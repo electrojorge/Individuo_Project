@@ -10,5 +10,5 @@ public class Unit_SO : ScriptableObject
     public Elements[] weakness;
     public Elements[] resistences;
 
-    public List<Abilities> abilities;
+    public List<Ability_SO> abilities;
 }

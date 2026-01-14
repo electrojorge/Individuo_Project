@@ -17,9 +17,5 @@ MonoBehaviour:
   weakness: 010000000300000002000000
   resistences: 0000000004000000
   abilities:
-  - abilityName: 
-    abilityElement: 2
-    damage: 875451
-  - abilityName: 
-    abilityElement: 0
-    damage: 877
+  - {fileID: 11400000, guid: a9c5fcba275952142a5ef9675d4a9596, type: 2}
+  - {fileID: 0}

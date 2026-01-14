@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8ce7ebb7d52f041a3008e1b2a74381, type: 3}
   m_Name: UnitTest1
   m_EditorClassIdentifier: Assembly-CSharp::Unit_SO
-  unitName: 
-  unitHP: 0
-  weakness: 
-  resistences: 
-  abilities: []
+  unitName: Makoto mi vieja
+  unitHP: 520
+  weakness: 0000000002000000
+  resistences: 04000000
+  abilities:
+  - {fileID: 0}
