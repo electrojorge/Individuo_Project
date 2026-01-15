@@ -290,10 +290,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451810327bbb6d24d87eb574e0d82cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattlePositioner
-  allyPrefab: {fileID: 4062708000821777536, guid: f4d17a98cea7c444d86602a24ef42f77, type: 3}
-  enemyPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
-  allyCount: 4
-  enemyCount: 3
+  allyPrefabs:
+  - {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
+  - {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
+  - {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
+  - {fileID: 7770681069192169274, guid: 2c807d06e8f871c4fa96e3a50fbf5e74, type: 3}
+  enemyPrefabs:
+  - {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+  - {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
   sideDistance: 6
   unitSpacing: 3
   battleCenter: {x: 0, y: 0, z: 0}

@@ -4,12 +4,15 @@ using System.Collections.Generic;
 public class Unit_Manager : MonoBehaviour
 {
     public Unit_SO unitData;
-
+    [SerializeField]
     string unitName;
+    [SerializeField]
     float unitHP;
     public void SetHp(float hpMod) => unitHP += hpMod;
-    float unitPE;
-    public void SetPe(float peMod) => unitPE += peMod;
+    [SerializeField]
+    float unitSP;
+    public void SetSp(float spMod) => unitSP += spMod;
+    [SerializeField]
     float unitEXP;
     public void SetExp(float expMod) => unitEXP += expMod;
 
@@ -36,7 +39,7 @@ public class Unit_Manager : MonoBehaviour
     {
         unitName = unitData.unitName;
         unitHP = unitData.unitHP;
-        unitPE = unitData.unitSP;
+        unitSP = unitData.unitSP;
         unitEXP = unitData.unitEXP;
     }
 }

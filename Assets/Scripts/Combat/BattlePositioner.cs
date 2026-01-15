@@ -1,14 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class BattlePositioner : MonoBehaviour
 {
     [Header("Prefabs")]
-    public GameObject allyPrefab;
-    public GameObject enemyPrefab;
-
-    [Header("Cantidad")]
-    public int allyCount = 3;
-    public int enemyCount = 4;
+    public List<GameObject> allyPrefabs = new List<GameObject>();
+    public List<GameObject> enemyPrefabs = new List<GameObject>();
 
     [Header("Posicionamiento")]
     public float sideDistance = 6f;   // Separación entre bandos (X)
@@ -17,13 +15,18 @@ public class BattlePositioner : MonoBehaviour
 
     void Start()
     {
-        SpawnGroup(allyPrefab, allyCount, -sideDistance, Quaternion.Euler(0, 90, 0));
-        SpawnGroup(enemyPrefab, enemyCount, sideDistance, Quaternion.Euler(0, -90, 0));
+        SpawnGroup(allyPrefabs, sideDistance, Quaternion.Euler(0, 90, 0));
+        SpawnGroup(enemyPrefabs, -sideDistance, Quaternion.Euler(0, -90, 0));
     }
 
-    void SpawnGroup(GameObject prefab, int count, float xPos, Quaternion rotation)
+    void SpawnGroup(List<GameObject> prefabs, float xPos, Quaternion rotation)
     {
-        if (count <= 0) return;
+        if (prefabs == null) return;
+
+        // Filtrar nulos para calcular el ancho real y evitar errores al instanciar
+        var validPrefabs = prefabs.Where(p => p != null).ToList();
+        int count = validPrefabs.Count;
+        if (count == 0) return;
 
         float totalWidth = (count - 1) * unitSpacing;
         float startZ = -totalWidth / 2f;
@@ -38,7 +41,7 @@ public class BattlePositioner : MonoBehaviour
                 zPos
             );
 
-            Instantiate(prefab, position, rotation);
+            Instantiate(validPrefabs[i], position, rotation);
         }
     }
 }
