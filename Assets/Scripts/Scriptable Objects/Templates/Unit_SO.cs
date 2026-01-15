@@ -6,6 +6,8 @@ public class Unit_SO : ScriptableObject
 {
     public string unitName;
     public float unitHP;
+    public float unitSP;
+    public float unitEXP;
 
     public Elements[] weakness;
     public Elements[] resistences;
