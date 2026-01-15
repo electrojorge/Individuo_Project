@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Unit_Manager : MonoBehaviour
 {
@@ -13,19 +13,19 @@ public class Unit_Manager : MonoBehaviour
     float unitEXP;
     public void SetExp(float expMod) => unitEXP += expMod;
 
-    //List<Ability_SO> abilities;
+    public List<Ability_SO> abilities;
 
-    //public void SetAbility(bool add, Ability_SO ability)
-    //{
-    //    if (add)
-    //    {
-    //        abilities.Add(ability);
-    //    }
-    //    else if (abilities.Contains(ability))
-    //    {
-    //        abilities.Remove(ability);
-    //    }
-    //}
+    public void SetAbility(bool add, Ability_SO ability)
+    {
+        if (add)
+        {
+            abilities.Add(ability);
+        }
+        else if (abilities.Contains(ability))
+        {
+            abilities.Remove(ability);
+        }
+    }
 
     private void Start()
     {
