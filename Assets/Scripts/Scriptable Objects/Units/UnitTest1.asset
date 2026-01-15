@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit_SO
   unitName: Makoto mi vieja
   unitHP: 520
+  unitSP: 0
+  unitEXP: 0
   weakness: 0000000002000000
   resistences: 04000000
   abilities:

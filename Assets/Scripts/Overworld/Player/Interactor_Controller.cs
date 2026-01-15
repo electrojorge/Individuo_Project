@@ -121,10 +121,11 @@ public class Interactor_Controller : MonoBehaviour
             UpdateIndicatorTransform();
             if (indicatorFaceCamera && mainCamera != null)
             {
-                // Hacer que el sprite mire a la cámara (billboard)
-                Vector3 dir = indicatorInstance.transform.position - mainCamera.transform.position;
+                // Billboard: el indicador mira siempre a la cámara.
+                // Usamos vector desde indicador hacia la cámara y Vector3.up para mantenerlo vertical (sin rotación en roll).
+                Vector3 dir = mainCamera.transform.position - indicatorInstance.transform.position;
                 if (dir.sqrMagnitude > 0.0001f)
-                    indicatorInstance.transform.rotation = Quaternion.LookRotation(dir);
+                    indicatorInstance.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
             }
         }
     }
