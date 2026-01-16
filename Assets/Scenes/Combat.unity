@@ -317,90 +317,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1647956008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1647956010}
-  - component: {fileID: 1647956009}
-  m_Layer: 0
-  m_Name: Simulated_Singleton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1647956009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647956008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5702f9ad1b57c46b0f65c7146d3927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AlliesManager
-  units:
-  - unitPrefab: {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
-    unitName: Joker
-    maxHP: 300
-    currentHP: 300
-    maxSP: 300
-    currentSP: 300
-    physicalATK: 50
-    magicalATK: 70
-    DEF: 50
-    unitEXP: 0
-    levelUpCap: 0
-    levelUpThresold: 0
-    lvl: 50
-  - unitPrefab: {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
-    unitName: Makoto
-    maxHP: 200
-    currentHP: 200
-    maxSP: 400
-    currentSP: 400
-    physicalATK: 40
-    magicalATK: 80
-    DEF: 40
-    unitEXP: 0
-    levelUpCap: 0
-    levelUpThresold: 0
-    lvl: 50
-  - unitPrefab: {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
-    unitName: Chie
-    maxHP: 400
-    currentHP: 400
-    maxSP: 200
-    currentSP: 200
-    physicalATK: 80
-    magicalATK: 40
-    DEF: 60
-    unitEXP: 0
-    levelUpCap: 0
-    levelUpThresold: 0
-    lvl: 50
---- !u!4 &1647956010
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647956008}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1649292996
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,10 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451810327bbb6d24d87eb574e0d82cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattlePositioner
-  allyPrefabs:
-  - {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
-  - {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
-  - {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
   enemyPrefabs:
   - {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
   - {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
@@ -844,5 +756,4 @@ SceneRoots:
   - {fileID: 2037715070}
   - {fileID: 1871105164}
   - {fileID: 1649292998}
-  - {fileID: 1647956010}
   - {fileID: 825864}
