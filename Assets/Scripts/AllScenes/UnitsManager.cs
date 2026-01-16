@@ -31,6 +31,8 @@ public class UnitsManager : MonoBehaviour
 [System.Serializable]
 public class Unit
 {
+    public GameObject unitPrefab;
+    [Space(10)]
     [Header("RESOURCE STATS")]
     public string unitName;
     public int maxHP;

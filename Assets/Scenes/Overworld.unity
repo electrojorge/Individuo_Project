@@ -451,9 +451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a390a8289a14f447afc0f947702229d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game_Manager
-  playerHP: 0
-  playerPE: 0
-  playerEXP: 0
 --- !u!4 &774526795
 Transform:
   m_ObjectHideFlags: 0
@@ -481,7 +478,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5702f9ad1b57c46b0f65c7146d3927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlliesManager
-  allies: []
+  units:
+  - unitPrefab: {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
+    unitName: Joker
+    maxHP: 300
+    currentHP: 300
+    maxSP: 300
+    currentSP: 300
+    physicalATK: 50
+    magicalATK: 70
+    DEF: 50
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 50
+  - unitPrefab: {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
+    unitName: Makoto
+    maxHP: 200
+    currentHP: 200
+    maxSP: 400
+    currentSP: 400
+    physicalATK: 40
+    magicalATK: 80
+    DEF: 40
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 50
+  - unitPrefab: {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
+    unitName: Chie
+    maxHP: 400
+    currentHP: 400
+    maxSP: 200
+    currentSP: 200
+    physicalATK: 80
+    magicalATK: 40
+    DEF: 60
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 50
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
