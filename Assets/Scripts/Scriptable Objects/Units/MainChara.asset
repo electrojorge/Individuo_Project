@@ -18,4 +18,5 @@ MonoBehaviour:
   unitEXP: 0
   weakness: 
   resistences: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: a9c5fcba275952142a5ef9675d4a9596, type: 2}
