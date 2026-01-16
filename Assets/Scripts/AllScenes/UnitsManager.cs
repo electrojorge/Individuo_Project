@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlliesManager : MonoBehaviour
+public class UnitsManager : MonoBehaviour
 {
-    public List<Ally> allies;
+    public List<Unit> units;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,17 +22,17 @@ public class AlliesManager : MonoBehaviour
     /// <param name="hp"></param>
     /// <param name="sp"></param>
     /// <param name="exp"></param>
-    public void AddAlly(string name, int hp, int sp, float exp)
+    public void AddUnit(string name, int hp, int sp, float exp)
     {
-        allies.Add(new Ally(name, hp, sp, exp));
+        units.Add(new Unit(name, hp, sp, exp));
     }
 }
 
 [System.Serializable]
-public class Ally
+public class Unit
 {
     [Header("RESOURCE STATS")]
-    public string allyName;
+    public string unitName;
     public int maxHP;
     public int currentHP;
     [Space(10)]
@@ -46,29 +46,29 @@ public class Ally
 
     [Header("EXP CONTROLLER")]
     [Space(10)]
-    public float allyEXP;
+    public float unitEXP;
     [SerializeField] float levelUpCap;
     [SerializeField] float levelUpThresold;
 
     public int lvl;
-    public Ally(string name, int hp, int sp, float exp)
+    public Unit(string name, int hp, int sp, float exp)
     {
-        allyName = name;
+        unitName = name;
         currentHP = hp;
         currentSP = sp;
-        allyEXP = exp;
+        unitEXP = exp;
     }
     public void SetHp(int hpMod) => currentHP += hpMod;
     public void SetSp(int spMod) => currentSP += spMod;
     public void SetExp(float expMod)
     {
-        allyEXP += expMod;
-        if(allyEXP > levelUpCap)
+        unitEXP += expMod;
+        if(unitEXP > levelUpCap)
         {
-            allyEXP -= levelUpCap;
+            unitEXP -= levelUpCap;
             lvl++;
             levelUpCap = levelUpCap * levelUpThresold;
-            Debug.Log(allyName + " leveled up!");
+            Debug.Log(unitName + " leveled up!");
         }
     } 
 }
