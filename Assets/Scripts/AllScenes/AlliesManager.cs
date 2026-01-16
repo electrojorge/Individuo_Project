@@ -22,7 +22,7 @@ public class AlliesManager : MonoBehaviour
     /// <param name="hp"></param>
     /// <param name="sp"></param>
     /// <param name="exp"></param>
-    public void AddAlly(string name, float hp, float sp, float exp)
+    public void AddAlly(string name, int hp, int sp, float exp)
     {
         allies.Add(new Ally(name, hp, sp, exp));
     }
@@ -31,9 +31,18 @@ public class AlliesManager : MonoBehaviour
 [System.Serializable]
 public class Ally
 {
+    [Header("RESOURCE STATS")]
     public string allyName;
-    public float allyHP;
-    public float allySP;
+    public int maxHP;
+    public int currentHP;
+    [Space(10)]
+    public int maxSP;
+    public int currentSP;
+
+    [Header("BATTLE STATS")]
+    public int physicalATK;
+    public int magicalATK;
+    public int DEF;
 
     [Header("EXP CONTROLLER")]
     [Space(10)]
@@ -42,15 +51,15 @@ public class Ally
     [SerializeField] float levelUpThresold;
 
     public int lvl;
-    public Ally(string name, float hp, float sp, float exp)
+    public Ally(string name, int hp, int sp, float exp)
     {
         allyName = name;
-        allyHP = hp;
-        allySP = sp;
+        currentHP = hp;
+        currentSP = sp;
         allyEXP = exp;
     }
-    public void SetHp(float hpMod) => allyHP += hpMod;
-    public void SetSp(float spMod) => allySP += spMod;
+    public void SetHp(int hpMod) => currentHP += hpMod;
+    public void SetSp(int spMod) => currentSP += spMod;
     public void SetExp(float expMod)
     {
         allyEXP += expMod;
