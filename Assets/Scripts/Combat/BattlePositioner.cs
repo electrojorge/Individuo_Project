@@ -1,95 +1,60 @@
-using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
 
 public class BattlePositioner : MonoBehaviour
 {
-    [Header("Prefabs")]
-    // Los aliados ahora se obtienen desde UnitsManager.units (no hay lista pública de allyPrefabs)
-    public List<GameObject> enemyPrefabs = new List<GameObject>();
+    public Vector3 centerPos;
+    public float distanceBetweenUnits;
 
-    [Header("Posicionamiento")]
-    public float sideDistance = 6f;   // Separación entre bandos (X)
-    public float unitSpacing = 3f;    // Separación entre unidades (Z)
-    public Vector3 battleCenter = Vector3.zero;
 
-    UnitsManager UM; // referencia al manager de unidades
+    public List<Unit> enemiesInCombat;
+    public List<Unit> playersInCombat;
 
-    void Awake()
+    private void Start()
     {
-        UM = Game_Manager.instance.GetComponent<UnitsManager>();
+        SetUnits(true);
     }
-
-    void Start()
+    void SetUnits(bool enemies)
     {
-        // Aliados: usar la lista de Units del UnitsManager
-        if (UM == null)
+        List<Unit> unitsToPosition = enemies ? enemiesInCombat : playersInCombat;
+
+        //for(int i = 0; i < unitsToPosition.Count; i++)
+        //{
+        //    Instantiate(unitsToPosition[i].unitPrefab, centerPos + new Vector3(distanceBetweenUnits * 0.5f, 0, 0), Quaternion.identity);
+        //}
+
+        Vector3 firstPos = centerPos + new Vector3(distanceBetweenUnits * 0.5f, 0, 0);
+        Vector3 secondPos = centerPos + new Vector3(distanceBetweenUnits, 0, 0);
+        Vector3 thirdPos = centerPos + new Vector3(distanceBetweenUnits * 1.5f, 0, 0);
+        Vector3 lastPos = centerPos + new Vector3(distanceBetweenUnits *2, 0, 0);
+
+        switch (unitsToPosition.Count)
         {
-            Debug.LogWarning("UnitsManager no encontrado en Game_Manager.instance. No se spawnearán aliados.");
-        }
-        else
-        {
-            SpawnGroup(UM.units, sideDistance, Quaternion.Euler(0, 90, 0));
-        }
-
-        // Enemigos: lista de prefabs pública (sigue igual)
-        SpawnGroup(enemyPrefabs, -sideDistance, Quaternion.Euler(0, -90, 0));
-    }
-
-    // Sobrecarga para listas de GameObject (ej. enemigos)
-    void SpawnGroup(List<GameObject> prefabs, float xPos, Quaternion rotation)
-    {
-        if (prefabs == null) return;
-
-        var validPrefabs = prefabs.Where(p => p != null).ToList();
-        int count = validPrefabs.Count;
-        if (count == 0) return;
-
-        float totalWidth = (count - 1) * unitSpacing;
-        float startZ = -totalWidth / 2f;
-
-        for (int i = 0; i < count; i++)
-        {
-            float zPos = startZ + i * unitSpacing;
-
-            Vector3 position = battleCenter + new Vector3(
-                xPos,
-                0f,
-                zPos
-            );
-
-            Instantiate(validPrefabs[i], position, rotation);
-        }
-    }
-
-    // Sobrecarga para listas de Unit (aliados desde UnitsManager)
-    void SpawnGroup(List<Unit> units, float xPos, Quaternion rotation)
-    {
-        if (units == null) return;
-
-        // Extraer prefabs válidos desde cada Unit
-        var validPrefabs = units
-            .Where(u => u != null && u.unitPrefab != null)
-            .Select(u => u.unitPrefab)
-            .ToList();
-
-        int count = validPrefabs.Count;
-        if (count == 0) return;
-
-        float totalWidth = (count - 1) * unitSpacing;
-        float startZ = -totalWidth / 2f;
-
-        for (int i = 0; i < count; i++)
-        {
-            float zPos = startZ + i * unitSpacing;
-
-            Vector3 position = battleCenter + new Vector3(
-                xPos,
-                0f,
-                zPos
-            );
-
-            Instantiate(validPrefabs[i], position, rotation);
+            case 1:
+                Instantiate(unitsToPosition[0].unitPrefab, centerPos, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(unitsToPosition[0].unitPrefab, firstPos, Quaternion.identity);
+                Instantiate(unitsToPosition[1].unitPrefab, -firstPos, Quaternion.identity);
+                break;
+            case 3:
+                Instantiate(unitsToPosition[0].unitPrefab, centerPos, Quaternion.identity);
+                Instantiate(unitsToPosition[1].unitPrefab, secondPos, Quaternion.identity);
+                Instantiate(unitsToPosition[2].unitPrefab, -secondPos, Quaternion.identity);
+                break;
+            case 4:
+                Instantiate(unitsToPosition[0].unitPrefab, firstPos, Quaternion.identity);
+                Instantiate(unitsToPosition[1].unitPrefab, thirdPos, Quaternion.identity);
+                Instantiate(unitsToPosition[2].unitPrefab, -firstPos, Quaternion.identity);
+                Instantiate(unitsToPosition[3].unitPrefab, -thirdPos, Quaternion.identity);
+                break;
+            case 5:
+                Instantiate(unitsToPosition[0].unitPrefab, centerPos, Quaternion.identity);
+                Instantiate(unitsToPosition[1].unitPrefab, secondPos, Quaternion.identity);
+                Instantiate(unitsToPosition[2].unitPrefab, lastPos, Quaternion.identity);
+                Instantiate(unitsToPosition[3].unitPrefab, -secondPos, Quaternion.identity);
+                Instantiate(unitsToPosition[4].unitPrefab, -lastPos, Quaternion.identity);
+                break;
         }
     }
 }

@@ -148,33 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5702f9ad1b57c46b0f65c7146d3927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitsManager
-  units:
-  - unitPrefab: {fileID: 0}
-    unitName: Epstein
-    maxHP: 200
-    currentHP: 200
-    maxSP: 100
-    currentSP: 100
-    physicalATK: 30
-    magicalATK: 30
-    DEF: 30
-    unitEXP: 0
-    levelUpCap: 0
-    levelUpThresold: 0
-    lvl: 30
-  - unitPrefab: {fileID: 0}
-    unitName: Charlie Kirk
-    maxHP: 200
-    currentHP: 200
-    maxSP: 100
-    currentSP: 100
-    physicalATK: 30
-    magicalATK: 30
-    DEF: 30
-    unitEXP: 0
-    levelUpCap: 0
-    levelUpThresold: 0
-    lvl: 30
+  unitsList: []
+  enemyList: []
 --- !u!4 &825864
 Transform:
   m_ObjectHideFlags: 0
@@ -362,12 +337,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451810327bbb6d24d87eb574e0d82cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattlePositioner
-  enemyPrefabs:
-  - {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
-  - {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
-  sideDistance: 6
-  unitSpacing: 3
-  battleCenter: {x: 0, y: 0, z: 0}
+  centerPos: {x: 0, y: 0, z: 0}
+  distanceBetweenUnits: 3
+  enemiesInCombat:
+  - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  playersInCombat: []
 --- !u!114 &1649293000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class UnitsManager : MonoBehaviour
 {
-    public List<Unit> units;
+    public List<Unit> unitsList;
+    public List<Unit> enemyList;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +25,7 @@ public class UnitsManager : MonoBehaviour
     /// <param name="exp"></param>
     public void AddUnit(string name, int hp, int sp, float exp)
     {
-        units.Add(new Unit(name, hp, sp, exp));
+        unitsList.Add(new Unit(name, hp, sp, exp));
     }
 }
 
