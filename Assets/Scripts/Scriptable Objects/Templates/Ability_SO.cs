@@ -16,5 +16,5 @@ public enum Elements
     Guilt, //Culpa
     Obsession, //Obesesión
     Rage, //Ira
-    Trauma //Trauma
+    Shame //Vergüenza
 }
