@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5702f9ad1b57c46b0f65c7146d3927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlliesManager
-  unitsList:
+  unitsTeam:
   - unitPrefab: {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
     unitName: 
     maxHP: 0
@@ -505,7 +505,7 @@ MonoBehaviour:
     levelUpCap: 0
     levelUpThresold: 0
     lvl: 0
-  - unitPrefab: {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
+  - unitPrefab: {fileID: 7770681069192169274, guid: 2c807d06e8f871c4fa96e3a50fbf5e74, type: 3}
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
     levelUpCap: 0
     levelUpThresold: 0
     lvl: 0
-  enemyList:
+  enemyDex:
   - unitPrefab: {fileID: 3485808161569492280, guid: 3d5b904d5a5c7094bb38e822238c9c7b, type: 3}
     unitName: 
     maxHP: 0
@@ -545,7 +545,98 @@ MonoBehaviour:
     levelUpCap: 0
     levelUpThresold: 0
     lvl: 0
+  - unitPrefab: {fileID: 6909418639106160192, guid: b5082523c1cf9ad48aefd4d4c8f58458, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 2522928765644230346, guid: c7782f5332ba98148a2e981c7d554b45, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
   - unitPrefab: {fileID: 3818931387955389084, guid: d24409e016f608541b7245e16966113b, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 5854084756380046240, guid: f4bd0c1fffabbc44b99b989907945d6d, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 7707703936300528439, guid: 452ae8500e80a6340841127ccefef29c, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 7345215414681837637, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 4303167720002616488, guid: 695473e12c1ed224d930c9394e84c713, type: 3}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  - unitPrefab: {fileID: 1327141511653527651, guid: 548ad3f4a5079a44bb9abc5dfb1c06af, type: 3}
     unitName: 
     maxHP: 0
     currentHP: 0

@@ -27,8 +27,8 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
 
-    List<Unit> playerUnits;
-    List<Unit> enemiesInCombat;
+    public List<Unit> playerUnits;
+    public List<Unit> enemiesInCombat;
 
 
     Unit player1;
@@ -48,6 +48,7 @@ public class BattleSystem : MonoBehaviour
     public List<Transform> playerBattlePositions;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         if(instance == null)
@@ -67,10 +68,7 @@ public class BattleSystem : MonoBehaviour
 
     void SetupBattle()
     {
-        for (int u = 0; u<UM.unitsList.Count; u++)
-        {
-            playerUnits[u] = UM.unitsList[u];
-        }
+        playerUnits = new List<Unit>(UM.unitsTeam);
 
         //switch (UM.unitsList.Count)
         //{
@@ -97,11 +95,12 @@ public class BattleSystem : MonoBehaviour
         //        break;
         //}
 
-        int nemiesNum = Random.Range(1, 6);
+        int enemiesNum = Random.Range(1, 6);
 
-        for(int e = 0; e < nemiesNum; e++)
+        for(int e = 0; e < enemiesNum; e++)
         {
-            enemiesInCombat.Add(UM.enemyList[Random.Range(0, UM.enemyList.Count + 1)]);
+            enemiesInCombat.Add(UM.enemyDex[Random.Range(0, UM.enemyDex.Count)]);
+            Debug.Log("bombo");
         }
         //int randomEnemy1 = Random.Range(0, UM.enemyList.Count + 1);
         //int randomEnemy2 = Random.Range(0, UM.enemyList.Count + 1);
