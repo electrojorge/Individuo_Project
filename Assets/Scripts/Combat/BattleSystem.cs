@@ -5,15 +5,8 @@ using UnityEngine;
 public enum BattleState
 {
     START,
-    PLAYER1_TURN,
-    PLAYER2_TURN,
-    PLAYER3_TURN,
-    PLAYER4_TURN,
-    ENEMY1_TURN,
-    ENEMY2_TURN,
-    ENEMY3_TURN,
-    ENEMY4_TURN,
-    ENEMY5_TURN,
+    PLAYER_TURN,
+    ENEMY_TURN,
     WON,
     LOST
 }
@@ -22,33 +15,44 @@ public class BattleSystem : MonoBehaviour
 {
     public static BattleSystem instance;
 
-    UnitsManager UM; //(no hacer caso) video brackeys playerPrefab
+    UnitsManager UM;
+    CombatHudManager CHM;
 
     public BattleState state;
 
 
     public List<Unit> playerUnits;
-    public List<Unit> enemiesInCombat;
+    public List<Unit> enemyUnits;
+
+    Unit currentPlayer;
+    Unit currentEnemy;
+
+    Unit attackedPlayer;
+
+    public GameObject attackButton;
+    public GameObject healButton;
+
+    [SerializeField] float waitTime;
 
 
-    Unit player1;
-    Unit player2;
-    Unit player3;
-    Unit player4;
+    //Unit player1;
+    //Unit player2;
+    //Unit player3;
+    //Unit player4;
 
-    Unit enemy1;
-    Unit enemy2;
-    Unit enemy3;
-    Unit enemy4;
-    Unit enemy5;
+    //Unit enemy1;
+    //Unit enemy2;
+    //Unit enemy3;
+    //Unit enemy4;
+    //Unit enemy5;
 
-    public GameObject enemies; //(no hacer caso) video brackeys enemyPrefab
+    //public GameObject enemies; //(no hacer caso) video brackeys enemyPrefab
 
-    public List<Transform> enemyBattlePositions;
-    public List<Transform> playerBattlePositions;
+    //public List<Transform> enemyBattlePositions;
+    //public List<Transform> playerBattlePositions;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+
     void Start()
     {
         if(instance == null)
@@ -61,80 +65,144 @@ public class BattleSystem : MonoBehaviour
         }
 
         UM = Game_Manager.instance.GetComponent<UnitsManager>();
+        CHM = GetComponent<CombatHudManager>();
 
         state = BattleState.START;
-        SetupBattle();
+        StartCoroutine(SetupBattle());
     }
 
-    void SetupBattle()
+    IEnumerator SetupBattle()
     {
-        playerUnits = new List<Unit>(UM.unitsTeam);
-
-        //switch (UM.unitsList.Count)
-        //{
-        //    case 0:
-        //        Debug.LogError("No hay players");
-        //        break;
-        //    case 1:
-        //        player1 = UM.unitsList[0];
-        //        break;
-        //    case 2:
-        //        player1 = UM.unitsList[0];
-        //        player2 = UM.unitsList[1];
-        //        break;
-        //    case 3:
-        //        player1 = UM.unitsList[0];
-        //        player2 = UM.unitsList[1];
-        //        player3 = UM.unitsList[2];
-        //        break;
-        //    case 4:
-        //        player1 = UM.unitsList[0];
-        //        player2 = UM.unitsList[1];
-        //        player3 = UM.unitsList[2];
-        //        player4 = UM.unitsList[3];
-        //        break;
-        //}
+        playerUnits = new List<Unit>(UM.unitsTeam); //pone los aliados
 
         int enemiesNum = Random.Range(1, 6);
 
-        for(int e = 0; e < enemiesNum; e++)
+        for(int e = 0; e < enemiesNum; e++) //pone a los enemigos
         {
-            enemiesInCombat.Add(UM.enemyDex[Random.Range(0, UM.enemyDex.Count)]);
+            enemyUnits.Add(UM.enemyDex[Random.Range(0, UM.enemyDex.Count)]);
             Debug.Log("bombo");
         }
-        //int randomEnemy1 = Random.Range(0, UM.enemyList.Count + 1);
-        //int randomEnemy2 = Random.Range(0, UM.enemyList.Count + 1);
-        //int randomEnemy3 = Random.Range(0, UM.enemyList.Count + 1);
-        //int randomEnemy4 = Random.Range(0, UM.enemyList.Count + 1);
-        //int randomEnemy5 = Random.Range(0, UM.enemyList.Count + 1);
-        //switch (nemiesNum)
-        //{
-        //    case 1:
-        //        enemy1 = UM.enemyList[randomEnemy1];
-        //        break;
-        //    case 2:
-        //        enemy1 = UM.enemyList[randomEnemy1];
-        //        enemy2 = UM.enemyList[randomEnemy2];
-        //        break;
-        //    case 3:
-        //        enemy1 = UM.enemyList[randomEnemy1];
-        //        enemy2 = UM.enemyList[randomEnemy2];
-        //        enemy3 = UM.enemyList[randomEnemy3];
-        //        break;
-        //    case 4:
-        //        enemy1 = UM.enemyList[randomEnemy1];
-        //        enemy2 = UM.enemyList[randomEnemy2];
-        //        enemy3 = UM.enemyList[randomEnemy3];
-        //        enemy4 = UM.enemyList[randomEnemy4];
-        //        break;
-        //    case 5:
-        //        enemy1 = UM.enemyList[randomEnemy1];
-        //        enemy2 = UM.enemyList[randomEnemy2];
-        //        enemy3 = UM.enemyList[randomEnemy3];
-        //        enemy4 = UM.enemyList[randomEnemy4];
-        //        enemy5 = UM.enemyList[randomEnemy5];
-        //        break;
-        //}
 
+        yield return new WaitForSeconds(waitTime);
+
+        state = BattleState.PLAYER_TURN;
+        currentPlayer = playerUnits[0];
+        currentEnemy = enemyUnits[0];
+        PlayerTurn();
+    }
+
+    public IEnumerator PlayerAttack()
+    {
+        bool isDead = EnemyTakeDamage(currentPlayer.physicalATK); //a futuro habra que cambiar phys atk, por un ataque bien calculado, de momento se queda asi para probar
+
+        yield return new WaitForSeconds(waitTime);
+
+        if (isDead)
+        {
+            enemyUnits.Remove(CHM.selectedEnemy);
+            //quitar tambien de BP
+            if (enemyUnits.Count == 0)
+            {
+                state = BattleState.WON;
+                //EndBattle();
+            }
+            else if (currentPlayer == playerUnits[^1])
+            {
+                state = BattleState.ENEMY_TURN;
+                //StartCoroutine(EnemyTurn());
+            }
+            else
+            {
+                currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
+                PlayerTurn();
+            }
+
+        }
+        else
+        {
+            if (currentPlayer == playerUnits[^1])
+            {
+                state = BattleState.ENEMY_TURN;
+                //StartCoroutine(EnemyTurn());
+            }
+            else
+            {
+                currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
+                PlayerTurn();
+            }
+        }
+
+        CHM.selectedEnemy = null;
+    }
+
+    IEnumerator EnemyTurn()
+    {
+        bool isDead = PlayerTakeDamage(currentEnemy.physicalATK);
+        yield return new WaitForSeconds(waitTime);
+
+        if (isDead)
+        {
+            playerUnits.Remove(attackedPlayer);
+            //quitar tambien de BP
+            if (playerUnits.Count == 0)
+            {
+                state = BattleState.LOST;
+                //EndBattle();
+            }
+            else if (currentEnemy == enemyUnits[^1])
+            {
+                state = BattleState.PLAYER_TURN;
+                PlayerTurn();
+            }
+            else
+            {
+                currentEnemy = enemyUnits[enemyUnits.IndexOf(currentEnemy) + 1];
+                StartCoroutine(EnemyTurn());
+            }
+
+        }
+        else
+        {
+            if (currentEnemy == enemyUnits[^1])
+            {
+                state = BattleState.PLAYER_TURN;
+                PlayerTurn();
+            }
+            else
+            {
+                currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
+                StartCoroutine(EnemyTurn());
+            }
+        }
+
+        attackedPlayer = null;
+    }
+
+    void PlayerTurn()
+    {
+        attackButton.SetActive(true);
+        healButton.SetActive(true);
+    }
+
+    bool EnemyTakeDamage(int dmg)
+    {
+        CHM.selectedEnemy.currentHP -= dmg;
+
+        if (CHM.selectedEnemy.currentHP <= 0)
+            return true;
+        else
+            return false;
+    }
+
+    bool PlayerTakeDamage(int dmg)
+    {
+        int i = Random.Range(0, playerUnits.Count);
+        playerUnits[i].currentHP -= dmg;
+        attackedPlayer = playerUnits[i];
+
+        if (attackedPlayer.currentHP <= 0)
+            return true;
+        else
+            return false;
     }
 }

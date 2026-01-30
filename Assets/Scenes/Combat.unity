@@ -367,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &658039297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -431,7 +431,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 658039299}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1649293001}
+        m_TargetAssemblyTypeName: CombatHudManager, Assembly-CSharp
+        m_MethodName: HealButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &658039299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +767,7 @@ GameObject:
   - component: {fileID: 1649292998}
   - component: {fileID: 1649292999}
   - component: {fileID: 1649293000}
+  - component: {fileID: 1649293001}
   m_Layer: 0
   m_Name: Battle Manager
   m_TagString: Untagged
@@ -860,10 +873,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleSystem
   state: 0
   playerUnits: []
-  enemiesInCombat: []
-  enemies: {fileID: 0}
-  enemyBattlePositions: []
-  playerBattlePositions: []
+  enemyUnits: []
+  attackButton: {fileID: 1804145412}
+  healButton: {fileID: 658039296}
+  waitTime: 0
+--- !u!114 &1649293001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649292996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2395ebb491e9c429bc57f46da670c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatHudManager
+  enemySelected:
+    unitPrefab: {fileID: 0}
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
 --- !u!1 &1667484328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1804145413
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1211,7 +1250,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1804145415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1649293001}
+        m_TargetAssemblyTypeName: CombatHudManager, Assembly-CSharp
+        m_MethodName: AttackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1804145415
 MonoBehaviour:
   m_ObjectHideFlags: 0

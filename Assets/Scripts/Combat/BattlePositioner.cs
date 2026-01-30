@@ -25,7 +25,7 @@ public class BattlePositioner : MonoBehaviour
 
     void SetUnits(bool enemies, float zOffset = 0f)
     {
-        List<Unit> unitsToPosition = enemies ? BS.enemiesInCombat : UM.unitsTeam;
+        List<Unit> unitsToPosition = enemies ? BS.enemyUnits : UM.unitsTeam;
         if (unitsToPosition == null || unitsToPosition.Count == 0) return;
 
         int count = unitsToPosition.Count;
