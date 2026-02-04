@@ -97,12 +97,8 @@ public class BattleSystem : MonoBehaviour
         //bool isDead = ; //a futuro habra que cambiar phys atk, por un ataque bien calculado, de momento se queda asi para probar
 
         yield return new WaitForSeconds(waitTime);
-
-        if (EnemyTakeDamage(currentPlayer.physicalATK))
-        {
-            //quitar tambien de BP
-            
-        }
+        
+        EnemyTakeDamage(currentPlayer.physicalATK);
 
         if (enemyUnits.Count == 0)
         {
