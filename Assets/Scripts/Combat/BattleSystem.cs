@@ -52,10 +52,9 @@ public class BattleSystem : MonoBehaviour
     //public List<Transform> playerBattlePositions;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    void Start()
+    private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -63,7 +62,9 @@ public class BattleSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+    }
+    void Start()
+    {
         UM = Game_Manager.instance.GetComponent<UnitsManager>();
         CHM = GetComponent<CombatHudManager>();
 
@@ -93,43 +94,30 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator PlayerAttack()
     {
-        bool isDead = EnemyTakeDamage(currentPlayer.physicalATK); //a futuro habra que cambiar phys atk, por un ataque bien calculado, de momento se queda asi para probar
+        //bool isDead = ; //a futuro habra que cambiar phys atk, por un ataque bien calculado, de momento se queda asi para probar
 
         yield return new WaitForSeconds(waitTime);
 
-        if (isDead)
+        if (EnemyTakeDamage(currentPlayer.physicalATK))
         {
-            enemyUnits.Remove(CHM.selectedEnemy);
             //quitar tambien de BP
-            if (enemyUnits.Count == 0)
-            {
-                state = BattleState.WON;
-                //EndBattle();
-            }
-            else if (currentPlayer == playerUnits[^1])
-            {
-                state = BattleState.ENEMY_TURN;
-                //StartCoroutine(EnemyTurn());
-            }
-            else
-            {
-                currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
-                PlayerTurn();
-            }
+            
+        }
 
+        if (enemyUnits.Count == 0)
+        {
+            state = BattleState.WON;
+            //EndBattle();
+        }
+        else if (currentPlayer == playerUnits[^1])
+        {
+            state = BattleState.ENEMY_TURN;
+            StartCoroutine(EnemyTurn());
         }
         else
         {
-            if (currentPlayer == playerUnits[^1])
-            {
-                state = BattleState.ENEMY_TURN;
-                //StartCoroutine(EnemyTurn());
-            }
-            else
-            {
-                currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
-                PlayerTurn();
-            }
+            currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
+            PlayerTurn();
         }
 
         CHM.selectedEnemy = null;
@@ -184,14 +172,11 @@ public class BattleSystem : MonoBehaviour
         healButton.SetActive(true);
     }
 
-    bool EnemyTakeDamage(int dmg)
+    void EnemyTakeDamage(int dmg)
     {
         CHM.selectedEnemy.currentHP -= dmg;
-
         if (CHM.selectedEnemy.currentHP <= 0)
-            return true;
-        else
-            return false;
+            enemyUnits.Remove(CHM.selectedEnemy);
     }
 
     bool PlayerTakeDamage(int dmg)

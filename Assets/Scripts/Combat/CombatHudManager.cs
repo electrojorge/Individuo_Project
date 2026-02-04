@@ -6,6 +6,8 @@ public class CombatHudManager : MonoBehaviour
     BattleSystem BS;
     public Unit selectedEnemy;
 
+    public static event System.Action<Unit> OnUnitSelected;
+
     private void Start()
     {
         BS = BattleSystem.instance;
@@ -15,6 +17,7 @@ public class CombatHudManager : MonoBehaviour
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
+            OnUnitSelected?.Invoke(BS.enemyUnits[0]);
             selectedEnemy = BS.enemyUnits[0];
         }
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
