@@ -876,7 +876,7 @@ MonoBehaviour:
   enemyUnits: []
   attackButton: {fileID: 1804145412}
   healButton: {fileID: 658039296}
-  waitTime: 0
+  waitTime: 2
 --- !u!114 &1649293001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2395ebb491e9c429bc57f46da670c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatHudManager
-  enemySelected:
+  selectedEnemy:
     unitPrefab: {fileID: 0}
     unitName: 
     maxHP: 0

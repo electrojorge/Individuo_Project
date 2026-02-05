@@ -34,23 +34,6 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] float waitTime;
 
-
-    //Unit player1;
-    //Unit player2;
-    //Unit player3;
-    //Unit player4;
-
-    //Unit enemy1;
-    //Unit enemy2;
-    //Unit enemy3;
-    //Unit enemy4;
-    //Unit enemy5;
-
-    //public GameObject enemies; //(no hacer caso) video brackeys enemyPrefab
-
-    //public List<Transform> enemyBattlePositions;
-    //public List<Transform> playerBattlePositions;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -69,6 +52,7 @@ public class BattleSystem : MonoBehaviour
         CHM = GetComponent<CombatHudManager>();
 
         state = BattleState.START;
+        Debug.Log("Empieza la batalla");
         StartCoroutine(SetupBattle());
     }
 
@@ -81,12 +65,15 @@ public class BattleSystem : MonoBehaviour
         for(int e = 0; e < enemiesNum; e++) //pone a los enemigos
         {
             enemyUnits.Add(UM.enemyDex[Random.Range(0, UM.enemyDex.Count)]);
-            Debug.Log("bombo");
+            //Debug.Log("bombo");
         }
+
+        Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
         yield return new WaitForSeconds(waitTime);
 
         state = BattleState.PLAYER_TURN;
+        Debug.Log("Turno del jugador");
         currentPlayer = playerUnits[0];
         currentEnemy = enemyUnits[0];
         PlayerTurn();
@@ -103,6 +90,7 @@ public class BattleSystem : MonoBehaviour
         if (enemyUnits.Count == 0)
         {
             state = BattleState.WON;
+            Debug.Log("Has ganado la batalla");
             //EndBattle();
         }
         else if (currentPlayer == playerUnits[^1])
@@ -121,6 +109,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        Debug.Log("Turno de: " + currentEnemy.unitName);
         bool isDead = PlayerTakeDamage(currentEnemy.physicalATK);
         yield return new WaitForSeconds(waitTime);
 
@@ -131,11 +120,13 @@ public class BattleSystem : MonoBehaviour
             if (playerUnits.Count == 0)
             {
                 state = BattleState.LOST;
+                Debug.Log("Has perdido la batalla");
                 //EndBattle();
             }
             else if (currentEnemy == enemyUnits[^1])
             {
                 state = BattleState.PLAYER_TURN;
+                currentPlayer = playerUnits[0];
                 PlayerTurn();
             }
             else
@@ -150,11 +141,12 @@ public class BattleSystem : MonoBehaviour
             if (currentEnemy == enemyUnits[^1])
             {
                 state = BattleState.PLAYER_TURN;
+                currentPlayer = playerUnits[0];
                 PlayerTurn();
             }
             else
             {
-                currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
+                currentEnemy = enemyUnits[enemyUnits.IndexOf(currentEnemy) + 1];
                 StartCoroutine(EnemyTurn());
             }
         }
@@ -164,6 +156,8 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        currentEnemy = enemyUnits[0];
+        Debug.Log("Turno de: " + currentPlayer.unitName);
         attackButton.SetActive(true);
         healButton.SetActive(true);
     }
@@ -171,6 +165,7 @@ public class BattleSystem : MonoBehaviour
     void EnemyTakeDamage(int dmg)
     {
         CHM.selectedEnemy.currentHP -= dmg;
+        Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
             enemyUnits.Remove(CHM.selectedEnemy);
     }
@@ -180,6 +175,7 @@ public class BattleSystem : MonoBehaviour
         int i = Random.Range(0, playerUnits.Count);
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
+        Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 
         if (attackedPlayer.currentHP <= 0)
             return true;
