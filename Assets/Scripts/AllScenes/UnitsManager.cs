@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class UnitsManager : MonoBehaviour
 {
-    public List<Unit> unitsTeam;
-    public List<Unit> enemyDex;
+    public List<Unit> unitsTeam = new List<Unit>();
+    public List<Unit> enemyDex = new List<Unit>();
+
+    public Unit GetEnemy(int index)
+    {
+        return enemyDex[index];
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +38,7 @@ public class UnitsManager : MonoBehaviour
 public class Unit
 {
     public GameObject unitPrefab;
+    public int unitID;
     [Space(10)]
     [Header("RESOURCE STATS")]
     public string unitName;

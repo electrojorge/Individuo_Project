@@ -11,6 +11,7 @@ public class CombatHudManager : MonoBehaviour
     private void Start()
     {
         BS = BattleSystem.instance;
+        selectedEnemy = null;
     }
 
     private void Update()
@@ -49,6 +50,7 @@ public class CombatHudManager : MonoBehaviour
             BS.attackButton.SetActive(false);
             BS.healButton.SetActive(false);
             StartCoroutine(BS.PlayerAttack());
+            Debug.Log("BOMBASTICO");
         }
     }
 

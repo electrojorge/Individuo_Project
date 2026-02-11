@@ -21,8 +21,8 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
 
-    public List<Unit> playerUnits;
-    public List<Unit> enemyUnits;
+    public List<Unit> playerUnits = new List<Unit>();
+    public List<Unit> enemyUnits = new List<Unit>();
 
     Unit currentPlayer;
     Unit currentEnemy;
@@ -60,13 +60,22 @@ public class BattleSystem : MonoBehaviour
     {
         playerUnits = new List<Unit>(UM.unitsTeam); //pone los aliados
 
-        int enemiesNum = Random.Range(1, 6);
-
-        for(int e = 0; e < enemiesNum; e++) //pone a los enemigos
+        for(int i = 0; i < playerUnits.Count; i++)
         {
-            enemyUnits.Add(UM.enemyDex[Random.Range(0, UM.enemyDex.Count)]);
-            //Debug.Log("bombo");
+            playerUnits[i].unitID = i + 1;
         }
+
+        int enemiesNum = Random.Range(1, 6);
+        enemyUnits = new List<Unit>();
+        for (int e = 0; e < enemiesNum; e++) //pone a los enemigos
+        {
+            LoadUnitData(UM.GetEnemy(Random.Range(0, UM.enemyDex.Count)),e+1);
+        }
+
+        //for (int i = 0; i < enemyUnits.Count; i++)
+        //{
+        //    enemyUnits[i].unitID = i + 1;
+        //}
 
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
@@ -78,11 +87,17 @@ public class BattleSystem : MonoBehaviour
         currentEnemy = enemyUnits[0];
         PlayerTurn();
     }
-
+    void LoadUnitData(Unit unitToLoad,int unitID)
+    {
+        Unit newUnit = new Unit(unitToLoad.unitName,
+            unitToLoad.currentHP,unitToLoad.currentSP,
+            unitToLoad.unitEXP);
+        newUnit.unitPrefab = unitToLoad.unitPrefab;
+        newUnit.unitID = unitID;
+        enemyUnits.Add(newUnit);
+    }
     public IEnumerator PlayerAttack()
     {
-        //bool isDead = ; //a futuro habra que cambiar phys atk, por un ataque bien calculado, de momento se queda asi para probar
-
         yield return new WaitForSeconds(waitTime);
         
         EnemyTakeDamage(currentPlayer.physicalATK);
@@ -109,46 +124,35 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        Debug.Log("Turno de: " + currentEnemy.unitName);
-        bool isDead = PlayerTakeDamage(currentEnemy.physicalATK);
+        Debug.Log("Turno de " + currentEnemy.unitName);
+
         yield return new WaitForSeconds(waitTime);
+
+        bool isDead = PlayerTakeDamage(currentEnemy.physicalATK);
 
         if (isDead)
         {
             playerUnits.Remove(attackedPlayer);
-            //quitar tambien de BP
+
             if (playerUnits.Count == 0)
             {
                 state = BattleState.LOST;
                 Debug.Log("Has perdido la batalla");
-                //EndBattle();
+                attackedPlayer = null;
+                yield break;
             }
-            else if (currentEnemy == enemyUnits[^1])
-            {
-                state = BattleState.PLAYER_TURN;
-                currentPlayer = playerUnits[0];
-                PlayerTurn();
-            }
-            else
-            {
-                currentEnemy = enemyUnits[enemyUnits.IndexOf(currentEnemy) + 1];
-                StartCoroutine(EnemyTurn());
-            }
+        }
 
+        if (currentEnemy == enemyUnits[^1])
+        {
+            state = BattleState.PLAYER_TURN;
+            currentPlayer = playerUnits[0];
+            PlayerTurn();
         }
         else
         {
-            if (currentEnemy == enemyUnits[^1])
-            {
-                state = BattleState.PLAYER_TURN;
-                currentPlayer = playerUnits[0];
-                PlayerTurn();
-            }
-            else
-            {
-                currentEnemy = enemyUnits[enemyUnits.IndexOf(currentEnemy) + 1];
-                StartCoroutine(EnemyTurn());
-            }
+            currentEnemy = enemyUnits[enemyUnits.IndexOf(currentEnemy) + 1];
+            StartCoroutine(EnemyTurn());
         }
 
         attackedPlayer = null;
