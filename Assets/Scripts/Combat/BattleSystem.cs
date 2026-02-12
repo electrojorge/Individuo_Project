@@ -72,28 +72,74 @@ public class BattleSystem : MonoBehaviour
             LoadUnitData(UM.GetEnemy(Random.Range(0, UM.enemyDex.Count)),e+1);
         }
 
-        //for (int i = 0; i < enemyUnits.Count; i++)
-        //{
-        //    enemyUnits[i].unitID = i + 1;
-        //}
-
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
         yield return new WaitForSeconds(waitTime);
 
         state = BattleState.PLAYER_TURN;
         Debug.Log("Turno del jugador");
-        currentPlayer = playerUnits[0];
-        currentEnemy = enemyUnits[0];
+
+        // Asignar currentPlayer usando NextCurrentPlayer para respetar la nueva función
+        if (playerUnits != null && playerUnits.Count > 0)
+            NextCurrentPlayer(playerUnits[0].unitID);
+
+        // Asignar currentEnemy usando NextCurrentEnemy (consistente con la nueva función)
+        if (enemyUnits != null && enemyUnits.Count > 0)
+            NextCurrentEnemy(enemyUnits[0].unitID);
+
         PlayerTurn();
     }
+    
+    void NextCurrentPlayer(int index)
+    {
+        // Buscar en la lista el primer Unit cuyo unitID coincida con el índice dado.
+        // Si no se encuentra, currentPlayer se deja en null y se registra una advertencia.
+        currentPlayer = playerUnits.Find(u => u != null && u.unitID == index);
+        if (currentPlayer == null)
+        {
+            Debug.LogWarning($"NextCurrentPlayer: no se encontró playerUnits con unitID == {index}");
+        }
+    }
+
+    void NextCurrentEnemy(int index)
+    {
+        // Buscar en la lista el primer Unit cuyo unitID coincida con el índice dado.
+        // Si no se encuentra, currentEnemy se deja en null y se registra una advertencia.
+        currentEnemy = enemyUnits.Find(u => u != null && u.unitID == index);
+        if (currentEnemy == null)
+        {
+            Debug.LogWarning($"NextCurrentEnemy: no se encontró enemyUnits con unitID == {index}");
+        }
+    }
+
     void LoadUnitData(Unit unitToLoad,int unitID)
     {
+        // Crear nueva instancia usando el constructor existente y luego copiar el resto de campos
         Unit newUnit = new Unit(unitToLoad.unitName,
-            unitToLoad.currentHP,unitToLoad.currentSP,
+            unitToLoad.currentHP, unitToLoad.currentSP,
             unitToLoad.unitEXP);
+
+        // Copiar referencias y estadísticas públicas
         newUnit.unitPrefab = unitToLoad.unitPrefab;
         newUnit.unitID = unitID;
+
+        newUnit.maxHP = unitToLoad.maxHP;
+        newUnit.currentHP = unitToLoad.currentHP;
+
+        newUnit.maxSP = unitToLoad.maxSP;
+        newUnit.currentSP = unitToLoad.currentSP;
+
+        newUnit.physicalATK = unitToLoad.physicalATK;
+        newUnit.magicalATK = unitToLoad.magicalATK;
+        newUnit.DEF = unitToLoad.DEF;
+
+        newUnit.lvl = unitToLoad.lvl;
+        // unitEXP ya se asignó por el constructor
+
+        // Nota: campos privados con [SerializeField] (por ejemplo levelUpCap, levelUpThresold)
+        // no son accesibles desde aquí y por tanto no se copian. Si necesitas copiarlos, hazlos públicos
+        // o añade un método en Unit para clonar/cargar desde otra instancia.
+
         enemyUnits.Add(newUnit);
     }
     public IEnumerator PlayerAttack()
@@ -115,8 +161,13 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            currentPlayer = playerUnits[playerUnits.IndexOf(currentPlayer) + 1];
-            PlayerTurn();
+            // Usar NextCurrentPlayer para decidir el siguiente currentPlayer según unitID
+            NextCurrentPlayer(currentPlayer.unitID + 1);
+
+            if (currentPlayer != null)
+                PlayerTurn();
+            else
+                Debug.LogWarning("PlayerAttack: NextCurrentPlayer devolvió null al avanzar al siguiente jugador.");
         }
 
         CHM.selectedEnemy = null;
@@ -146,13 +197,22 @@ public class BattleSystem : MonoBehaviour
         if (currentEnemy == enemyUnits[^1])
         {
             state = BattleState.PLAYER_TURN;
-            currentPlayer = playerUnits[0];
+
+            // Al volver al turno del jugador, seleccionar el primer jugador mediante NextCurrentPlayer
+            if (playerUnits != null && playerUnits.Count > 0)
+                NextCurrentPlayer(playerUnits[0].unitID);
+
             PlayerTurn();
         }
         else
         {
-            currentEnemy = enemyUnits[enemyUnits.IndexOf(currentEnemy) + 1];
-            StartCoroutine(EnemyTurn());
+            // Avanzar al siguiente enemigo usando NextCurrentEnemy (mismo patrón que NextCurrentPlayer)
+            NextCurrentEnemy(currentEnemy.unitID + 1);
+
+            if (currentEnemy != null)
+                StartCoroutine(EnemyTurn());
+            else
+                Debug.LogWarning("EnemyTurn: NextCurrentEnemy devolvió null al avanzar al siguiente enemigo.");
         }
 
         attackedPlayer = null;
@@ -160,8 +220,15 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
-        currentEnemy = enemyUnits[0];
-        Debug.Log("Turno de: " + currentPlayer.unitName);
+        // Seleccionar primer enemigo mediante NextCurrentEnemy para mantener consistencia
+        if (enemyUnits != null && enemyUnits.Count > 0)
+            NextCurrentEnemy(enemyUnits[0].unitID);
+
+        if (currentPlayer != null)
+            Debug.Log("Turno de: " + currentPlayer.unitName);
+        else
+            Debug.LogWarning("PlayerTurn: currentPlayer es null.");
+
         attackButton.SetActive(true);
         healButton.SetActive(true);
     }
