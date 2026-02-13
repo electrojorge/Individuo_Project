@@ -212,5 +212,11 @@ MonoBehaviour:
   chaseSpeed: 4
   chaseRange: 6
   lostChaseRange: 8
+  viewAngle: 90
+  eyeHeight: 1
+  requireLineOfSight: 1
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   playerTag: Player
   sceneIndexOnAttack: 1
