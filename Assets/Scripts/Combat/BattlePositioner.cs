@@ -13,6 +13,8 @@ public class BattlePositioner : MonoBehaviour
     public List<Unit> enemiesInCombat;
     public List<Unit> playersInCombat;
 
+    public GameObject enemiesContainer;
+
     private void Start()
     {
         UM = Game_Manager.instance.GetComponent<UnitsManager>();
@@ -41,9 +43,11 @@ public class BattlePositioner : MonoBehaviour
             Vector3 pos = new Vector3(leftX + i * distanceBetweenUnits, y, z);
             GameObject prefab = unitsToPosition[i].unitPrefab;
             if (prefab != null)
-                Instantiate(prefab, pos, Quaternion.identity);
-            else
-                Debug.LogWarning($"Unit prefab null en índice {i} ({(enemies ? "enemigo" : "aliado")})");
+            {
+                GameObject enemyInstantiated = Instantiate(prefab, enemiesContainer.transform);
+                enemyInstantiated.transform.position = pos;
+                enemyInstantiated.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
     }
 }

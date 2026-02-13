@@ -17,6 +17,7 @@ public class BattleSystem : MonoBehaviour
 
     UnitsManager UM;
     CombatHudManager CHM;
+    BattlePositioner BP;
 
     public BattleState state;
 
@@ -50,6 +51,7 @@ public class BattleSystem : MonoBehaviour
     {
         UM = Game_Manager.instance.GetComponent<UnitsManager>();
         CHM = GetComponent<CombatHudManager>();
+        BP = GetComponent<BattlePositioner>();
 
         state = BattleState.START;
         Debug.Log("Empieza la batalla");
@@ -134,11 +136,6 @@ public class BattleSystem : MonoBehaviour
         newUnit.DEF = unitToLoad.DEF;
 
         newUnit.lvl = unitToLoad.lvl;
-        // unitEXP ya se asignó por el constructor
-
-        // Nota: campos privados con [SerializeField] (por ejemplo levelUpCap, levelUpThresold)
-        // no son accesibles desde aquí y por tanto no se copian. Si necesitas copiarlos, hazlos públicos
-        // o añade un método en Unit para clonar/cargar desde otra instancia.
 
         enemyUnits.Add(newUnit);
     }
@@ -238,7 +235,11 @@ public class BattleSystem : MonoBehaviour
         CHM.selectedEnemy.currentHP -= dmg;
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
+        {
             enemyUnits.Remove(CHM.selectedEnemy);
+            Debug.Log("muelto");
+            BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).gameObject.SetActive(false);
+        }
     }
 
     bool PlayerTakeDamage(int dmg)

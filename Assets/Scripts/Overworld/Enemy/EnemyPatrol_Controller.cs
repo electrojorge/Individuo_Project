@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class EnemyPatrol_Controller : MonoBehaviour
@@ -92,6 +93,11 @@ public class EnemyPatrol_Controller : MonoBehaviour
             case EnemyBehavior.Attack:
                 // Estado Attack ahora se activa únicamente cuando ocurre la colisión física.
                 break;
+        }
+
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            Attack();
         }
     }
 

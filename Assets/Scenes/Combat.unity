@@ -619,6 +619,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161718813}
   m_CullTransparentMesh: 1
+--- !u!1 &1185041500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185041501}
+  m_Layer: 0
+  m_Name: EnemiesContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1185041501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185041500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517505221
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +838,7 @@ MonoBehaviour:
   distanceBetweenTeams: 3
   enemiesInCombat:
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitID: 0
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -820,6 +852,7 @@ MonoBehaviour:
     levelUpThresold: 0
     lvl: 0
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitID: 0
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -833,6 +866,7 @@ MonoBehaviour:
     levelUpThresold: 0
     lvl: 0
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitID: 0
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -846,6 +880,7 @@ MonoBehaviour:
     levelUpThresold: 0
     lvl: 0
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
+    unitID: 0
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -859,6 +894,7 @@ MonoBehaviour:
     levelUpThresold: 0
     lvl: 0
   playersInCombat: []
+  enemiesContainer: {fileID: 1185041500}
 --- !u!114 &1649293000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,6 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CombatHudManager
   selectedEnemy:
     unitPrefab: {fileID: 0}
+    unitID: 0
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -1456,7 +1493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2037715070}
   m_Layer: 0
-  m_Name: VFX
+  m_Name: Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1489,3 +1526,4 @@ SceneRoots:
   - {fileID: 1649292998}
   - {fileID: 143079818}
   - {fileID: 1667484331}
+  - {fileID: 1185041501}
