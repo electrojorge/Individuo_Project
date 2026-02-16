@@ -5085,7 +5085,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5093,7 +5093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14864,7 +14864,7 @@ Transform:
   m_GameObject: {fileID: 632458738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2534013, y: -0.000000011289291, z: 0.0000000048353126, w: 0.9673613}
-  m_LocalPosition: {x: 19, y: 6.05, z: 23.6}
+  m_LocalPosition: {x: 0, y: 6.05, z: -14.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17796,7 +17796,19 @@ MonoBehaviour:
   playerTag: Player
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1300247961}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &663096642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21943,6 +21955,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
+--- !u!1 &949959566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5704795842344490238, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
+  m_PrefabInstance: {fileID: 949959565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &957471273
 Mesh:
   m_ObjectHideFlags: 0
@@ -22482,7 +22499,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5510276492729915078, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
   m_PrefabInstance: {fileID: 949959565}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 949959566}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdcf2598a3dad2f438c7c3b8bf859451, type: 3}
@@ -29968,6 +29985,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90539c56c4f28546a1e3591ed19173a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HospitalDoor_Controller
+  prefabKeyDrops:
+  - enemyPrefab: {fileID: 949959566}
+    keyID: 1
 --- !u!4 &1300247963
 Transform:
   m_ObjectHideFlags: 0
