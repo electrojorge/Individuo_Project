@@ -141,7 +141,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         MoveTowards(playerTransform.position, chaseSpeed);
     }
 
-    void Attack()
+    public void Attack()
     {
         // Cargar la escena configurada
         SceneManager.LoadScene(sceneIndexOnAttack);
