@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum BattleState
@@ -94,23 +95,45 @@ public class BattleSystem : MonoBehaviour
     
     void NextCurrentPlayer(int index)
     {
-        // Buscar en la lista el primer Unit cuyo unitID coincida con el índice dado.
-        // Si no se encuentra, currentPlayer se deja en null y se registra una advertencia.
-        currentPlayer = playerUnits.Find(u => u != null && u.unitID == index);
+        // Buscamos al jugador que tenga el ID igual o más cercano (hacia arriba) al index
+        Unit next = null;
+        int lowestFoundID = int.MaxValue;
+
+        foreach (Unit u in playerUnits)
+        {
+            if (u.unitID >= index && u.unitID < lowestFoundID)
+            {
+                next = u;
+                lowestFoundID = u.unitID;
+            }
+        }
+        currentPlayer = next;
+
         if (currentPlayer == null)
         {
-            Debug.LogWarning($"NextCurrentPlayer: no se encontró playerUnits con unitID == {index}");
+            Debug.Log("No hay más jugadores vivos con ID >= " + index);
         }
     }
 
     void NextCurrentEnemy(int index)
     {
-        // Buscar en la lista el primer Unit cuyo unitID coincida con el índice dado.
-        // Si no se encuentra, currentEnemy se deja en null y se registra una advertencia.
-        currentEnemy = enemyUnits.Find(u => u != null && u.unitID == index);
+        // Buscamos al enemigo que tenga el ID igual o más cercano (hacia arriba) al index
+        Unit next = null;
+        int lowestFoundID = int.MaxValue;
+
+        foreach (Unit u in enemyUnits)
+        {
+            if (u.unitID >= index && u.unitID < lowestFoundID)
+            {
+                next = u;
+                lowestFoundID = u.unitID;
+            }
+        }
+        currentEnemy = next;
+
         if (currentEnemy == null)
         {
-            Debug.LogWarning($"NextCurrentEnemy: no se encontró enemyUnits con unitID == {index}");
+            Debug.Log("No hay más enemigos vivos con ID >= " + index);
         }
     }
 
@@ -139,10 +162,11 @@ public class BattleSystem : MonoBehaviour
 
         enemyUnits.Add(newUnit);
     }
+
     public IEnumerator PlayerAttack()
     {
         yield return new WaitForSeconds(waitTime);
-        
+
         EnemyTakeDamage(currentPlayer.physicalATK);
 
         if (enemyUnits.Count == 0)
@@ -151,65 +175,58 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Has ganado la batalla");
             //EndBattle();
         }
-        else if (currentPlayer == playerUnits[^1])
-        {
-            state = BattleState.ENEMY_TURN;
-            StartCoroutine(EnemyTurn());
-        }
         else
         {
-            // Usar NextCurrentPlayer para decidir el siguiente currentPlayer según unitID
+            // Intentamos buscar al siguiente
             NextCurrentPlayer(currentPlayer.unitID + 1);
 
             if (currentPlayer != null)
+            {
+                // Si encontró a alguien, sigue el turno del jugador
                 PlayerTurn();
+            }
             else
-                Debug.LogWarning("PlayerAttack: NextCurrentPlayer devolvió null al avanzar al siguiente jugador.");
+            {
+                // Si NextCurrentPlayer nos dejó el currentPlayer en null, es que ya no hay más
+                state = BattleState.ENEMY_TURN;
+                NextCurrentEnemy(1); // Buscamos al primer enemigo vivo (ID 1 o superior)
+                StartCoroutine(EnemyTurn());
+            }
         }
-
         CHM.selectedEnemy = null;
     }
 
     IEnumerator EnemyTurn()
     {
+        // Alineada con PlayerAttack: esperar, aplicar daño mediante función que gestiona la resta y la posible muerte,
+        // luego comprobar si quedan jugadores y avanzar el puntero o cambiar turno.
         Debug.Log("Turno de " + currentEnemy.unitName);
-
         yield return new WaitForSeconds(waitTime);
 
-        bool isDead = PlayerTakeDamage(currentEnemy.physicalATK);
+        // Aplicar daño al jugador (la función ahora gestiona la resta y la eliminación)
+        PlayerTakeDamage(currentEnemy.physicalATK);
 
-        if (isDead)
+        // Si ya no quedan jugadores -> perdido
+        if (playerUnits.Count == 0)
         {
-            playerUnits.Remove(attackedPlayer);
-
-            if (playerUnits.Count == 0)
-            {
-                state = BattleState.LOST;
-                Debug.Log("Has perdido la batalla");
-                attackedPlayer = null;
-                yield break;
-            }
+            state = BattleState.LOST;
+            Debug.Log("Has perdido la batalla");
+            yield break;
         }
 
-        if (currentEnemy == enemyUnits[^1])
+        // Intentamos pasar al siguiente enemigo
+        NextCurrentEnemy(currentEnemy.unitID + 1);
+
+        if (currentEnemy != null)
         {
-            state = BattleState.PLAYER_TURN;
-
-            // Al volver al turno del jugador, seleccionar el primer jugador mediante NextCurrentPlayer
-            if (playerUnits != null && playerUnits.Count > 0)
-                NextCurrentPlayer(playerUnits[0].unitID);
-
-            PlayerTurn();
+            StartCoroutine(EnemyTurn());
         }
         else
         {
-            // Avanzar al siguiente enemigo usando NextCurrentEnemy (mismo patrón que NextCurrentPlayer)
-            NextCurrentEnemy(currentEnemy.unitID + 1);
-
-            if (currentEnemy != null)
-                StartCoroutine(EnemyTurn());
-            else
-                Debug.LogWarning("EnemyTurn: NextCurrentEnemy devolvió null al avanzar al siguiente enemigo.");
+            // No quedan más enemigos: volver a turno jugador
+            state = BattleState.PLAYER_TURN;
+            NextCurrentPlayer(1);
+            PlayerTurn();
         }
 
         attackedPlayer = null;
@@ -242,16 +259,24 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    bool PlayerTakeDamage(int dmg)
+    // Reestructurada para igualar la arquitectura de EnemyTakeDamage: esta función aplica el daño,
+    // notifica y elimina al jugador si muere (sin devolver bool).
+    void PlayerTakeDamage(int dmg)
     {
+        if (playerUnits == null || playerUnits.Count == 0)
+            return;
+
         int i = Random.Range(0, playerUnits.Count);
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
         Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 
         if (attackedPlayer.currentHP <= 0)
-            return true;
-        else
-            return false;
+        {
+            // Eliminar jugador y log
+            playerUnits.Remove(attackedPlayer);
+            Debug.Log(attackedPlayer.unitName + " ha muerto");
+            // Si hay UI o contenedores de jugador, aquí es donde deberías desactivarlos.
+        }
     }
 }
