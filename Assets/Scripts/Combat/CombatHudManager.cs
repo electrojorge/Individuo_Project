@@ -5,6 +5,7 @@ public class CombatHudManager : MonoBehaviour
 {
     BattleSystem BS;
     public Unit selectedEnemy;
+    public Unit selectedAlly;
 
     //public static event System.Action<Unit> OnUnitSelected;
 
@@ -12,13 +13,13 @@ public class CombatHudManager : MonoBehaviour
     {
         BS = BattleSystem.instance;
         selectedEnemy = null;
+        selectedAlly = null;
     }
 
     private void Update()
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            //OnUnitSelected?.Invoke(BS.enemyUnits[0]);
             Debug.Log("enemigo 1 seleccionado");
             selectedEnemy = BS.enemyUnits[0];
         }
@@ -42,6 +43,29 @@ public class CombatHudManager : MonoBehaviour
             Debug.Log("enemigo 5 seleccionado");
             selectedEnemy = BS.enemyUnits[4];
         }
+
+
+
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            Debug.Log("jugador 1 seleccionado");
+            selectedAlly = BS.playerUnits[0];
+        }
+        if (Keyboard.current.wKey.wasPressedThisFrame)
+        {
+            Debug.Log("jugador 2 seleccionado");
+            selectedAlly = BS.playerUnits[1];
+        }
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            Debug.Log("jugador 3 seleccionado");
+            selectedAlly = BS.playerUnits[2];
+        }
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            Debug.Log("jugador 4 seleccionado");
+            selectedAlly = BS.playerUnits[3];
+        }
     }
     public void AttackButton()
     {
@@ -56,8 +80,11 @@ public class CombatHudManager : MonoBehaviour
 
     public void HealButton()
     {
-        BS.attackButton.SetActive(false);
-        BS.healButton.SetActive(false);
-        //StartCoroutine(BS.PlayerHeal());
+        if(selectedAlly != null)
+        {
+            BS.attackButton.SetActive(false);
+            BS.healButton.SetActive(false);
+            StartCoroutine(BS.PlayerHeal());
+        }
     }
 }

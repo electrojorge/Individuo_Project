@@ -38654,12 +38654,12 @@ MonoBehaviour:
   - unitPrefab: {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
     unitID: 0
     unitName: Joker
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
     physicalATK: 40
-    magicalATK: 0
+    magicalATK: 60
     DEF: 0
     unitEXP: 0
     levelUpCap: 0
@@ -38668,12 +38668,12 @@ MonoBehaviour:
   - unitPrefab: {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
     unitID: 0
     unitName: Makoto
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
     physicalATK: 40
-    magicalATK: 0
+    magicalATK: 60
     DEF: 0
     unitEXP: 0
     levelUpCap: 0
@@ -38682,12 +38682,12 @@ MonoBehaviour:
   - unitPrefab: {fileID: 7770681069192169274, guid: 2c807d06e8f871c4fa96e3a50fbf5e74, type: 3}
     unitID: 0
     unitName: Morgana
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
     physicalATK: 40
-    magicalATK: 0
+    magicalATK: 60
     DEF: 0
     unitEXP: 0
     levelUpCap: 0
@@ -38696,12 +38696,12 @@ MonoBehaviour:
   - unitPrefab: {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
     unitID: 0
     unitName: Chie
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
     physicalATK: 40
-    magicalATK: 0
+    magicalATK: 60
     DEF: 0
     unitEXP: 0
     levelUpCap: 0

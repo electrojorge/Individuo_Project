@@ -193,6 +193,32 @@ public class BattleSystem : MonoBehaviour
                 StartCoroutine(EnemyTurn());
             }
         }
+        CHM.selectedAlly = null;
+        CHM.selectedEnemy = null;
+    }
+
+    public IEnumerator PlayerHeal()
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        PlayerGetsHealing(currentPlayer.magicalATK);
+
+        NextCurrentPlayer(currentPlayer.unitID + 1);
+
+        if (currentPlayer != null)
+        {
+            // Si encontró a alguien, sigue el turno del jugador
+            PlayerTurn();
+        }
+        else
+        {
+            // Si NextCurrentPlayer nos dejó el currentPlayer en null, es que ya no hay más
+            state = BattleState.ENEMY_TURN;
+            NextCurrentEnemy(1); // Buscamos al primer enemigo vivo (ID 1 o superior)
+            StartCoroutine(EnemyTurn());
+        }
+
+        CHM.selectedAlly = null;
         CHM.selectedEnemy = null;
     }
 
@@ -257,6 +283,14 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("muelto");
             BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).gameObject.SetActive(false);
         }
+    }
+
+    void PlayerGetsHealing(int heal)
+    {
+        CHM.selectedAlly.currentHP += heal;
+        if (CHM.selectedAlly.currentHP > CHM.selectedAlly.maxHP)
+            CHM.selectedAlly.currentHP = CHM.selectedAlly.maxHP;
+        Debug.Log("vida de: " + CHM.selectedAlly.unitName + " ahora es: " + CHM.selectedAlly.currentHP);
     }
 
     // Reestructurada para igualar la arquitectura de EnemyTakeDamage: esta función aplica el daño,
