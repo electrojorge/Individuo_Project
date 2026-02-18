@@ -707,7 +707,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -17794,7 +17793,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -24808,7 +24806,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -25521,7 +25518,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -28506,7 +28502,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -33031,7 +33026,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 1300054542}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -47430,7 +47424,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 1.5, z: 0}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 1683552067}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -47494,12 +47487,9 @@ MonoBehaviour:
   lostChaseRange: 8
   viewAngle: 90
   eyeHeight: 1
-  requireLineOfSight: 1
   obstructionMask:
     serializedVersion: 2
     m_Bits: 64
-  playerTag: Player
-  sceneIndexOnAttack: 1
 --- !u!1 &5704795842218471283
 GameObject:
   m_ObjectHideFlags: 0

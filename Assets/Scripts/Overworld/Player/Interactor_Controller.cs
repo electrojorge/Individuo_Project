@@ -5,25 +5,20 @@ using TMPro;
 
 public class Interactor_Controller : MonoBehaviour
 {
-    [Header("UI - Player HUD")]
-    [Tooltip("Texto en la interfaz del jugador (Canvas Screen Space - TextMeshProUGUI). Se habilita/deshabilita y muestra `message`.")]
-    [SerializeField] private TextMeshProUGUI playerUIText;
-    [Tooltip("Si asignas el GameObject padre del texto, se activará/desactivará en bloque. Si está vacío se alternará solo el Text.")]
-    [SerializeField] private GameObject playerUIPanel;
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI playerUIText; // Texto del HUD
+    [SerializeField] private GameObject playerUIPanel;     // Panel del HUD (opcional)
     [SerializeField] private string message = "Pulsa E";
 
-    [Header("World Indicator (sprite animado)")]
-    [Tooltip("Prefab del indicador (debe contener SpriteRenderer y Animator/Animation). Se instanciará delante del objeto.")]
+    [Header("World Indicator")]
     [SerializeField] private GameObject indicatorPrefab;
     [SerializeField] private Vector3 indicatorLocalOffset = new Vector3(0f, 0.5f, 1f);
     [SerializeField] private bool indicatorFaceCamera = true;
 
-    [Header("Input (Nuevo Input System)")]
-    [Tooltip("InputActionReference opcional para la interacción. Si está vacío se usa <Keyboard>/e y <Gamepad>/buttonSouth.")]
+    [Header("Input System")]
     [SerializeField] private InputActionReference interactActionReference;
 
-    [Header("Interaction")]
-    [SerializeField] private string playerTag = "Player";
+    private string playerTag = "Player";
     public UnityEvent onInteract;
 
     private bool playerInRange;
@@ -33,7 +28,7 @@ public class Interactor_Controller : MonoBehaviour
     private InputAction runtimeInteractAction;
     private bool usingReference => interactActionReference != null && interactActionReference.action != null;
 
-    // Instancia del indicador en mundo (no parentada para evitar deformaciones por escala del padre)
+    // Instancia del indicador en mundo
     private GameObject indicatorInstance;
     private Vector3 indicatorPrefabLocalScale = Vector3.one;
 
@@ -41,7 +36,7 @@ public class Interactor_Controller : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        // Preparar player UI (HUD)
+        // Preparar HUD
         if (playerUIText != null)
         {
             playerUIText.text = message;
@@ -51,17 +46,15 @@ public class Interactor_Controller : MonoBehaviour
                 playerUIText.gameObject.SetActive(false);
         }
 
-        // Guardar escala original del prefab (si existe)
+        // Guardar escala original del prefab
         if (indicatorPrefab != null)
             indicatorPrefabLocalScale = indicatorPrefab.transform.localScale;
 
-        // Instanciar indicador en mundo (desactivado inicialmente)
+        // Instanciar indicador en el mundo (desactivado)
         if (indicatorPrefab != null)
         {
-            // Instanciar sin padre para evitar heredar escala no uniforme del objeto padre
             indicatorInstance = Instantiate(indicatorPrefab);
             indicatorInstance.SetActive(false);
-            // Asegurar la escala original del prefab (instanciado sin padre mantiene localScale, pero lo forzamos)
             indicatorInstance.transform.localScale = indicatorPrefabLocalScale;
             UpdateIndicatorTransform();
         }
@@ -69,6 +62,7 @@ public class Interactor_Controller : MonoBehaviour
 
     void OnEnable()
     {
+        // Preparar acción de interacción
         if (usingReference)
         {
             runtimeInteractAction = interactActionReference.action;
@@ -115,14 +109,13 @@ public class Interactor_Controller : MonoBehaviour
 
     void Update()
     {
-        // Actualizar indicador en mundo
+        // Actualiza indicador si está activo
         if (indicatorInstance != null && indicatorInstance.activeSelf)
         {
             UpdateIndicatorTransform();
             if (indicatorFaceCamera && mainCamera != null)
             {
-                // Billboard: el indicador mira siempre a la cámara.
-                // Usamos vector desde indicador hacia la cámara y Vector3.up para mantenerlo vertical (sin rotación en roll).
+                // Hacer que mire a la cámara
                 Vector3 dir = mainCamera.transform.position - indicatorInstance.transform.position;
                 if (dir.sqrMagnitude > 0.0001f)
                     indicatorInstance.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
@@ -132,6 +125,7 @@ public class Interactor_Controller : MonoBehaviour
 
     private void OnInteractPerformed(InputAction.CallbackContext ctx)
     {
+        // Ejecutar evento si el jugador está en rango
         if (playerInRange)
         {
             onInteract?.Invoke();
@@ -140,7 +134,7 @@ public class Interactor_Controller : MonoBehaviour
 
     private void ShowUI(bool show)
     {
-        // UI del jugador (HUD)
+        // Mostrar/ocultar HUD
         if (playerUIText != null)
         {
             playerUIText.text = message;
@@ -150,7 +144,7 @@ public class Interactor_Controller : MonoBehaviour
                 playerUIText.gameObject.SetActive(show);
         }
 
-        // Indicador en mundo delante del objeto
+        // Mostrar/ocultar indicador en mundo
         if (indicatorInstance != null)
         {
             indicatorInstance.SetActive(show);
@@ -161,9 +155,8 @@ public class Interactor_Controller : MonoBehaviour
     private void UpdateIndicatorTransform()
     {
         if (indicatorInstance == null) return;
-        // Posicionar delante del objeto usando TransformPoint para calcular la posición en world space
+        // Posicionar frente al objeto y mantener escala original
         indicatorInstance.transform.position = transform.TransformPoint(indicatorLocalOffset);
-        // Mantener la escala original del prefab (evita deformaciones por la escala del objeto padre)
         indicatorInstance.transform.localScale = indicatorPrefabLocalScale;
     }
 }

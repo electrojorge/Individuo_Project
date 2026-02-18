@@ -10,6 +10,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         Chase,
         Attack
     }
+
     [Header("State")]
     public EnemyBehavior enemyActivity = EnemyBehavior.Patrol;
 
@@ -24,25 +25,19 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     [Header("Chase")]
     [SerializeField] private float chaseSpeed = 4f;
-    [Tooltip("Distancia a la que detecta al jugador y pasa a Chase (usa también para el cono de visión)")]
+    [Tooltip("Distancia a la que detecta al jugador y pasa a perseguir")]
     [SerializeField] private float chaseRange = 6f;
     [Tooltip("Si el jugador se aleja más que esto, vuelve a patrullar")]
     [SerializeField] private float lostChaseRange = 8f;
 
     [Header("Vision")]
-    [Tooltip("Ángulo total del cono de visión en grados")]
     [SerializeField] private float viewAngle = 90f;
-    [Tooltip("Altura del 'ojo' del enemigo desde donde se hacen los raycast de visión")]
     [SerializeField] private float eyeHeight = 1.0f;
-    [Tooltip("Si está activado comprueba línea de visión (raycast) contra `obstructionMask`")]
-    [SerializeField] private bool requireLineOfSight = true;
-    [Tooltip("Capas que bloquean la visión del enemigo")]
-    [SerializeField] private LayerMask obstructionMask = ~0; // por defecto todo
-
-    [Header("Attack")]
-    [SerializeField] private string playerTag = "Player";
-    [Tooltip("Índice de la escena que se cargará en Attack (por defecto 1)")]
-    [SerializeField] private int sceneIndexOnAttack = 1;
+    [SerializeField] private LayerMask obstructionMask = ~0;
+    private bool requireLineOfSight = true;
+    
+    private string playerTag = "Player";
+    private int sceneIndexOnAttack = 1;
 
     // internals
     private int currentPatrolIndex;
@@ -54,16 +49,14 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     void Start()
     {
-        // cachear jugador por su tag (si existe)
+        // Buscar jugador por tag
         var playerGO = GameObject.FindGameObjectWithTag(playerTag);
         if (playerGO != null) playerTransform = playerGO.transform;
 
-        // iniciar valores
+        // Inicializar estado de patrulla
         currentPatrolIndex = 0;
         isWaiting = false;
         waitTimer = 0f;
-
-        // estado por defecto
         enemyActivity = EnemyBehavior.Patrol;
     }
 
@@ -73,7 +66,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         {
             case EnemyBehavior.Patrol:
                 Patrol();
-                // comprobar transición a Chase por proximidad + cono de visión + line of sight
+                // Si ve al jugador pasa a perseguir
                 if (IsPlayerInVision(false))
                 {
                     enemyActivity = EnemyBehavior.Chase;
@@ -82,7 +75,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
             case EnemyBehavior.Chase:
                 Chase();
-                // Si el jugador se pierde (se aleja o sale del cono/LOS) volver a patrullar y forzar el punto de patrol más cercano
+                // Si pierde al jugador vuelve a patrullar y busca el punto más cercano
                 if (!IsPlayerInVision(true))
                 {
                     ReturnToNearestPatrolPoint();
@@ -91,10 +84,11 @@ public class EnemyPatrol_Controller : MonoBehaviour
                 break;
 
             case EnemyBehavior.Attack:
-                // Estado Attack ahora se activa únicamente cuando ocurre la colisión física.
+                // Attack se dispara por colisión física
                 break;
         }
 
+        // Tecla de depuración para forzar ataque
         if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
             Attack();
@@ -108,7 +102,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         Transform target = patrolPoints[currentPatrolIndex];
         float dist = Vector3.Distance(transform.position, target.position);
 
-        // Si está dentro del umbral y no se estaba esperando, iniciar espera.
+        // Si llega al punto, espera un tiempo antes de ir al siguiente
         if (dist <= arrivalThreshold)
         {
             if (!isWaiting)
@@ -118,7 +112,6 @@ public class EnemyPatrol_Controller : MonoBehaviour
             }
             else
             {
-                // Durante la espera reducir el temporizador; cuando termine avanzar al siguiente punto
                 waitTimer -= Time.deltaTime;
                 if (waitTimer <= 0f)
                 {
@@ -129,7 +122,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         }
         else
         {
-            // Si no ha llegado aún, moverse hacia el punto
+            // Moverse hacia el punto de patrulla
             MoveTowards(target.position, patrolSpeed);
         }
     }
@@ -137,30 +130,29 @@ public class EnemyPatrol_Controller : MonoBehaviour
     void Chase()
     {
         if (playerTransform == null) return;
-        // mover hacia el jugador
+        // Moverse hacia el jugador
         MoveTowards(playerTransform.position, chaseSpeed);
     }
 
     public void Attack()
     {
-        // Cargar la escena configurada
+        // Cargar escena de ataque (configurable)
         SceneManager.LoadScene(sceneIndexOnAttack);
     }
 
-    // utility: mover hacia destino y rotar suavemente
+    // Mueve y rota suavemente hacia un objetivo en el plano XZ
     private void MoveTowards(Vector3 worldTarget, float speed)
     {
         Vector3 dir = (worldTarget - transform.position);
-        dir.y = 0f; // opcional: mantener en el plano XZ
+        dir.y = 0f;
         if (dir.sqrMagnitude <= 0.0001f) return;
 
         Vector3 move = dir.normalized * speed * Time.deltaTime;
-        // evitar sobrepasar el objetivo
         if (move.sqrMagnitude > dir.sqrMagnitude) move = dir;
 
         transform.position += move;
 
-        // rotación hacia movimiento
+        // Rotar hacia la dirección de movimiento
         Vector3 lookDir = dir;
         if (lookDir.sqrMagnitude > 0.0001f)
         {
@@ -170,8 +162,8 @@ public class EnemyPatrol_Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Determina si el jugador está dentro del cono de visión y distancia (y opcionalmente línea de visión).
-    /// withHysteresis = true usa lostChaseRange en lugar de chaseRange para evitar cambios constantes.
+    /// Comprueba si el jugador está dentro del cono de visión y rango.
+    /// withHysteresis usa lostChaseRange para evitar cambios constantes.
     /// </summary>
     private bool IsPlayerInVision(bool withHysteresis = false)
     {
@@ -183,20 +175,19 @@ public class EnemyPatrol_Controller : MonoBehaviour
         float dist = toPlayer.magnitude;
         if (dist > maxDist) return false;
 
-        // comprobar ángulo
+        // Comprobar ángulo de visión
         Vector3 forwardFlat = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         Vector3 toPlayerFlat = Vector3.ProjectOnPlane(toPlayer, Vector3.up).normalized;
         float halfAngle = viewAngle * 0.5f;
         float angleTo = Vector3.Angle(forwardFlat, toPlayerFlat);
         if (angleTo > halfAngle) return false;
 
-        // línea de visión opcional
+        // Comprobar línea de visión si está requerida
         if (requireLineOfSight)
         {
             RaycastHit hit;
             if (Physics.Raycast(eyePos, toPlayer.normalized, out hit, dist, obstructionMask))
             {
-                // Si el primer impacto no es el jugador, la visión está obstruida.
                 if (!hit.collider.CompareTag(playerTag))
                     return false;
             }
@@ -207,25 +198,20 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     private bool PlayerInChaseRange(bool withHysteresis = false)
     {
-        // mantenido por compatibilidad: ahora delega en IsPlayerInVision()
         return IsPlayerInVision(withHysteresis);
     }
 
-    // Detectar colisión física con el Player (usar el collider "pequeño" y no el trigger grande)
+    // Colisión física con el jugador entoces ataca
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
-            // Se ha chocado físicamente con el player -> ataque
             enemyActivity = EnemyBehavior.Attack;
             Attack();
         }
     }
 
-    /// <summary>
-    /// Selecciona el patrol point más cercano y ajusta currentPatrolIndex para que el enemigo
-    /// retome el patrullaje desde ese punto y continúe recorriendo el array.
-    /// </summary>
+    // Ajusta el índice al patrol point más cercano
     private void ReturnToNearestPatrolPoint()
     {
         if (patrolPoints == null || patrolPoints.Length == 0) return;
@@ -243,14 +229,12 @@ public class EnemyPatrol_Controller : MonoBehaviour
             }
         }
 
-        // Establecer el índice en el punto más cercano. El patrullaje continuará desde ese índice.
         currentPatrolIndex = nearestIndex;
-        // Reiniciar estado de espera para que el enemigo vaya hacia ese punto y luego espere al llegar.
         isWaiting = false;
         waitTimer = 0f;
     }
 
-    // Opcional: dibujar radios y el cono de visión en el editor para depuración
+    // Gizmos: rangos, puntos y cono de visión
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
