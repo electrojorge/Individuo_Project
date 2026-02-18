@@ -707,7 +707,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -5085,7 +5084,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5093,7 +5092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2912919019323338551, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14864,7 +14863,7 @@ Transform:
   m_GameObject: {fileID: 632458738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2534013, y: -0.000000011289291, z: 0.0000000048353126, w: 0.9673613}
-  m_LocalPosition: {x: 19, y: 6.05, z: 23.6}
+  m_LocalPosition: {x: 0, y: 6.05, z: -14.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17752,6 +17751,7 @@ GameObject:
   - component: {fileID: 663096643}
   - component: {fileID: 663096642}
   - component: {fileID: 663096641}
+  - component: {fileID: 663096645}
   m_Layer: 6
   m_Name: Door (1)
   m_TagString: Untagged
@@ -17793,10 +17793,21 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 663096645}
+        m_TargetAssemblyTypeName: Door_Blocked, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &663096642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17875,6 +17886,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663096639}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &663096645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663096639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fad60f9f5d42344e8045397d9168518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
+  doorNumber: 1
+  doorAnimator: {fileID: 0}
+  openTriggerName: Open
 --- !u!1 &733338449
 GameObject:
   m_ObjectHideFlags: 0
@@ -21834,115 +21860,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1001 &949959565
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: playerUIText
-      value: 
-      objectReference: {fileID: 1046629678}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: playerUIPanel
-      value: 
-      objectReference: {fileID: 1046629675}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: interactActionReference
-      value: 
-      objectReference: {fileID: 1683552067}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 978297876}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EnemyPatrol_Controller, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5250048641263470602, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5510276492729915078, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: 'patrolPoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2145403402}
-    - target: {fileID: 5510276492729915078, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: 'patrolPoints.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1705952465}
-    - target: {fileID: 5510276492729915078, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: 'patrolPoints.Array.data[2]'
-      value: 
-      objectReference: {fileID: 2025077301}
-    - target: {fileID: 5704795842344490238, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_Name
-      value: OverWorld_Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -34
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6688787918792955064, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
 --- !u!43 &957471273
 Mesh:
   m_ObjectHideFlags: 0
@@ -22477,17 +22394,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1051641617}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &978297876 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5510276492729915078, guid: 908908904a7cf49479e369e7a0b3b645, type: 3}
-  m_PrefabInstance: {fileID: 949959565}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdcf2598a3dad2f438c7c3b8bf859451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol_Controller
 --- !u!1 &989484490
 GameObject:
   m_ObjectHideFlags: 0
@@ -24900,7 +24806,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -25613,7 +25518,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -28556,6 +28460,7 @@ GameObject:
   - component: {fileID: 1223520543}
   - component: {fileID: 1223520542}
   - component: {fileID: 1223520541}
+  - component: {fileID: 1223520545}
   m_Layer: 6
   m_Name: Door (2)
   m_TagString: Untagged
@@ -28597,7 +28502,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -28679,6 +28583,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223520539}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1223520545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223520539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fad60f9f5d42344e8045397d9168518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
+  doorNumber: 2
+  doorAnimator: {fileID: 0}
+  openTriggerName: Open
 --- !u!1 &1231910569
 GameObject:
   m_ObjectHideFlags: 0
@@ -29968,6 +29887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90539c56c4f28546a1e3591ed19173a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HospitalDoor_Controller
+  keyDropDatabase: {fileID: 11400000, guid: 3510034ed2823c84990b75478aef78cb, type: 2}
 --- !u!4 &1300247963
 Transform:
   m_ObjectHideFlags: 0
@@ -33106,7 +33026,6 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 1300054542}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -47465,6 +47384,234 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1959093543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2325551488838809119
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 6
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &5250048641407071111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77a61bc72ce6854b94a0459e4449b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactor_Controller
+  playerUIText: {fileID: 1046629678}
+  playerUIPanel: {fileID: 1046629675}
+  message: Attack
+  indicatorPrefab: {fileID: 5575409437514443015, guid: dbcf010becf2bb24189415298be6bbd7, type: 3}
+  indicatorLocalOffset: {x: 0, y: 1.5, z: 0}
+  indicatorFaceCamera: 1
+  interactActionReference: {fileID: 1683552067}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5510276493676457291}
+        m_TargetAssemblyTypeName: EnemyPatrol_Controller, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!136 &5424730499639051853
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &5510276493676457291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcf2598a3dad2f438c7c3b8bf859451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol_Controller
+  enemyActivity: 0
+  patrolPoints:
+  - {fileID: 2145403402}
+  - {fileID: 1705952465}
+  - {fileID: 2025077301}
+  patrolSpeed: 2
+  arrivalThreshold: 0.2
+  waitAtPoint: 1
+  chaseSpeed: 4
+  chaseRange: 6
+  lostChaseRange: 8
+  viewAngle: 90
+  eyeHeight: 1
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!1 &5704795842218471283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6688787918649765685}
+  - component: {fileID: 8547839394762383719}
+  - component: {fileID: 6892190576604495813}
+  - component: {fileID: 7832521166002890491}
+  - component: {fileID: 5424730499639051853}
+  - component: {fileID: 2325551488838809119}
+  - component: {fileID: 5250048641407071111}
+  - component: {fileID: 5510276493676457291}
+  m_Layer: 0
+  m_Name: OverWorld_Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6688787918649765685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34, y: 2.9, z: 29}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &6892190576604495813
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b7b047cf7ebf03d4d9b37734ff5931b6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &7832521166002890491
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!33 &8547839394762383719
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704795842218471283}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -47478,5 +47625,5 @@ SceneRoots:
   - {fileID: 1959093543}
   - {fileID: 632458745}
   - {fileID: 1748675635}
-  - {fileID: 949959565}
+  - {fileID: 6688787918649765685}
   - {fileID: 346152610}
