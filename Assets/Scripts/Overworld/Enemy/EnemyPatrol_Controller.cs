@@ -207,6 +207,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag(playerTag))
         {
             enemyActivity = EnemyBehavior.Attack;
+            Game_Manager.instance.enemyCombat = this.gameObject;
             Attack();
         }
     }

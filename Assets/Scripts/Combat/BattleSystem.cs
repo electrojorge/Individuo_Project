@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum BattleState
 {
@@ -173,7 +175,7 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.WON;
             Debug.Log("Has ganado la batalla");
-            //EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -237,6 +239,7 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.LOST;
             Debug.Log("Has perdido la batalla");
+            //GameOver();
             yield break;
         }
 
@@ -271,6 +274,12 @@ public class BattleSystem : MonoBehaviour
 
         attackButton.SetActive(true);
         healButton.SetActive(true);
+    }
+
+    IEnumerator EndBattle()
+    {
+        yield return new WaitForSeconds(waitTime);
+        SceneManager.LoadScene("Hospital_Inside");
     }
 
     void EnemyTakeDamage(int dmg)
