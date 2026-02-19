@@ -18,7 +18,6 @@ public class Player_Controller : MonoBehaviour
 
     void Start()
     {
-        // Obtener o añadir Rigidbody: el controlador siempre usa Rigidbody.
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
