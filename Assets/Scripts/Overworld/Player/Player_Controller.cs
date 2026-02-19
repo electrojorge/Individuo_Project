@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class Player_Controller : MonoBehaviour
 {
+    public static Player_Controller instance;
+
     [Header("Input System")]
     [SerializeField] private InputActionReference moveActionReference;
 
@@ -16,10 +18,14 @@ public class Player_Controller : MonoBehaviour
     private Rigidbody rb;
     private Vector3 inputDirection = Vector3.zero;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        
+    }
     void Start()
     {
         // Obtener o añadir Rigidbody: el controlador siempre usa Rigidbody.
-        rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
             rb = gameObject.AddComponent<Rigidbody>();
@@ -33,6 +39,8 @@ public class Player_Controller : MonoBehaviour
         if (cameraTransform == null && Camera.main != null)
             cameraTransform = Camera.main.transform;
     }
+
+    public Rigidbody GetRigidbody() { return rb; }
 
     void OnEnable()
     {

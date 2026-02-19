@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5704795842344490238
+--- !u!1 &5781603785681677536
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,14 +8,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6688787918792955064}
-  - component: {fileID: 8547839394621020906}
-  - component: {fileID: 6892190576462070856}
-  - component: {fileID: 7832521166950210934}
-  - component: {fileID: 5424730499512384960}
-  - component: {fileID: 2325551487905762706}
-  - component: {fileID: 5250048641263470602}
-  - component: {fileID: 5510276492729915078}
+  - component: {fileID: 3435832293930212213}
+  - component: {fileID: 5231435047844058282}
+  - component: {fileID: 3965747959456027238}
+  - component: {fileID: 9103997450127428950}
+  - component: {fileID: 6649904500102645093}
+  - component: {fileID: 4566319886803708926}
+  - component: {fileID: 5388339891516933701}
+  - component: {fileID: 7198409741297272668}
   m_Layer: 0
   m_Name: OverWorld_Enemy
   m_TagString: Untagged
@@ -23,36 +23,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6688787918792955064
+--- !u!4 &3435832293930212213
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0.5, z: 25.35}
+  m_LocalPosition: {x: -34, y: 2.9, z: 29}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8547839394621020906
+--- !u!33 &5231435047844058282
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6892190576462070856
+--- !u!23 &3965747959456027238
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -95,13 +95,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &7832521166950210934
+--- !u!54 &9103997450127428950
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -122,13 +122,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!136 &5424730499512384960
+--- !u!136 &6649904500102645093
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -145,13 +145,13 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!135 &2325551487905762706
+--- !u!135 &4566319886803708926
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -166,13 +166,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5250048641263470602
+--- !u!114 &5388339891516933701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b77a61bc72ce6854b94a0459e4449b50, type: 3}
@@ -185,27 +185,35 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 1.5, z: 0}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 0}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &5510276492729915078
+      m_Calls:
+      - m_Target: {fileID: 7198409741297272668}
+        m_TargetAssemblyTypeName: EnemyPatrol_Controller, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7198409741297272668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704795842344490238}
+  m_GameObject: {fileID: 5781603785681677536}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdcf2598a3dad2f438c7c3b8bf859451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol_Controller
   enemyActivity: 0
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  patrolPoints: []
   patrolSpeed: 2
   arrivalThreshold: 0.2
   waitAtPoint: 1
@@ -214,9 +222,6 @@ MonoBehaviour:
   lostChaseRange: 8
   viewAngle: 90
   eyeHeight: 1
-  requireLineOfSight: 1
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  playerTag: Player
-  sceneIndexOnAttack: 1
+    m_Bits: 64

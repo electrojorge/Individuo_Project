@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyPatrol_Controller : MonoBehaviour
 {
+    public static EnemyPatrol_Controller instance;
     public enum EnemyBehavior
     {
         Patrol,
@@ -16,7 +17,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     [Header("Patrol")]
     [Tooltip("Puntos por los que patrullará el enemigo")]
-    [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] public Transform[] patrolPoints;
     [SerializeField] private float patrolSpeed = 2f;
     [Tooltip("Distancia mínima para considerar que ha llegado al punto")]
     [SerializeField] private float arrivalThreshold = 0.2f;
@@ -46,6 +47,8 @@ public class EnemyPatrol_Controller : MonoBehaviour
     // espera en punto de patrulla
     private bool isWaiting = false;
     private float waitTimer = 0f;
+
+    public int enemyID;
 
     void Start()
     {
@@ -207,7 +210,8 @@ public class EnemyPatrol_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag(playerTag))
         {
             enemyActivity = EnemyBehavior.Attack;
-            Game_Manager.instance.enemyCombat = this.gameObject;
+            Game_Manager.instance.savedID = enemyID;
+            Game_Manager.instance.PlayerPos = collision.gameObject.GetComponent<Transform>().position;
             Attack();
         }
     }

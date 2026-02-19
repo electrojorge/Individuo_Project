@@ -7,7 +7,13 @@ public class Game_Manager : MonoBehaviour
 {
     public static Game_Manager instance;
 
-    public GameObject enemyCombat;
+    public int? savedID;
+
+    private Vector3 playerPos;
+    public Vector3 PlayerPos  {get{return playerPos;} set{playerPos = value;}}
+
+    public bool returningFromCombat;
+
 
     void Awake()
     {
@@ -34,10 +40,13 @@ public class Game_Manager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Hospital_Inside" && enemyCombat != null)
+        if (scene.name == "Hospital_Inside" && returningFromCombat)
         {
             Debug.Log("volvemos al overworld");
-            Destroy(enemyCombat);
+            Player_Controller player = FindFirstObjectByType<Player_Controller>();
+            player.GetRigidbody().position = playerPos;
+            player.transform.position = playerPos;
+            returningFromCombat = false;
         }
     }
 }

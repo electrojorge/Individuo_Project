@@ -279,6 +279,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EndBattle()
     {
         yield return new WaitForSeconds(waitTime);
+        Game_Manager.instance.returningFromCombat = true;
         SceneManager.LoadScene("Hospital_Inside");
     }
 
