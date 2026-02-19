@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7198409741297272668}
   m_Layer: 0
   m_Name: OverWorld_Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77a61bc72ce6854b94a0459e4449b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactor_Controller
-  playerUIText: {fileID: 0}
-  playerUIPanel: {fileID: 0}
+  playerUIText: {fileID: 6654941335510480771, guid: 6416e10ceaa003e468b173355df57c1f, type: 3}
+  playerUIPanel: {fileID: 8555834429802199153, guid: 6416e10ceaa003e468b173355df57c1f, type: 3}
   message: Attack
   indicatorPrefab: {fileID: 5575409437514443015, guid: dbcf010becf2bb24189415298be6bbd7, type: 3}
   indicatorLocalOffset: {x: 0, y: 1.5, z: 0}
@@ -188,9 +188,9 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7198409741297272668}
-        m_TargetAssemblyTypeName: EnemyPatrol_Controller, Assembly-CSharp
-        m_MethodName: Attack
+      - m_Target: {fileID: 4713232708866810649, guid: d426516186715014dab639de27eb4d8c, type: 3}
+        m_TargetAssemblyTypeName: Player_Controller, Assembly-CSharp
+        m_MethodName: AttackEnemy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -225,3 +225,4 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 64
+  enemyID: 0

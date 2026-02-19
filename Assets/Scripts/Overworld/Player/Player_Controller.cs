@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -15,8 +17,15 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float rotationSpeed = 10f;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI enemyUIText; // Texto del HUD
+    [SerializeField] private GameObject enemyUIPanel;     // Panel del HUD (opcional)
+    [SerializeField] private string message = "Atacar";
+
     private Rigidbody rb;
     private Vector3 inputDirection = Vector3.zero;
+    private bool enemyInRange;
+    private string enemyTag = "Enemy";
 
     private void Awake()
     {
@@ -118,5 +127,37 @@ public class Player_Controller : MonoBehaviour
     {
         if (speed < 0f) speed = 0f;
         if (rotationSpeed < 0f) rotationSpeed = 0f;
+    }
+
+    public void AttackEnemy()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag(enemyTag)) return;
+        enemyInRange = true;
+        ShowUI(true);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag(enemyTag)) return;
+        enemyInRange = false;
+        ShowUI(false);
+    }
+
+    private void ShowUI(bool show)
+    {
+        // Mostrar/ocultar HUD
+        if (enemyUIText != null)
+        {
+            enemyUIText.text = message;
+            if (enemyUIPanel != null)
+                enemyUIPanel.SetActive(show);
+            else
+                enemyUIText.gameObject.SetActive(show);
+        }
     }
 }
