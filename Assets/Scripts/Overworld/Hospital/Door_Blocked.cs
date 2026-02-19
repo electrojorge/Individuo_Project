@@ -43,11 +43,11 @@ public class Door_Blocked : MonoBehaviour
             return;
         }
 
-        if (HospitalDoor_Controller.HasKey(doorNumber))
-        {
-            Debug.Log($"Se tiene la llave {doorNumber} -> abriendo puerta.");
-            DoOpen();
-        }
+        //if (HospitalDoor_Controller.HasKey(doorNumber))
+        //{
+        //    Debug.Log($"Se tiene la llave {doorNumber} -> abriendo puerta.");
+        //    DoOpen();
+        //}
         else
         {
             Debug.Log($"Puerta cerrada: necesitas la llave {doorNumber} para abrirla.");
