@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Door_Blocked : MonoBehaviour
@@ -5,7 +7,7 @@ public class Door_Blocked : MonoBehaviour
     [Header("Door settings")]
     // Número de la puerta, para verificar si el jugador tiene la llave
     public int doorNumber = 0;
-    //Animator para reproducir la animación
+    // Animator para reproducir la animación
     public Animator doorAnimator;
     // Nombre del trigger en el Animator para abrir la puerta
     public string openTriggerName = "Open";
@@ -43,11 +45,12 @@ public class Door_Blocked : MonoBehaviour
             return;
         }
 
-        //if (HospitalDoor_Controller.HasKey(doorNumber))
-        //{
-        //    Debug.Log($"Se tiene la llave {doorNumber} -> abriendo puerta.");
-        //    DoOpen();
-        //}
+        // Comprueba el inventario del jugador
+        if (PlayerHasKey(doorNumber))
+        {
+            Debug.Log($"Se tiene la llave {doorNumber} -> abriendo puerta.");
+            DoOpen();
+        }
         else
         {
             Debug.Log($"Puerta cerrada: necesitas la llave {doorNumber} para abrirla.");
@@ -77,5 +80,63 @@ public class Door_Blocked : MonoBehaviour
     public bool IsOpen()
     {
         return isOpen;
+    }
+
+    // Acceso al KeyInventory
+    private static KeyInventory cachedInventory;
+
+    private static KeyInventory GetInventory()
+    {
+        if (cachedInventory == null)
+        {
+            cachedInventory = Object.FindFirstObjectByType<KeyInventory>();
+            if (cachedInventory == null)
+                Debug.LogWarning("Door_Blocked: no se encontró KeyInventory en la escena.");
+        }
+        return cachedInventory;
+    }
+
+    // Métodos de compatibilidad / helpers (llamables desde otros scripts)
+    public static void GivePlayerKey(Key_SO key)
+    {
+        if (key == null)
+        {
+            Debug.LogWarning("GivePlayerKey recibió null.");
+            return;
+        }
+        var inv = GetInventory();
+        if (inv != null)
+        {
+            inv.AddKey(key.keyID);
+            Debug.Log($"Llave añadida: {key.keyID}");
+        }
+    }
+
+    public static void GivePlayerKeyByID(int id)
+    {
+        var inv = GetInventory();
+        if (inv != null)
+        {
+            inv.AddKey(id);
+            Debug.Log($"Llave añadida por ID: {id}");
+        }
+    }
+
+    public static bool PlayerHasKey(int id)
+    {
+        var inv = GetInventory();
+        return inv != null && inv.HasKey(id);
+    }
+
+    public static bool RemovePlayerKey(int id)
+    {
+        var inv = GetInventory();
+        return inv != null && inv.RemoveKey(id);
+    }
+
+    public static int[] GetPlayerKeys()
+    {
+        var inv = GetInventory();
+        return inv != null ? inv.GetKeys() : new int[0];
     }
 }
