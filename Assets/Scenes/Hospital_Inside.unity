@@ -28526,8 +28526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77a61bc72ce6854b94a0459e4449b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactor_Controller
-  playerUIText: {fileID: 0}
-  playerUIPanel: {fileID: 0}
+  playerUIText: {fileID: 1742648651}
+  playerUIPanel: {fileID: 1742648649}
   message: Pulsa E
   indicatorPrefab: {fileID: 5575409437514443015, guid: dbcf010becf2bb24189415298be6bbd7, type: 3}
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
@@ -28535,7 +28535,19 @@ MonoBehaviour:
   interactActionReference: {fileID: 0}
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1223520545}
+        m_TargetAssemblyTypeName: Door_Blocked, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1223520542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29889,50 +29901,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
---- !u!1 &1300247961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1300247963}
-  - component: {fileID: 1300247962}
-  m_Layer: 0
-  m_Name: --Door--
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1300247962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300247961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90539c56c4f28546a1e3591ed19173a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HospitalDoor_Controller
---- !u!4 &1300247963
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300247961}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4824, y: 3.50623, z: 19.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1307830766
 Mesh:
   m_ObjectHideFlags: 0
@@ -33015,6 +32983,7 @@ GameObject:
   - component: {fileID: 1473056364}
   - component: {fileID: 1473056363}
   - component: {fileID: 1473056362}
+  - component: {fileID: 1473056366}
   m_Layer: 6
   m_Name: HospitalDoor
   m_TagString: Untagged
@@ -33059,7 +33028,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1300247962}
+      - m_Target: {fileID: 1473056366}
         m_TargetAssemblyTypeName: HospitalDoor_Controller, Assembly-CSharp
         m_MethodName: ExitHospital
         m_Mode: 1
@@ -33149,6 +33118,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473056360}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1473056366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473056360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90539c56c4f28546a1e3591ed19173a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HospitalDoor_Controller
 --- !u!1 &1481826777
 GameObject:
   m_ObjectHideFlags: 0
@@ -38597,6 +38578,7 @@ GameObject:
   - component: {fileID: 1738932410}
   - component: {fileID: 1738932409}
   - component: {fileID: 1738932408}
+  - component: {fileID: 1738932411}
   m_Layer: 0
   m_Name: --GameManager--
   m_TagString: Untagged
@@ -38828,6 +38810,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738932411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738932407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df00d4f199292843af67926578835f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyInventory
+  keyEntries:
+  - key: {fileID: 11400000, guid: bc005d51407e616489b37ad1e6be3eaf, type: 2}
+    obtained: 0
+  - key: {fileID: 11400000, guid: 4710951ef5eae7c42b378b6dc0d37fca, type: 2}
+    obtained: 0
+  - key: {fileID: 11400000, guid: ee482ba2ea4a95a4ebb58e446a2f3c24, type: 2}
+    obtained: 0
+  - key: {fileID: 11400000, guid: afcfda68d5c0f674db375ca7c90a516f, type: 2}
+    obtained: 0
+  - key: {fileID: 11400000, guid: 766b1480b59af924d8cb439a89d801d4, type: 2}
+    obtained: 0
 --- !u!43 &1742636459
 Mesh:
   m_ObjectHideFlags: 0
@@ -47645,7 +47650,6 @@ SceneRoots:
   - {fileID: 1665042469}
   - {fileID: 1738932410}
   - {fileID: 2087837105}
-  - {fileID: 1300247963}
   - {fileID: 1048359521}
   - {fileID: 1959093543}
   - {fileID: 632458745}
