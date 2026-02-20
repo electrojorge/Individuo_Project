@@ -246,50 +246,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &348633503
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 348633505}
-  - component: {fileID: 348633504}
-  m_Layer: 0
-  m_Name: --Door--
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &348633504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348633503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90539c56c4f28546a1e3591ed19173a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HospitalDoor_Controller
---- !u!4 &348633505
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348633503}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4824, y: 3.50623, z: 19.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &355044162
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,8 +7815,9 @@ GameObject:
   - component: {fileID: 1670194626}
   - component: {fileID: 1670194625}
   - component: {fileID: 1670194624}
+  - component: {fileID: 1670194628}
   m_Layer: 0
-  m_Name: _HospitalDoor_
+  m_Name: HospitalDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7900,11 +7857,10 @@ MonoBehaviour:
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
   interactActionReference: {fileID: 1649334840}
-  playerTag: Player
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348633504}
+      - m_Target: {fileID: 1670194628}
         m_TargetAssemblyTypeName: HospitalDoor_Controller, Assembly-CSharp
         m_MethodName: EnterHospital
         m_Mode: 1
@@ -7994,6 +7950,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670194622}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1670194628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670194622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90539c56c4f28546a1e3591ed19173a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HospitalDoor_Controller
 --- !u!1 &1699438921
 GameObject:
   m_ObjectHideFlags: 0
@@ -10146,7 +10114,10 @@ MonoBehaviour:
   cameraTransform: {fileID: 5984623528364521860}
   speed: 6.5
   rotationSpeed: 10
-  preferRigidbody: 1
+  enemyUIText: {fileID: 0}
+  enemyUIPanel: {fileID: 0}
+  message: Atacar
+  enemyInRange: 0
 --- !u!33 &5438132383183433613
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10343,7 +10314,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 34368167}
   - {fileID: 1037026171}
-  - {fileID: 348633505}
   - {fileID: 878363534}
   - {fileID: 2912919019694305333}
   - {fileID: 433307959}
