@@ -65,14 +65,28 @@ public class Interactor_Controller : MonoBehaviour
         // Preparar acción de interacción
         if (usingReference)
         {
+            // Usar la referencia proporcionada en el inspector (si existe)
             runtimeInteractAction = interactActionReference.action;
         }
         else
         {
+            // Si no hay referencia, crear una acción por defecto.
+            // Si este GameObject tiene un EnemyPatrol_Controller, usamos click izquierdo como binding.
             if (runtimeInteractAction == null)
             {
-                runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Keyboard>/e");
-                runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
+                var enemy = GetComponent<EnemyPatrol_Controller>();
+                if (enemy != null)
+                {
+                    // Enemigo: interacción = atacar -> click izquierdo del ratón (y gamepad botón Sur)
+                    runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Mouse>/leftButton");
+                    runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
+                }
+                else
+                {
+                    // No-enemigo: uso por defecto (teclado E + gamepad)
+                    runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Keyboard>/e");
+                    runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
+                }
             }
         }
 

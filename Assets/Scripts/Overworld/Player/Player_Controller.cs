@@ -24,7 +24,7 @@ public class Player_Controller : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 inputDirection = Vector3.zero;
-    private bool enemyInRange;
+    public bool enemyInRange;
     private string enemyTag = "Enemy";
 
     private void Awake()
@@ -34,6 +34,7 @@ public class Player_Controller : MonoBehaviour
     }
     void Start()
     {
+
         // Obtener o añadir Rigidbody: el controlador siempre usa Rigidbody.
         if (rb == null)
         {
