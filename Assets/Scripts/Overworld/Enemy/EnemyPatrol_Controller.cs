@@ -210,7 +210,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag(playerTag))
         {
             enemyActivity = EnemyBehavior.Attack;
-            Game_Manager.instance.savedID = enemyID;
+            Game_Manager.instance.savedIDs.Add(enemyID);
             Game_Manager.instance.PlayerPos = collision.gameObject.GetComponent<Transform>().position;
             Attack();
         }

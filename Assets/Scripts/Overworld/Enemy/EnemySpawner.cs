@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (i != Game_Manager.instance.savedID)
+            if (!Game_Manager.instance.savedIDs.Contains(i))
             {
                 GameObject enemy = Instantiate(enemies[i].enemyPrefab, enemies[i].enemySpawn.position, Quaternion.identity);
                 enemy.GetComponent<EnemyPatrol_Controller>().patrolPoints = enemies[i].patrolPoints;

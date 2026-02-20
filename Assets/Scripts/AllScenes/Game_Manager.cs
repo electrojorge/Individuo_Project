@@ -7,7 +7,7 @@ public class Game_Manager : MonoBehaviour
 {
     public static Game_Manager instance;
 
-    public int? savedID;
+    public List<int?> savedIDs;
 
     private Vector3 playerPos;
     public Vector3 PlayerPos  {get{return playerPos;} set{playerPos = value;}}
