@@ -482,6 +482,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658039296}
   m_CullTransparentMesh: 1
+--- !u!1 &764503521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764503522}
+  m_Layer: 0
+  m_Name: PlayersContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &764503522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764503521}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1161718813
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,6 +926,7 @@ MonoBehaviour:
     lvl: 0
   playersInCombat: []
   enemiesContainer: {fileID: 1185041500}
+  playersContainer: {fileID: 764503521}
 --- !u!114 &1649293000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,6 +958,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatHudManager
   selectedEnemy:
+    unitPrefab: {fileID: 0}
+    unitID: 0
+    unitName: 
+    maxHP: 0
+    currentHP: 0
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+  selectedAlly:
     unitPrefab: {fileID: 0}
     unitID: 0
     unitName: 
@@ -1527,3 +1574,4 @@ SceneRoots:
   - {fileID: 143079818}
   - {fileID: 1667484331}
   - {fileID: 1185041501}
+  - {fileID: 764503522}

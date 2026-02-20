@@ -314,6 +314,7 @@ public class BattleSystem : MonoBehaviour
         {
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
+            BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
         }
     }
 }
