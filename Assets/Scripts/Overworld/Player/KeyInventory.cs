@@ -13,8 +13,6 @@ public class KeyInventory : MonoBehaviour
 {
     [SerializeField]
     private List<KeyEntry> keyEntries = new List<KeyEntry>();
-
-    // Conjunto de consulta rápida basado en keyID
     private HashSet<int> obtainedSet = new HashSet<int>();
 
     private void Awake()
@@ -28,17 +26,18 @@ public class KeyInventory : MonoBehaviour
         SyncFromEntries();
     }
 
-    // Sincroniza el HashSet con las entradas editables
+    // Sincroniza el HashSet de llaves obtenidas a partir de la lista de entradas
     public void SyncFromEntries()
     {
+        // Crea una nueva lista con las entradas que no son null, tienen una llave asignada y están marcadas como obtenidas
         obtainedSet = new HashSet<int>(
             keyEntries
-                .Where(e => e != null && e.key != null && e.obtained)
-                .Select(e => e.key.keyID)
+                .Where(e => e != null && e.key != null && e.obtained) // Filtra solo las entradas válidas y obtenidas
+                .Select(e => e.key.keyID) // Extrae el ID de la llave de cada entrada filtrada
         );
     }
 
-    // Comprueba si el jugador tiene la llave por ID o por Key_SO
+    // Comprueba si el jugador tiene la llave por ID o por el scriptable object
     public bool HasKey(int id)
     {
         return obtainedSet.Contains(id);
@@ -50,8 +49,7 @@ public class KeyInventory : MonoBehaviour
         return HasKey(key.keyID);
     }
 
-    // Marca la llave como obtenida. Si no existe la entrada en la lista, se añade al conjunto
-    // y se avisa para que añadas el Key_SO al Inspector (recomendado).
+    // Añade una llave al jugador y la marca como obtenida
     public void AddKey(int id)
     {
         var entry = keyEntries.FirstOrDefault(e => e != null && e.key != null && e.key.keyID == id);
@@ -61,15 +59,15 @@ public class KeyInventory : MonoBehaviour
             {
                 entry.obtained = true;
                 obtainedSet.Add(id);
-                Debug.Log($"KeyInventory: llave marcada como obtenida {id}");
+                Debug.Log($"Llave {id} marcada como obtenida");
             }
             return;
         }
 
-        // Compatibilidad: añadimos al conjunto aunque no exista la entrada.
+        // Se añade la llave aunque no exista la entrada.
         if (obtainedSet.Add(id))
         {
-            Debug.LogWarning($"KeyInventory: no existe Key_SO para la llave {id} en 'keyEntries'. Se ha marcado como obtenida en memoria. Añade el Key_SO en el Inspector para gestión completa.");
+            Debug.LogWarning($"No hay un Key_SO para la llave {id}");
         }
     }
 
@@ -83,39 +81,13 @@ public class KeyInventory : MonoBehaviour
         AddKey(key.keyID);
     }
 
-    // Marca la llave como no obtenida (si existe la entrada). Si no existe, se intenta eliminar del conjunto.
-    public bool RemoveKey(int id)
-    {
-        var entry = keyEntries.FirstOrDefault(e => e != null && e.key != null && e.key.keyID == id);
-        if (entry != null)
-        {
-            if (entry.obtained)
-            {
-                entry.obtained = false;
-                obtainedSet.Remove(id);
-                Debug.Log($"KeyInventory: llave marcada como no obtenida {id}");
-                return true;
-            }
-            return false;
-        }
-
-        if (obtainedSet.Remove(id))
-        {
-            Debug.LogWarning($"KeyInventory: la llave {id} no tenía entrada en 'keyEntries' pero fue eliminada del conjunto en memoria.");
-            return true;
-        }
-
-        Debug.LogWarning($"KeyInventory.RemoveKey: no existe la llave {id}.");
-        return false;
-    }
-
     // Devuelve los IDs de las llaves obtenidas
     public int[] GetKeys()
     {
         return obtainedSet.ToArray();
     }
 
-    // Devuelve todas las entradas (útil para UI/editor)
+    // Devuelve todas las entradas. (Para el UI)
     public KeyEntry[] GetAllEntries()
     {
         return keyEntries.ToArray();
