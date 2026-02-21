@@ -132,7 +132,7 @@ public class Player_Controller : MonoBehaviour
 
     public void AttackEnemy()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     void OnTriggerEnter(Collider other)

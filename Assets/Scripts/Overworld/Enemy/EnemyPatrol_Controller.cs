@@ -38,7 +38,6 @@ public class EnemyPatrol_Controller : MonoBehaviour
     private bool requireLineOfSight = true;
     
     private string playerTag = "Player";
-    private int sceneIndexOnAttack = 1;
 
     // internals
     private int currentPatrolIndex;
@@ -139,8 +138,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     public void Attack()
     {
-        // Cargar escena de ataque (configurable)
-        SceneManager.LoadScene(sceneIndexOnAttack);
+        SceneManager.LoadScene(2);
     }
 
     // Mueve y rota suavemente hacia un objetivo en el plano XZ

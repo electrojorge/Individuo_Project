@@ -77,13 +77,13 @@ public class Interactor_Controller : MonoBehaviour
                 var enemy = GetComponent<EnemyPatrol_Controller>();
                 if (enemy != null)
                 {
-                    // Enemigo: interacción = atacar -> click izquierdo del ratón (y gamepad botón Sur)
+                    // Enemigo: atacar con click izquierdo del ratón
                     runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Mouse>/leftButton");
                     runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
                 }
                 else
                 {
-                    // No-enemigo: uso por defecto (teclado E + gamepad)
+                    //No es un enemigo: tecla E
                     runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Keyboard>/e");
                     runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
                 }

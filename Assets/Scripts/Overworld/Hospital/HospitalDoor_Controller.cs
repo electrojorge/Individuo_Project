@@ -6,12 +6,12 @@ public class HospitalDoor_Controller : MonoBehaviour
 {
     public void EnterHospital()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
         Debug.Log("Entering hospital");
     }
     public void ExitHospital()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
         Debug.Log("Exiting hospital");
     }
 }
