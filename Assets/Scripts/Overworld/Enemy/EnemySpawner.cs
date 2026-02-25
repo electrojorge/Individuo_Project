@@ -25,9 +25,11 @@ public class EnemySpawner : MonoBehaviour
                 enemy.GetComponent<EnemyPatrol_Controller>().patrolPoints = enemies[i].patrolPoints;
                 enemy.GetComponent<EnemyPatrol_Controller>().enemyID = i;
             }
-            else
+            else if (!Game_Manager.instance.GetComponent<KeyInventory>().GetKeysList().Contains(i))
             {
-                Instantiate(keyDrop);
+                Debug.Log("Spawning key for enemy ID: " + i);
+                GameObject keyDroped = Instantiate(keyDrop, enemies[i].enemySpawn.position, Quaternion.identity);
+                keyDroped.GetComponent<KeyDrop>().keyID = i;
             }
         }
     }

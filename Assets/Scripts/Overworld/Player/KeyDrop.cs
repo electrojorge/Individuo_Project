@@ -6,9 +6,9 @@ public class KeyDrop : MonoBehaviour
     public int keyID;
     public bool obtained;
 
-    void Awake()
+    void Start()
     {
-
+        KI = Game_Manager.instance.GetComponent<KeyInventory>();
     }
     void OnTriggerEnter(Collider other)
     {
