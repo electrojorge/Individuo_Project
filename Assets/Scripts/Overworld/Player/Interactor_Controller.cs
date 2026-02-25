@@ -32,6 +32,13 @@ public class Interactor_Controller : MonoBehaviour
     private GameObject indicatorInstance;
     private Vector3 indicatorPrefabLocalScale = Vector3.one;
 
+    Player_Controller PC;
+
+    private void Awake()
+    {
+        PC = FindAnyObjectByType<Player_Controller>();
+    }
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -142,7 +149,7 @@ public class Interactor_Controller : MonoBehaviour
         // Ejecutar evento si el jugador está en rango
         if (playerInRange)
         {
-            onInteract?.Invoke();
+            PC.AttackEnemy();
         }
     }
 

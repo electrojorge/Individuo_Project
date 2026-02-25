@@ -9,7 +9,7 @@ public class Game_Manager : MonoBehaviour
 
     public List<int?> savedIDs = new List<int?>();
 
-    private Vector3 playerPos;
+    [SerializeField] private Vector3 playerPos;
     public Vector3 PlayerPos  {get{return playerPos;} set{playerPos = value;}}
 
     public bool returningFromCombat;

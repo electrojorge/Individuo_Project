@@ -27,6 +27,8 @@ public class Player_Controller : MonoBehaviour
     public bool enemyInRange;
     private string enemyTag = "Enemy";
 
+    public int enemyID;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -132,6 +134,8 @@ public class Player_Controller : MonoBehaviour
 
     public void AttackEnemy()
     {
+        Game_Manager.instance.savedIDs.Add(enemyID);
+        Game_Manager.instance.PlayerPos = transform.position;
         SceneManager.LoadScene(2);
     }
 
@@ -139,6 +143,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (!other.CompareTag(enemyTag)) return;
         enemyInRange = true;
+        enemyID = other.GetComponent<EnemyPatrol_Controller>().enemyID;
         ShowUI(true);
     }
 
