@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 20388182}
   - component: {fileID: 20388181}
   - component: {fileID: 20388180}
+  - component: {fileID: 20388184}
   m_Layer: 6
   m_Name: Door (5)
   m_TagString: Untagged
@@ -709,7 +710,19 @@ MonoBehaviour:
   interactActionReference: {fileID: 0}
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 20388178}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &20388181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -788,6 +801,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20388178}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &20388184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20388178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fad60f9f5d42344e8045397d9168518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
+  doorNumber: 4
+  doorAnimator: {fileID: 0}
+  openTriggerName: Open
 --- !u!43 &31167412
 Mesh:
   m_ObjectHideFlags: 0
@@ -24797,6 +24825,7 @@ GameObject:
   - component: {fileID: 1065193237}
   - component: {fileID: 1065193236}
   - component: {fileID: 1065193235}
+  - component: {fileID: 1065193239}
   m_Layer: 6
   m_Name: Door (3)
   m_TagString: Untagged
@@ -24840,7 +24869,19 @@ MonoBehaviour:
   interactActionReference: {fileID: 0}
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1065193239}
+        m_TargetAssemblyTypeName: Door_Blocked, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1065193236
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24919,6 +24960,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065193233}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1065193239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065193233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fad60f9f5d42344e8045397d9168518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
+  doorNumber: 2
+  doorAnimator: {fileID: 0}
+  openTriggerName: Open
 --- !u!1 &1071336555
 GameObject:
   m_ObjectHideFlags: 0
@@ -25509,6 +25565,7 @@ GameObject:
   - component: {fileID: 1082814573}
   - component: {fileID: 1082814572}
   - component: {fileID: 1082814571}
+  - component: {fileID: 1082814575}
   m_Layer: 6
   m_Name: Door (4)
   m_TagString: Untagged
@@ -25552,7 +25609,19 @@ MonoBehaviour:
   interactActionReference: {fileID: 0}
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1082814575}
+        m_TargetAssemblyTypeName: Door_Blocked, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1082814572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25631,6 +25700,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082814569}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1082814575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082814569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fad60f9f5d42344e8045397d9168518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
+  doorNumber: 3
+  doorAnimator: {fileID: 0}
+  openTriggerName: Open
 --- !u!1 &1094987588
 GameObject:
   m_ObjectHideFlags: 0
