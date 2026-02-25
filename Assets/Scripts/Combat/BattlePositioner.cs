@@ -14,6 +14,7 @@ public class BattlePositioner : MonoBehaviour
     public List<Unit> playersInCombat;
 
     public GameObject enemiesContainer;
+    public GameObject playersContainer;
 
     private void Start()
     {
@@ -30,6 +31,9 @@ public class BattlePositioner : MonoBehaviour
         List<Unit> unitsToPosition = enemies ? BS.enemyUnits : UM.unitsTeam;
         if (unitsToPosition == null || unitsToPosition.Count == 0) return;
 
+        GameObject parentContainer = enemies ? enemiesContainer : playersContainer;
+        Transform parentTransform = parentContainer != null ? parentContainer.transform : null;
+
         int count = unitsToPosition.Count;
         // ancho total ocupado por las unidades (N-1 espacios)
         float totalWidth = (count - 1) * distanceBetweenUnits;
@@ -44,9 +48,14 @@ public class BattlePositioner : MonoBehaviour
             GameObject prefab = unitsToPosition[i].unitPrefab;
             if (prefab != null)
             {
-                GameObject enemyInstantiated = Instantiate(prefab, enemiesContainer.transform);
-                enemyInstantiated.transform.position = pos;
-                enemyInstantiated.transform.rotation = Quaternion.Euler(0, 0, 0);
+                GameObject inst;
+                if (parentTransform != null)
+                    inst = Instantiate(prefab, parentTransform);
+                else
+                    inst = Instantiate(prefab);
+
+                inst.transform.position = pos;
+                inst.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
     }

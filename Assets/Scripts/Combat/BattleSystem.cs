@@ -38,7 +38,6 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] float waitTime;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         if (instance == null)
@@ -63,7 +62,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        playerUnits = new List<Unit>(UM.unitsTeam); //pone los aliados
+        playerUnits = new List<Unit>(UM.unitsTeam); //establece los aliados
 
         for(int i = 0; i < playerUnits.Count; i++)
         {
@@ -72,7 +71,7 @@ public class BattleSystem : MonoBehaviour
 
         int enemiesNum = Random.Range(1, 6);
         enemyUnits = new List<Unit>();
-        for (int e = 0; e < enemiesNum; e++) //pone a los enemigos
+        for (int e = 0; e < enemiesNum; e++) //establece los enemigos
         {
             LoadUnitData(UM.GetEnemy(Random.Range(0, UM.enemyDex.Count)),e+1);
         }
@@ -84,11 +83,11 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYER_TURN;
         Debug.Log("Turno del jugador");
 
-        // Asignar currentPlayer usando NextCurrentPlayer para respetar la nueva función
+        // Asigna al primer player del equipo
         if (playerUnits != null && playerUnits.Count > 0)
             NextCurrentPlayer(playerUnits[0].unitID);
 
-        // Asignar currentEnemy usando NextCurrentEnemy (consistente con la nueva función)
+        // Asigna el primer enemigo 
         if (enemyUnits != null && enemyUnits.Count > 0)
             NextCurrentEnemy(enemyUnits[0].unitID);
 
@@ -97,7 +96,7 @@ public class BattleSystem : MonoBehaviour
     
     void NextCurrentPlayer(int index)
     {
-        // Buscamos al jugador que tenga el ID igual o más cercano (hacia arriba) al index
+        // Busca al siguiente jugador en la lista segun su ID
         Unit next = null;
         int lowestFoundID = int.MaxValue;
 
@@ -119,7 +118,7 @@ public class BattleSystem : MonoBehaviour
 
     void NextCurrentEnemy(int index)
     {
-        // Buscamos al enemigo que tenga el ID igual o más cercano (hacia arriba) al index
+        //  Busca al siguiente enemigo en la lista segun su ID
         Unit next = null;
         int lowestFoundID = int.MaxValue;
 
@@ -141,12 +140,12 @@ public class BattleSystem : MonoBehaviour
 
     void LoadUnitData(Unit unitToLoad,int unitID)
     {
-        // Crear nueva instancia usando el constructor existente y luego copiar el resto de campos
+        // Crear las unidades a partir de las estadisticas de UnitsManager
         Unit newUnit = new Unit(unitToLoad.unitName,
             unitToLoad.currentHP, unitToLoad.currentSP,
             unitToLoad.unitEXP);
 
-        // Copiar referencias y estadísticas públicas
+        // Resto de stats
         newUnit.unitPrefab = unitToLoad.unitPrefab;
         newUnit.unitID = unitID;
 
@@ -165,7 +164,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnits.Add(newUnit);
     }
 
-    public IEnumerator PlayerAttack()
+    public IEnumerator PlayerAttack() // Jugador ataca al enemigo seleccionado
     {
         yield return new WaitForSeconds(waitTime);
 
@@ -199,7 +198,7 @@ public class BattleSystem : MonoBehaviour
         CHM.selectedEnemy = null;
     }
 
-    public IEnumerator PlayerHeal()
+    public IEnumerator PlayerHeal() // Jugador cura al aliado seleccionado
     {
         yield return new WaitForSeconds(waitTime);
 
@@ -224,14 +223,12 @@ public class BattleSystem : MonoBehaviour
         CHM.selectedEnemy = null;
     }
 
-    IEnumerator EnemyTurn()
+    IEnumerator EnemyTurn() // Turno de enemigo: ataca a un jugador aleatorio, luego pasa al siguiente enemigo o vuelve al jugador si no quedan más
     {
-        // Alineada con PlayerAttack: esperar, aplicar daño mediante función que gestiona la resta y la posible muerte,
-        // luego comprobar si quedan jugadores y avanzar el puntero o cambiar turno.
         Debug.Log("Turno de " + currentEnemy.unitName);
         yield return new WaitForSeconds(waitTime);
 
-        // Aplicar daño al jugador (la función ahora gestiona la resta y la eliminación)
+        // Aplicar daño al jugador
         PlayerTakeDamage(currentEnemy.physicalATK);
 
         // Si ya no quedan jugadores -> perdido
@@ -276,14 +273,14 @@ public class BattleSystem : MonoBehaviour
         healButton.SetActive(true);
     }
 
-    IEnumerator EndBattle()
+    IEnumerator EndBattle() // Volver a la escena del hospital despues de ganar
     {
         yield return new WaitForSeconds(waitTime);
         Game_Manager.instance.returningFromCombat = true;
         SceneManager.LoadScene("Hospital_Inside");
     }
 
-    void EnemyTakeDamage(int dmg)
+    void EnemyTakeDamage(int dmg) // funcion del enemigo recibe daño, si muere se elimina de la lista y se desactiva su prefab
     {
         CHM.selectedEnemy.currentHP -= dmg;
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
@@ -295,7 +292,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void PlayerGetsHealing(int heal)
+    void PlayerGetsHealing(int heal) // funcion que cura al jugador seleccionado.
     {
         CHM.selectedAlly.currentHP += heal;
         if (CHM.selectedAlly.currentHP > CHM.selectedAlly.maxHP)
@@ -303,9 +300,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("vida de: " + CHM.selectedAlly.unitName + " ahora es: " + CHM.selectedAlly.currentHP);
     }
 
-    // Reestructurada para igualar la arquitectura de EnemyTakeDamage: esta función aplica el daño,
-    // notifica y elimina al jugador si muere (sin devolver bool).
-    void PlayerTakeDamage(int dmg)
+    void PlayerTakeDamage(int dmg) // funcion que hace que un jugador reciba daño, si muere se elimina de la lista y se desactiva su prefab
     {
         if (playerUnits == null || playerUnits.Count == 0)
             return;
@@ -317,10 +312,9 @@ public class BattleSystem : MonoBehaviour
 
         if (attackedPlayer.currentHP <= 0)
         {
-            // Eliminar jugador y log
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
-            // Si hay UI o contenedores de jugador, aquí es donde deberías desactivarlos.
+            BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
         }
     }
 }

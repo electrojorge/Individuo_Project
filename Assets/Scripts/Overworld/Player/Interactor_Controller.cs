@@ -32,6 +32,11 @@ public class Interactor_Controller : MonoBehaviour
     private GameObject indicatorInstance;
     private Vector3 indicatorPrefabLocalScale = Vector3.one;
 
+    private void Awake()
+    {
+
+    }
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -65,12 +70,16 @@ public class Interactor_Controller : MonoBehaviour
         // Preparar acción de interacción
         if (usingReference)
         {
+            // Usar la referencia proporcionada en el inspector (si existe)
             runtimeInteractAction = interactActionReference.action;
         }
         else
         {
+            // Si no hay referencia, crear una acción por defecto.
+            // Usamos la tecla E como binding.
             if (runtimeInteractAction == null)
             {
+                //No es un enemigo: tecla E
                 runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Keyboard>/e");
                 runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
             }

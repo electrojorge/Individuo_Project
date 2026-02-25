@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 9103997450127428950}
   - component: {fileID: 6649904500102645093}
   - component: {fileID: 4566319886803708926}
-  - component: {fileID: 5388339891516933701}
   - component: {fileID: 7198409741297272668}
+  - component: {fileID: -61272267170217901}
   m_Layer: 0
   m_Name: OverWorld_Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,40 +166,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5388339891516933701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5781603785681677536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b77a61bc72ce6854b94a0459e4449b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactor_Controller
-  playerUIText: {fileID: 0}
-  playerUIPanel: {fileID: 0}
-  message: Attack
-  indicatorPrefab: {fileID: 5575409437514443015, guid: dbcf010becf2bb24189415298be6bbd7, type: 3}
-  indicatorLocalOffset: {x: 0, y: 1.5, z: 0}
-  indicatorFaceCamera: 1
-  interactActionReference: {fileID: 0}
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7198409741297272668}
-        m_TargetAssemblyTypeName: EnemyPatrol_Controller, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &7198409741297272668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,3 +191,23 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 64
+  enemyID: 0
+--- !u!114 &-61272267170217901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781603785681677536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab8daaadc3d227499043066b2371bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractorEnemy
+  indicatorPrefab: {fileID: 5575409437514443015, guid: dbcf010becf2bb24189415298be6bbd7, type: 3}
+  indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
+  indicatorFaceCamera: 1
+  interactActionReference: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
