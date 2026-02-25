@@ -5,13 +5,9 @@ using UnityEngine;
 public class Door_Blocked : MonoBehaviour
 {
     [Header("Door settings")]
-    // Número de la puerta, para verificar si el jugador tiene la llave
     public int doorNumber = 0;
-    // Animator para reproducir la animación
     public Animator doorAnimator;
-    // Nombre del trigger en el Animator para abrir la puerta
     public string openTriggerName = "Open";
-    // Estado local
     private bool isOpen = false;
     private GameObject doorObject;
     private BoxCollider doorCollider;
@@ -27,7 +23,6 @@ public class Door_Blocked : MonoBehaviour
         }
     }
 
-    //Abre la puerta si el jugador tiene la llave correcta.
     public void OpenDoor()
     {
         if (isOpen)
@@ -43,7 +38,6 @@ public class Door_Blocked : MonoBehaviour
             return;
         }
 
-        // Comprueba el inventario del jugador
         if (PlayerHasKey(doorNumber))
         {
             Debug.Log($"Se tiene la llave {doorNumber}, abriendo puerta.");
@@ -55,7 +49,6 @@ public class Door_Blocked : MonoBehaviour
         }
     }
 
-    // Ejecuta la animación y desactiva el collider para abrir (provisional)
     private void DoOpen()
     {
         isOpen = true;
@@ -74,7 +67,6 @@ public class Door_Blocked : MonoBehaviour
             doorCollider.enabled = false;
     }
 
-    // Comprueba el estado de la puerta (abierta o cerrada)
     public bool IsOpen()
     {
         return isOpen;
@@ -82,7 +74,6 @@ public class Door_Blocked : MonoBehaviour
 
     private static KeyInventory cachedInventory;
 
-    // Accede al KeyInventory.
     private static KeyInventory GetInventory()
     {
         if (cachedInventory == null)
@@ -94,30 +85,22 @@ public class Door_Blocked : MonoBehaviour
         return cachedInventory;
     }
 
-    // Método público para dar una llave al jugador (se usará proximamente desde KeyDrop)
-    public static void GivePlayerKey(Key_SO key)
+    public static void GivePlayerKey(int id)
     {
-        if (key == null)
-        {
-            Debug.LogWarning("No hay llave");
-            return;
-        }
         var inv = GetInventory();
         if (inv != null)
         {
-            inv.AddKey(key.keyID);
-            Debug.Log($"Llave añadida: {key.keyID}");
+            inv.AddKey(id);
+            Debug.Log($"Llave añadida: {id}");
         }
     }
 
-    //Devuelve que el bool es true si el jugador tiene la llave con el mismo ID.
     public static bool PlayerHasKey(int id)
     {
         var inv = GetInventory();
         return inv != null && inv.HasKey(id);
     }
 
-    // Devuelve un array con los IDs de las llaves que el jugador tiene actualmente.
     public static int[] GetPlayerKeys()
     {
         var inv = GetInventory();
