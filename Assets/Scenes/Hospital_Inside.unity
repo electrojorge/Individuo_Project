@@ -38795,6 +38795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a390a8289a14f447afc0f947702229d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game_Manager
+  playerPos: {x: 0, y: 0, z: 0}
   returningFromCombat: 0
 --- !u!4 &1738932410
 Transform:
@@ -38824,16 +38825,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyInventory
   keyEntries:
-  - key: {fileID: 11400000, guid: bc005d51407e616489b37ad1e6be3eaf, type: 2}
-    obtained: 0
-  - key: {fileID: 11400000, guid: 4710951ef5eae7c42b378b6dc0d37fca, type: 2}
-    obtained: 0
-  - key: {fileID: 11400000, guid: ee482ba2ea4a95a4ebb58e446a2f3c24, type: 2}
-    obtained: 0
-  - key: {fileID: 11400000, guid: afcfda68d5c0f674db375ca7c90a516f, type: 2}
-    obtained: 0
-  - key: {fileID: 11400000, guid: 766b1480b59af924d8cb439a89d801d4, type: 2}
-    obtained: 0
+  - keyDrop: {fileID: 0}
+  - keyDrop: {fileID: 0}
+  - keyDrop: {fileID: 0}
+  - keyDrop: {fileID: 0}
+  - keyDrop: {fileID: 0}
+  obtainedKeyIDs: 
 --- !u!43 &1742636459
 Mesh:
   m_ObjectHideFlags: 0

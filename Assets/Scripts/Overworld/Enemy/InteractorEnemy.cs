@@ -1,15 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using TMPro;
 
-public class Interactor_Controller : MonoBehaviour
+public class InteractorEnemy : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI playerUIText; // Texto del HUD
-    [SerializeField] private GameObject playerUIPanel;     // Panel del HUD (opcional)
-    [SerializeField] private string message = "Pulsa E";
-
     [Header("World Indicator")]
     [SerializeField] private GameObject indicatorPrefab;
     [SerializeField] private Vector3 indicatorLocalOffset = new Vector3(0f, 0.5f, 1f);
@@ -18,7 +13,6 @@ public class Interactor_Controller : MonoBehaviour
     [Header("Input System")]
     [SerializeField] private InputActionReference interactActionReference;
 
-    private string playerTag = "Player";
     public UnityEvent onInteract;
 
     private bool playerInRange;
@@ -32,24 +26,16 @@ public class Interactor_Controller : MonoBehaviour
     private GameObject indicatorInstance;
     private Vector3 indicatorPrefabLocalScale = Vector3.one;
 
+    Player_Controller PC;
+
     private void Awake()
     {
-
+        PC = FindAnyObjectByType<Player_Controller>();
     }
 
     void Start()
     {
         mainCamera = Camera.main;
-
-        // Preparar HUD
-        if (playerUIText != null)
-        {
-            playerUIText.text = message;
-            if (playerUIPanel != null)
-                playerUIPanel.SetActive(false);
-            else
-                playerUIText.gameObject.SetActive(false);
-        }
 
         // Guardar escala original del prefab
         if (indicatorPrefab != null)
@@ -76,11 +62,10 @@ public class Interactor_Controller : MonoBehaviour
         else
         {
             // Si no hay referencia, crear una acción por defecto.
-            // Usamos la tecla E como binding.
+            // Usamos click izquierdo como binding.
             if (runtimeInteractAction == null)
             {
-                //No es un enemigo: tecla E
-                runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Keyboard>/e");
+                runtimeInteractAction = new InputAction("Interact", InputActionType.Button, "<Mouse>/leftButton");
                 runtimeInteractAction.AddBinding("<Gamepad>/buttonSouth");
             }
         }
@@ -102,20 +87,6 @@ public class Interactor_Controller : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag(playerTag)) return;
-        playerInRange = true;
-        ShowUI(true);
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag(playerTag)) return;
-        playerInRange = false;
-        ShowUI(false);
-    }
-
     void Update()
     {
         // Actualiza indicador si está activo
@@ -132,32 +103,24 @@ public class Interactor_Controller : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        playerInRange = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        playerInRange = false;
+    }
+
     private void OnInteractPerformed(InputAction.CallbackContext ctx)
     {
         // Ejecutar evento si el jugador está en rango
         if (playerInRange)
         {
-            onInteract?.Invoke();
-        }
-    }
-
-    private void ShowUI(bool show)
-    {
-        // Mostrar/ocultar HUD
-        if (playerUIText != null)
-        {
-            playerUIText.text = message;
-            if (playerUIPanel != null)
-                playerUIPanel.SetActive(show);
-            else
-                playerUIText.gameObject.SetActive(show);
-        }
-
-        // Mostrar/ocultar indicador en mundo
-        if (indicatorInstance != null)
-        {
-            indicatorInstance.SetActive(show);
-            if (show) UpdateIndicatorTransform();
+            PC.AttackEnemy();
         }
     }
 
