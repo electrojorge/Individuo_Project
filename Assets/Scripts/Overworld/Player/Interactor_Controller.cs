@@ -138,6 +138,7 @@ public class Interactor_Controller : MonoBehaviour
         if (playerInRange)
         {
             onInteract?.Invoke();
+            ShowUI(false);
         }
     }
 
