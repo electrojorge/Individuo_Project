@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator ShowMainMenuDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.25f);
         startScreen.SetActive(false);
         mainMenuPanel.SetActive(true);
     }
@@ -68,7 +68,7 @@ public class MainMenu : MonoBehaviour
 
         StopCoroutine("LoadingDots");
         loadingText.text = "Loading complete";
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
     IEnumerator LoadingDots()
