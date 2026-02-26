@@ -57,6 +57,15 @@ public class BattlePositioner : MonoBehaviour
                 inst.transform.position = pos;
                 inst.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-        }
+
+            
+
+            if (unitsToPosition[i].healthBar != null)
+            {
+                unitsToPosition[i].healthBar.Init(
+                    unitsToPosition[i].currentHP,
+                    unitsToPosition[i].maxHP
+                );
+            }
     }
 }

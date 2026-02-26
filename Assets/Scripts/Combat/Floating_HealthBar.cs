@@ -11,7 +11,7 @@ public class Floating_HealthBar : MonoBehaviour
         slider.value = currentValue / maxValue;
     }
 
-    public void Inition(float currentValue, float maxValue)
+    public void Init(float currentValue, float maxValue)
     {
         slider.maxValue = 1f;
         UpadeteHealthBar(currentValue, maxValue);
