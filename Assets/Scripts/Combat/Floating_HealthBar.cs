@@ -1,3 +1,4 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,5 +9,11 @@ public class Floating_HealthBar : MonoBehaviour
     public void UpadeteHealthBar(float currentValue, float maxValue)
     {
         slider.value = currentValue / maxValue;
+    }
+
+    public void Inition(float currentValue, float maxValue)
+    {
+        slider.maxValue = 1f;
+        UpadeteHealthBar(currentValue, maxValue);
     }
 }

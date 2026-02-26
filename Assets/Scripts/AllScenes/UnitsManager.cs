@@ -39,6 +39,7 @@ public class Unit
 {
     public GameObject unitPrefab;
     public int unitID;
+    public Floating_HealthBar healthBar;
     [Space(10)]
     [Header("RESOURCE STATS")]
     public string unitName;
@@ -58,6 +59,7 @@ public class Unit
     public float unitEXP;
     [SerializeField] float levelUpCap;
     [SerializeField] float levelUpThresold;
+
 
     public int lvl;
     public Unit(string name, int hp, int sp, float exp)
