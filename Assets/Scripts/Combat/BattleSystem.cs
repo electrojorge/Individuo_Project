@@ -24,6 +24,8 @@ public class BattleSystem : MonoBehaviour
 
     public BattleState state;
 
+    public bool isBoss;
+    bool bossSecondTurn;
 
     public List<Unit> playerUnits = new List<Unit>();
     public List<Unit> enemyUnits = new List<Unit>();
@@ -70,6 +72,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         int enemiesNum = Random.Range(1, 6);
+        enemiesNum = (isBoss) ? 1 : enemiesNum; // Si es un boss, solo hay un enemigo
         enemyUnits = new List<Unit>();
         for (int e = 0; e < enemiesNum; e++) //establece los enemigos
         {
@@ -231,7 +234,7 @@ public class BattleSystem : MonoBehaviour
         // Aplicar daño al jugador
         PlayerTakeDamage(currentEnemy.physicalATK);
 
-        // Si ya no quedan jugadores -> perdido
+        // Si ya no quedan jugadores -> Game Over
         if (playerUnits.Count == 0)
         {
             state = BattleState.LOST;
@@ -240,19 +243,43 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        // Intentamos pasar al siguiente enemigo
-        NextCurrentEnemy(currentEnemy.unitID + 1);
+        // Pasamos turno al siguiente enemigo o al jugador si no quedan más enemigos, o si es un boss, vuelve a atacar
 
-        if (currentEnemy != null)
+        if (isBoss) // Lógica del segundo turno del boss
         {
-            StartCoroutine(EnemyTurn());
+            if (!bossSecondTurn)
+            {
+                // Si es el primer ataque del boss, activamos el bool y repetimos la corrutina
+                bossSecondTurn = true;
+                Debug.Log("¡El Boss ataca de nuevo!");
+                StartCoroutine(EnemyTurn());
+            }
+            else
+            {
+                // Si ya es su segundo ataque, reseteamos el bool y pasamos al jugador
+                bossSecondTurn = false;
+                state = BattleState.PLAYER_TURN;
+                NextCurrentPlayer(1); // Volvemos al primer aliado vivo
+                PlayerTurn();
+            }
         }
         else
         {
-            // No quedan más enemigos: volver a turno jugador
-            state = BattleState.PLAYER_TURN;
-            NextCurrentPlayer(1);
-            PlayerTurn();
+            // Lógica para enemigos normales (múltiples)
+            NextCurrentEnemy(currentEnemy.unitID + 1);
+
+            if (currentEnemy != null)
+            {
+                // Si hay otro enemigo en la lista, le toca a él
+                StartCoroutine(EnemyTurn());
+            }
+            else
+            {
+                // Si no hay más enemigos, turno del jugador
+                state = BattleState.PLAYER_TURN;
+                NextCurrentPlayer(1); // Volvemos al primer aliado vivo
+                PlayerTurn();
+            }
         }
 
         attackedPlayer = null;
@@ -305,7 +332,10 @@ public class BattleSystem : MonoBehaviour
         if (playerUnits == null || playerUnits.Count == 0)
             return;
 
+        int extraDmg = Random.Range(0, 10);
         int i = Random.Range(0, playerUnits.Count);
+
+        dmg = (isBoss) ? dmg + extraDmg : dmg;
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
         Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
