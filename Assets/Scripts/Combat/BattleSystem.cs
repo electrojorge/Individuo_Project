@@ -311,10 +311,6 @@ public class BattleSystem : MonoBehaviour
     void EnemyTakeDamage(int dmg) // funcion del enemigo recibe daño, si muere se elimina de la lista y se desactiva su prefab
     {
         CHM.selectedEnemy.currentHP -= dmg;
-        if (CHM.selectedEnemy.healthBar != null)
-        {
-            CHM.selectedEnemy.healthBar.UpdateHealthBar(CHM.selectedEnemy.currentHP, CHM.selectedEnemy.maxHP);
-        }
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
         {
@@ -322,18 +318,22 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("muelto");
             BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).gameObject.SetActive(false);
         }
+        if (CHM.selectedEnemy.healthBar != null)
+        {
+            CHM.selectedEnemy.healthBar.UpdateHealthBar(CHM.selectedEnemy.currentHP, CHM.selectedEnemy.maxHP);
+        }
     }
 
     void PlayerGetsHealing(int heal) // funcion que cura al jugador seleccionado.
     {
         CHM.selectedAlly.currentHP += heal;
+        if (CHM.selectedAlly.currentHP > CHM.selectedAlly.maxHP)
+            CHM.selectedAlly.currentHP = CHM.selectedAlly.maxHP;
+        Debug.Log("vida de: " + CHM.selectedAlly.unitName + " ahora es: " + CHM.selectedAlly.currentHP);
         if (CHM.selectedAlly.healthBar != null)
         {
             CHM.selectedAlly.healthBar.UpdateHealthBar(CHM.selectedAlly.currentHP, CHM.selectedAlly.maxHP);
         }
-        if (CHM.selectedAlly.currentHP > CHM.selectedAlly.maxHP)
-            CHM.selectedAlly.currentHP = CHM.selectedAlly.maxHP;
-        Debug.Log("vida de: " + CHM.selectedAlly.unitName + " ahora es: " + CHM.selectedAlly.currentHP);
     }
 
     void PlayerTakeDamage(int dmg) // funcion que hace que un jugador reciba daño, si muere se elimina de la lista y se desactiva su prefab
@@ -346,10 +346,6 @@ public class BattleSystem : MonoBehaviour
 
         dmg = (isBoss) ? dmg + extraDmg : dmg;
         playerUnits[i].currentHP -= dmg;
-        if (attackedPlayer.healthBar != null)
-        {
-            attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
-        }
         attackedPlayer = playerUnits[i];
         Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 
@@ -358,6 +354,10 @@ public class BattleSystem : MonoBehaviour
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
+        }
+        if (attackedPlayer.healthBar == null)
+        {
+            attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
         }
     }
 }
