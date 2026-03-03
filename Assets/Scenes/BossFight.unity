@@ -827,6 +827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649292998}
+  - component: {fileID: 1649293002}
   - component: {fileID: 1649292999}
   - component: {fileID: 1649293000}
   - component: {fileID: 1649293001}
@@ -940,6 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleSystem
   state: 0
+  isBoss: 0
   playerUnits: []
   enemyUnits: []
   attackButton: {fileID: 1804145412}
@@ -981,6 +983,33 @@ MonoBehaviour:
     maxSP: 0
     currentSP: 0
     physicalATK: 0
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
+--- !u!114 &1649293002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649292996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f1ad2251c18cb4a9263ab17f3c2f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetBoss
+  boss:
+    unitPrefab: {fileID: 3447125978659509344, guid: a1f82eabd0cd80345bb37c41f3aeec2d, type: 3}
+    unitID: 0
+    unitName: PoopBreath
+    maxHP: 500
+    currentHP: 500
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 40
     magicalATK: 0
     DEF: 0
     unitEXP: 0

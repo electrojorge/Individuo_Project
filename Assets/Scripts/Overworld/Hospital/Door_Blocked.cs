@@ -31,13 +31,6 @@ public class Door_Blocked : MonoBehaviour
             return;
         }
 
-        if (doorNumber <= 0)
-        {
-            Debug.LogWarning("DoorNumber no está configurado o es 0. La puerta se abrirá de todos modos.");
-            DoOpen();
-            return;
-        }
-
         if (PlayerHasKey(doorNumber))
         {
             Debug.Log($"Se tiene la llave {doorNumber}, abriendo puerta.");

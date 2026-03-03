@@ -95,6 +95,11 @@ public class EnemyPatrol_Controller : MonoBehaviour
         {
             Attack();
         }
+
+        if (Keyboard.current.f2Key.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("BossFight");
+        }
     }
 
     void Patrol()
