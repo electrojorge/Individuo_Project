@@ -6,14 +6,20 @@ public class Floating_HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
 
-    public void UpadeteHealthBar(float currentValue, float maxValue)
-    {
-        slider.value = currentValue / maxValue;
-    }
-
     public void Init(float currentValue, float maxValue)
     {
         slider.maxValue = 1f;
-        UpadeteHealthBar(currentValue, maxValue);
+        UpdateHealthBar(currentValue, maxValue);
+    }
+
+    public void UpdateHealthBar(float currentValue, float maxValue)
+    {
+        if (maxValue <= 0f)
+        {
+            slider.value = 0f;
+            return;
+        }
+
+        slider.value = currentValue / maxValue;
     }
 }

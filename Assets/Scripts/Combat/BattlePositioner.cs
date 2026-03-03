@@ -48,24 +48,17 @@ public class BattlePositioner : MonoBehaviour
             GameObject prefab = unitsToPosition[i].unitPrefab;
             if (prefab != null)
             {
-                GameObject inst;
-                if (parentTransform != null)
-                    inst = Instantiate(prefab, parentTransform);
-                else
-                    inst = Instantiate(prefab);
+                GameObject inst = Instantiate(prefab, pos, Quaternion.identity, parentTransform);
 
-                inst.transform.position = pos;
-                inst.transform.rotation = Quaternion.Euler(0, 0, 0);
+                Floating_HealthBar hB = inst.GetComponentInChildren<Floating_HealthBar>();
+
+                if (hB != null)
+                {
+                    unitsToPosition[i].healthBar = hB;
+                    hB.Init(unitsToPosition[i].currentHP, unitsToPosition[i].maxHP);
+                }
             }
-
-            
-
-            if (unitsToPosition[i].healthBar != null)
-            {
-                unitsToPosition[i].healthBar.Init(
-                    unitsToPosition[i].currentHP,
-                    unitsToPosition[i].maxHP
-                );
-            }
+        }
     }
 }
+

@@ -54,7 +54,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3818931387955389084, guid: d24409e016f608541b7245e16966113b, type: 3}
       propertyPath: m_Name
-      value: Enemy 2 Variant 1
+      value: Enemy6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170715649827167406, guid: d24409e016f608541b7245e16966113b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0014673899
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170715649827167406, guid: d24409e016f608541b7245e16966113b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.005082982
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170715649827167406, guid: d24409e016f608541b7245e16966113b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170715649827167406, guid: d24409e016f608541b7245e16966113b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170715649827167406, guid: d24409e016f608541b7245e16966113b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778077373242462570, guid: d24409e016f608541b7245e16966113b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

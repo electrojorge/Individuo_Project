@@ -8,9 +8,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1080989428476072883, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7345215414681837637, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
       propertyPath: m_Name
-      value: 0Enemy base Variant Variant 1
+      value: Enemy9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562028198773546615, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.00092248764
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562028198773546615, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.003199944
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562028198773546615, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562028198773546615, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562028198773546615, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.89
       objectReference: {fileID: 0}
     - target: {fileID: 8777899527222487839, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
       propertyPath: m_LocalScale.y

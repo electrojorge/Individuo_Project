@@ -29888,20 +29888,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!114 &1300054542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Interact
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
 --- !u!43 &1307830766
 Mesh:
   m_ObjectHideFlags: 0
@@ -33025,7 +33011,7 @@ MonoBehaviour:
   indicatorPrefab: {fileID: 5575409437514443015, guid: dbcf010becf2bb24189415298be6bbd7, type: 3}
   indicatorLocalOffset: {x: 0, y: 0.5, z: 1}
   indicatorFaceCamera: 1
-  interactActionReference: {fileID: 1300054542}
+  interactActionReference: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -37033,7 +37019,7 @@ Transform:
   m_GameObject: {fileID: 1701564250}
   serializedVersion: 2
   m_LocalRotation: {x: 1.11022296e-17, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.7952, y: 5.03407, z: 59.5}
+  m_LocalPosition: {x: 29, y: 5.03407, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38602,6 +38588,7 @@ MonoBehaviour:
   unitsTeam:
   - unitPrefab: {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: Joker
     maxHP: 100
     currentHP: 100
@@ -38616,6 +38603,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: Makoto
     maxHP: 100
     currentHP: 100
@@ -38630,6 +38618,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 7770681069192169274, guid: 2c807d06e8f871c4fa96e3a50fbf5e74, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: Morgana
     maxHP: 100
     currentHP: 100
@@ -38644,6 +38633,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: Chie
     maxHP: 100
     currentHP: 100
@@ -38659,6 +38649,7 @@ MonoBehaviour:
   enemyDex:
   - unitPrefab: {fileID: 3485808161569492280, guid: 3d5b904d5a5c7094bb38e822238c9c7b, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: rojo
     maxHP: 0
     currentHP: 100
@@ -38673,6 +38664,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 6909418639106160192, guid: b5082523c1cf9ad48aefd4d4c8f58458, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: rojazo
     maxHP: 0
     currentHP: 100
@@ -38687,6 +38679,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 2522928765644230346, guid: c7782f5332ba98148a2e981c7d554b45, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: rojito
     maxHP: 0
     currentHP: 100
@@ -38701,6 +38694,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 3818931387955389084, guid: d24409e016f608541b7245e16966113b, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: naranja
     maxHP: 0
     currentHP: 100
@@ -38715,6 +38709,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 5854084756380046240, guid: f4bd0c1fffabbc44b99b989907945d6d, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: naranjazo
     maxHP: 0
     currentHP: 100
@@ -38729,6 +38724,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 7707703936300528439, guid: 452ae8500e80a6340841127ccefef29c, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: naranjito
     maxHP: 0
     currentHP: 100
@@ -38743,6 +38739,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 7345215414681837637, guid: e0319c2c914bbb8448f586c8d2070a8a, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: negro
     maxHP: 0
     currentHP: 100
@@ -38757,6 +38754,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 4303167720002616488, guid: 695473e12c1ed224d930c9394e84c713, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: negrazo
     maxHP: 0
     currentHP: 100
@@ -38771,6 +38769,7 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 1327141511653527651, guid: 548ad3f4a5079a44bb9abc5dfb1c06af, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
     unitName: negrito
     maxHP: 0
     currentHP: 100

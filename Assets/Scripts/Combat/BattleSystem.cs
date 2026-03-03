@@ -40,6 +40,7 @@ public class BattleSystem : MonoBehaviour
 
     private void Awake()
     {
+        Floating_HealthBar FHB = GetComponentInChildren<Floating_HealthBar>();
         if (instance == null)
         {
             instance = this;
@@ -283,6 +284,10 @@ public class BattleSystem : MonoBehaviour
     void EnemyTakeDamage(int dmg) // funcion del enemigo recibe daño, si muere se elimina de la lista y se desactiva su prefab
     {
         CHM.selectedEnemy.currentHP -= dmg;
+        if (CHM.selectedEnemy.healthBar != null)
+        {
+            CHM.selectedEnemy.healthBar.UpdateHealthBar(CHM.selectedEnemy.currentHP, CHM.selectedEnemy.maxHP);
+        }
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
         {
@@ -295,6 +300,10 @@ public class BattleSystem : MonoBehaviour
     void PlayerGetsHealing(int heal) // funcion que cura al jugador seleccionado.
     {
         CHM.selectedAlly.currentHP += heal;
+        if (CHM.selectedAlly.healthBar != null)
+        {
+            CHM.selectedAlly.healthBar.UpdateHealthBar(CHM.selectedAlly.currentHP, CHM.selectedAlly.maxHP);
+        }
         if (CHM.selectedAlly.currentHP > CHM.selectedAlly.maxHP)
             CHM.selectedAlly.currentHP = CHM.selectedAlly.maxHP;
         Debug.Log("vida de: " + CHM.selectedAlly.unitName + " ahora es: " + CHM.selectedAlly.currentHP);
@@ -307,6 +316,10 @@ public class BattleSystem : MonoBehaviour
 
         int i = Random.Range(0, playerUnits.Count);
         playerUnits[i].currentHP -= dmg;
+        if (attackedPlayer.healthBar != null)
+        {
+            attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
+        }
         attackedPlayer = playerUnits[i];
         Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 

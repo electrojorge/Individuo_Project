@@ -69,7 +69,7 @@ public class CombatHudManager : MonoBehaviour
     }
     public void AttackButton()
     {
-        if (selectedEnemy.unitPrefab != null)
+        if (selectedEnemy != null)
         {
             BS.attackButton.SetActive(false);
             BS.healButton.SetActive(false);
