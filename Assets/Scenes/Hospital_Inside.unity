@@ -38735,7 +38735,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: rojo
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38750,7 +38750,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: rojazo
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38765,7 +38765,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: rojito
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38780,7 +38780,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: naranja
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38795,7 +38795,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: naranjazo
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38810,7 +38810,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: naranjito
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38825,7 +38825,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: negro
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38840,7 +38840,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: negrazo
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0
@@ -38855,7 +38855,7 @@ MonoBehaviour:
     unitID: 0
     healthBar: {fileID: 0}
     unitName: negrito
-    maxHP: 0
+    maxHP: 100
     currentHP: 100
     maxSP: 0
     currentSP: 0

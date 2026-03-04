@@ -153,8 +153,8 @@ public class BattleSystem : MonoBehaviour
         newUnit.unitPrefab = unitToLoad.unitPrefab;
         newUnit.unitID = unitID;
 
-        newUnit.maxHP = unitToLoad.maxHP;
         newUnit.currentHP = unitToLoad.currentHP;
+        newUnit.maxHP = unitToLoad.maxHP != 0 ? unitToLoad.maxHP : unitToLoad.currentHP;
 
         newUnit.maxSP = unitToLoad.maxSP;
         newUnit.currentSP = unitToLoad.currentSP;
@@ -296,12 +296,6 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Turno de: " + currentPlayer.unitName);
         else
             Debug.LogWarning("PlayerTurn: currentPlayer es null.");
-
-        if (CHM != null)
-        {
-            CHM.selectedEnemy = currentEnemy;
-            CHM.selectedAlly = currentPlayer;
-        }
         attackButton.SetActive(true);
         healButton.SetActive(true);
     }
@@ -325,6 +319,7 @@ public class BattleSystem : MonoBehaviour
         }
         if (CHM.selectedEnemy.healthBar != null)
         {
+            Debug.Log("changing barra" + CHM.selectedEnemy.currentHP + "vida" + CHM.selectedEnemy.maxHP);
             CHM.selectedEnemy.healthBar.UpdateHealthBar(CHM.selectedEnemy.currentHP, CHM.selectedEnemy.maxHP);
         }
     }
