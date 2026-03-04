@@ -297,6 +297,11 @@ public class BattleSystem : MonoBehaviour
         else
             Debug.LogWarning("PlayerTurn: currentPlayer es null.");
 
+        if (CHM != null)
+        {
+            CHM.selectedEnemy = currentEnemy;
+            CHM.selectedAlly = currentPlayer;
+        }
         attackButton.SetActive(true);
         healButton.SetActive(true);
     }
@@ -355,7 +360,7 @@ public class BattleSystem : MonoBehaviour
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
         }
-        if (attackedPlayer.healthBar == null)
+        if (attackedPlayer.healthBar != null)
         {
             attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
         }
