@@ -108,7 +108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.2031171}
   m_AnchorMax: {x: 1, y: 0.82813853}
-  m_AnchoredPosition: {x: -4.8757744, y: -0.32188654}
+  m_AnchoredPosition: {x: -4.875778, y: -0.32188606}
   m_SizeDelta: {x: -19.751522, y: -2.5474539}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4062708000821777536
@@ -250,9 +250,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6171355375454007376}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0012277232, y: 0.002479159, z: 0.0032756326}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3541520907239952741}
@@ -260,9 +260,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.07, y: 0.65}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!223 &4515886858383794206
 Canvas:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ Canvas:
   m_GameObject: {fileID: 6171355375454007376}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3175738675333327411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,17 +353,17 @@ RectTransform:
   m_GameObject: {fileID: 6421848170814275494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.1336, y: 6.1336, z: 6.1336}
+  m_LocalScale: {x: 1.3488295, y: 2.1739957, z: 1.5868582}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7794893322221907370}
   - {fileID: 8380196731152470615}
   m_Father: {fileID: 4008444630043155825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2761489, y: 0.5437946}
-  m_AnchorMax: {x: 0.7984681, y: 0.66200006}
-  m_AnchoredPosition: {x: 0.19921875, y: -3.252884}
-  m_SizeDelta: {x: -842.5811, y: -107.33765}
+  m_AnchorMin: {x: 0.8743334, y: 0.035148147}
+  m_AnchorMax: {x: 0.98600006, y: 0.07585186}
+  m_AnchoredPosition: {x: -3.5, y: -1}
+  m_SizeDelta: {x: -53.581055, y: -23.337646}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8574580427445979969
 MonoBehaviour:
@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Floating_HealthBar
   slider: {fileID: 8574580427445979969}
+  eventDamage: {fileID: 0}
 --- !u!1 &8853061738516931001
 GameObject:
   m_ObjectHideFlags: 0

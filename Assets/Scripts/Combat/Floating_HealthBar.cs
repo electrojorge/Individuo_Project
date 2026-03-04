@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 public class Floating_HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    [SerializeField] private TextMeshProUGUI eventDamage;
 
     public void Init(float currentValue, float maxValue)
     {
