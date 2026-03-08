@@ -7,6 +7,9 @@ public class CombatHudManager : MonoBehaviour
     public Unit selectedEnemy;
     public Unit selectedAlly;
 
+    private Unit lastSelectedEnemy;
+    private Unit lastSelectedAlly;
+
     //public static event System.Action<Unit> OnUnitSelected;
 
     private void Start()
@@ -65,6 +68,44 @@ public class CombatHudManager : MonoBehaviour
         {
             Debug.Log("jugador 4 seleccionado");
             selectedAlly = BS.playerUnits[3];
+        }
+    }
+    private void LateUpdate()
+    {
+        // Esto solo se encarga de actualizar el selector visual
+        if (lastSelectedEnemy != selectedEnemy)
+        {
+            if (lastSelectedEnemy != null && lastSelectedEnemy.healthBar != null)
+                lastSelectedEnemy.healthBar.Deselect();
+
+            if (selectedEnemy != null && selectedEnemy.healthBar != null)
+            {
+                // Desactivar selector del aliado si hay
+                if (selectedAlly != null && selectedAlly.healthBar != null)
+                    selectedAlly.healthBar.Deselect();
+
+                selectedEnemy.healthBar.ShowSelector();
+            }
+
+            lastSelectedEnemy = selectedEnemy;
+        }
+
+        // -------- Control de jugadores ----------
+        if (lastSelectedAlly != selectedAlly)
+        {
+            if (lastSelectedAlly != null && lastSelectedAlly.healthBar != null)
+                lastSelectedAlly.healthBar.Deselect();
+
+            if (selectedAlly != null && selectedAlly.healthBar != null)
+            {
+                // Desactivar selector del enemigo si hay
+                if (selectedEnemy != null && selectedEnemy.healthBar != null)
+                    selectedEnemy.healthBar.Deselect();
+
+                selectedAlly.healthBar.ShowSelector();
+            }
+
+            lastSelectedAlly = selectedAlly;
         }
     }
     public void AttackButton()

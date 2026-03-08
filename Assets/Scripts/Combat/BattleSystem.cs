@@ -319,6 +319,10 @@ public class BattleSystem : MonoBehaviour
         }
         if (CHM.selectedEnemy.healthBar != null)
         {
+            CHM.selectedEnemy.healthBar.ShowNumberEvent(dmg, false);
+        }
+        if (CHM.selectedEnemy.healthBar != null)
+        {
             Debug.Log("changing barra" + CHM.selectedEnemy.currentHP + "vida" + CHM.selectedEnemy.maxHP);
             CHM.selectedEnemy.healthBar.UpdateHealthBar(CHM.selectedEnemy.currentHP, CHM.selectedEnemy.maxHP);
         }
@@ -330,6 +334,10 @@ public class BattleSystem : MonoBehaviour
         if (CHM.selectedAlly.currentHP > CHM.selectedAlly.maxHP)
             CHM.selectedAlly.currentHP = CHM.selectedAlly.maxHP;
         Debug.Log("vida de: " + CHM.selectedAlly.unitName + " ahora es: " + CHM.selectedAlly.currentHP);
+        if (CHM.selectedAlly.healthBar != null)
+        {
+            CHM.selectedAlly.healthBar.ShowNumberEvent(heal, true);
+        }
         if (CHM.selectedAlly.healthBar != null)
         {
             CHM.selectedAlly.healthBar.UpdateHealthBar(CHM.selectedAlly.currentHP, CHM.selectedAlly.maxHP);
@@ -354,6 +362,10 @@ public class BattleSystem : MonoBehaviour
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
+        }
+        if (attackedPlayer.healthBar != null)
+        {
+            attackedPlayer.healthBar.ShowNumberEvent(dmg, false);
         }
         if (attackedPlayer.healthBar != null)
         {
