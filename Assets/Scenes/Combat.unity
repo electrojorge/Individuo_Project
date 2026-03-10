@@ -870,6 +870,8 @@ MonoBehaviour:
   enemiesInCombat:
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -884,6 +886,8 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -898,6 +902,8 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -912,6 +918,8 @@ MonoBehaviour:
     lvl: 0
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
     unitID: 0
+    healthBar: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -940,6 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleSystem
   state: 0
+  isBoss: 0
   playerUnits: []
   enemyUnits: []
   attackButton: {fileID: 1804145412}
@@ -960,6 +969,8 @@ MonoBehaviour:
   selectedEnemy:
     unitPrefab: {fileID: 0}
     unitID: 0
+    healthBar: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: 
     maxHP: 0
     currentHP: 0
@@ -975,6 +986,8 @@ MonoBehaviour:
   selectedAlly:
     unitPrefab: {fileID: 0}
     unitID: 0
+    healthBar: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: 
     maxHP: 0
     currentHP: 0

@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0.3173194, b: 0.10633675, a: 1}
+  m_Color: {r: 0.3018868, g: 0.27586424, b: 0.252047, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -719,6 +719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Floating_HealthBar
   slider: {fileID: 705666377253446363}
+  fillImage: {fileID: 1463435590922197901}
+  changeSpeed: 2
   eventDamage: {fileID: 6145261475852527572}
   selector: {fileID: 3329245406523081288}
 --- !u!1001 &6539429946128629175

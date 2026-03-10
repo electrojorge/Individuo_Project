@@ -84,8 +84,11 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
 
+        //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
+
         state = BattleState.PLAYER_TURN;
         Debug.Log("Turno del jugador");
+
 
         // Asigna al primer player del equipo
         if (playerUnits != null && playerUnits.Count > 0)
@@ -200,6 +203,8 @@ public class BattleSystem : MonoBehaviour
         }
         CHM.selectedAlly = null;
         CHM.selectedEnemy = null;
+
+        //TurnOrderUI.instance.RotateTurn();
     }
 
     public IEnumerator PlayerHeal() // Jugador cura al aliado seleccionado
@@ -225,6 +230,7 @@ public class BattleSystem : MonoBehaviour
 
         CHM.selectedAlly = null;
         CHM.selectedEnemy = null;
+        //TurnOrderUI.instance.RotateTurn();
     }
 
     IEnumerator EnemyTurn() // Turno de enemigo: ataca a un jugador aleatorio, luego pasa al siguiente enemigo o vuelve al jugador si no quedan más
@@ -316,6 +322,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnits.Remove(CHM.selectedEnemy);
             Debug.Log("muelto");
             BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).gameObject.SetActive(false);
+            //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
         }
         if (CHM.selectedEnemy.healthBar != null)
         {
@@ -362,6 +369,7 @@ public class BattleSystem : MonoBehaviour
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
+            //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
         }
         if (attackedPlayer.healthBar != null)
         {

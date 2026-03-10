@@ -40,6 +40,7 @@ public class Unit
     public GameObject unitPrefab;
     public int unitID;
     public Floating_HealthBar healthBar;
+    public Sprite unitPotrait;
     [Space(10)]
     [Header("RESOURCE STATS")]
     public string unitName;

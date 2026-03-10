@@ -1,12 +1,18 @@
 using System.Collections;
 using TMPro;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Floating_HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    [SerializeField] private Image fillImage;
+    [SerializeField] float changeSpeed = 2f;
+    float tV;
+    float cV;
+
     [SerializeField] private TextMeshProUGUI eventDamage;
     [SerializeField] private GameObject selector;
 
@@ -15,10 +21,21 @@ public class Floating_HealthBar : MonoBehaviour
         if (eventDamage != null) eventDamage.gameObject.SetActive(false);
         if (selector != null) selector.SetActive(false);
     }
+
+    private void Update()
+    {
+        cV = Mathf.MoveTowards(cV, tV, changeSpeed * Time.deltaTime);
+        slider.value = cV;
+        UpdateColor();
+    }
     public void Init(float currentValue, float maxValue)
     {
         slider.maxValue = 1f;
-        UpdateHealthBar(currentValue, maxValue);
+        float normalized = currentValue / maxValue;
+        this.cV = normalized;
+        tV = normalized;
+        slider.value = normalized;
+        UpdateColor();
     }
     public void ShowSelector()
     {
@@ -32,13 +49,22 @@ public class Floating_HealthBar : MonoBehaviour
 
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
-        if (maxValue <= 0f)
-        {
-            slider.value = 0f;
-            return;
-        }
+        tV = currentValue / maxValue;
+    }
 
-        slider.value = currentValue / maxValue;
+    void UpdateColor()
+    {
+        float t = slider.value;
+        Color color;
+        if (t > 0.5f)
+        {
+            color = Color.Lerp(Color.yellow, Color.green, (t - 0.5f) * 2);
+        }
+        else
+        {
+            color = Color.Lerp(Color.red, Color.yellow, t * 2);
+        }
+        fillImage.color = color;
     }
 
     public void ShowNumberEvent(int amount, bool isHeal)
