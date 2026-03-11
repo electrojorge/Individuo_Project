@@ -38746,6 +38746,21 @@ MonoBehaviour:
     levelUpCap: 0
     levelUpThresold: 0
     lvl: 0
+  - unitPrefab: {fileID: 5719554319389849644, guid: 054c4f319dd882547ae726a8041288c7, type: 3}
+    unitID: 0
+    healthBar: {fileID: 0}
+    unitName: rojo
+    maxHP: 100
+    currentHP: 100
+    maxSP: 0
+    currentSP: 0
+    physicalATK: 20
+    magicalATK: 0
+    DEF: 0
+    unitEXP: 0
+    levelUpCap: 0
+    levelUpThresold: 0
+    lvl: 0
 --- !u!114 &1738932409
 MonoBehaviour:
   m_ObjectHideFlags: 0
