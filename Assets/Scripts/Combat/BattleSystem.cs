@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Cinemachine;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,8 @@ public enum BattleState
 public class BattleSystem : MonoBehaviour
 {
     public static BattleSystem instance;
+
+    public CinemachineCamera[] cameras;
 
     UnitsManager UM;
     CombatHudManager CHM;
