@@ -80,6 +80,14 @@ public class BattleSystem : MonoBehaviour
             LoadUnitData(UM.GetEnemy(Random.Range(0, UM.enemyDex.Count)),e+1);
         }
 
+        for(int i = 0; i < playerUnits.Count; i++)
+        {
+            if (playerUnits[i].currentHP <= 0)
+            {
+                playerUnits[i].currentHP = 1;
+            }
+        }
+
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
         yield return new WaitForSeconds(waitTime);
