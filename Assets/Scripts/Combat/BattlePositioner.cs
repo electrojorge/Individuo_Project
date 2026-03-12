@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BattlePositioner : MonoBehaviour
@@ -49,13 +50,33 @@ public class BattlePositioner : MonoBehaviour
             if (prefab != null)
             {
                 GameObject inst = Instantiate(prefab, pos, Quaternion.identity, parentTransform);
-
                 Floating_HealthBar hB = inst.GetComponentInChildren<Floating_HealthBar>();
+                TextMeshProUGUI dmgText = inst.GetComponentInChildren<TextMeshProUGUI>();
 
-                if (hB != null)
+                if (enemies)
                 {
-                    unitsToPosition[i].healthBar = hB;
-                    hB.Init(unitsToPosition[i].currentHP, unitsToPosition[i].maxHP);
+                    if (hB != null)
+                    {
+                        unitsToPosition[i].healthBar = hB;
+
+                        hB.Init(
+                            unitsToPosition[i].currentHP,
+                            unitsToPosition[i].maxHP
+                        );
+                    }
+                }
+                else
+                {
+                    Floating_HealthBar hudBar = BS.GetComponent<CombatHudManager>().allyBars[i];
+
+                    unitsToPosition[i].healthBar = hudBar;
+
+                    hudBar.Init(
+                        unitsToPosition[i].currentHP,
+                        unitsToPosition[i].maxHP
+                    );
+
+                    hudBar.SetEventText(dmgText);
                 }
             }
         }

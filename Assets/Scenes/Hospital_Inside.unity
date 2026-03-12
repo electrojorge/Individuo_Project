@@ -38840,6 +38840,7 @@ MonoBehaviour:
   - unitPrefab: {fileID: 3513512184682462265, guid: 0eab29507d84ab34b97d9dcd6b4b7601, type: 3}
     unitID: 0
     healthBar: {fileID: 0}
+    unitTransform: {fileID: 0}
     unitPotrait: {fileID: 0}
     unitName: Joker
     maxHP: 100
@@ -38856,6 +38857,7 @@ MonoBehaviour:
   - unitPrefab: {fileID: 8909036361889345799, guid: 332df29a3dbf84e4e84d959aa8d4ad31, type: 3}
     unitID: 0
     healthBar: {fileID: 0}
+    unitTransform: {fileID: 0}
     unitPotrait: {fileID: 0}
     unitName: Makoto
     maxHP: 100
@@ -38872,6 +38874,7 @@ MonoBehaviour:
   - unitPrefab: {fileID: 7770681069192169274, guid: 2c807d06e8f871c4fa96e3a50fbf5e74, type: 3}
     unitID: 0
     healthBar: {fileID: 0}
+    unitTransform: {fileID: 0}
     unitPotrait: {fileID: 0}
     unitName: Morgana
     maxHP: 100
@@ -38888,6 +38891,7 @@ MonoBehaviour:
   - unitPrefab: {fileID: 4399095056940866462, guid: 6e1a199d1f0bb8d4ab4c16f16c46642d, type: 3}
     unitID: 0
     healthBar: {fileID: 0}
+    unitTransform: {fileID: 0}
     unitPotrait: {fileID: 0}
     unitName: Chie
     maxHP: 100
@@ -38905,6 +38909,7 @@ MonoBehaviour:
   - unitPrefab: {fileID: 5719554319389849644, guid: 8ccb27a9f343766408fc96298590df19, type: 3}
     unitID: 0
     healthBar: {fileID: 0}
+    unitTransform: {fileID: 0}
     unitPotrait: {fileID: 0}
     unitName: rojo
     maxHP: 100
@@ -38921,6 +38926,8 @@ MonoBehaviour:
   - unitPrefab: {fileID: 5719554319389849644, guid: 054c4f319dd882547ae726a8041288c7, type: 3}
     unitID: 0
     healthBar: {fileID: 0}
+    unitTransform: {fileID: 0}
+    unitPotrait: {fileID: 0}
     unitName: rojo
     maxHP: 100
     currentHP: 100
