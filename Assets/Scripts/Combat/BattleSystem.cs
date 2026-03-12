@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Cinemachine;
 
 public enum BattleState
 {
@@ -39,6 +40,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject healButton;
 
     [SerializeField] float waitTime;
+
+    int cameraIndex = 0;
 
     private void Awake()
     {
@@ -86,6 +89,18 @@ public class BattleSystem : MonoBehaviour
             {
                 playerUnits[i].currentHP = 1;
             }
+        }
+
+        for (int i = 0; i < playerUnits.Count; i++)
+        {
+            Floating_HealthBar bar = CHM.allyBars[i];
+
+            playerUnits[i].healthBar = bar;
+
+            bar.Init(
+                playerUnits[i].currentHP,
+                playerUnits[i].maxHP
+            );
         }
 
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
@@ -310,8 +325,32 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Turno de: " + currentPlayer.unitName);
         else
             Debug.LogWarning("PlayerTurn: currentPlayer es null.");
+
+        NextCamera();
         attackButton.SetActive(true);
         healButton.SetActive(true);
+        Debug.Log("MOSTRAR BOTONES");
+    }
+    void NextCamera()
+    {
+        // 1. Verificación de seguridad: ¿Hay cámaras en la lista?
+        if (BP.cameras == null || BP.cameras.Count == 0) return;
+
+        // 2. Si el índice llegó al final, reseteamos TODO antes de usarlo
+        if (cameraIndex >= BP.cameras.Count)
+        {
+            cameraIndex = 0; // Volvemos al inicio
+            for (int i = 0; i < BP.cameras.Count; i++)
+            {
+                BP.cameras[i].Priority = 0;
+            }
+        }
+
+        // 3. Ahora sí es seguro acceder porque ya validamos el índice
+        BP.cameras[cameraIndex].Priority++;
+
+        // 4. Incrementamos para el próximo turno
+        cameraIndex++;
     }
 
     IEnumerator EndBattle() // Volver a la escena del hospital despues de ganar
@@ -377,6 +416,8 @@ public class BattleSystem : MonoBehaviour
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
+            BP.cameras.Remove(BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponent<CinemachineCamera>());
+            attackedPlayer.healthBar.gameObject.SetActive(false);
             //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
         }
         if (attackedPlayer.healthBar != null)
