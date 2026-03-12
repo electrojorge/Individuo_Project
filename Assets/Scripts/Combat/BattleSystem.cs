@@ -329,17 +329,27 @@ public class BattleSystem : MonoBehaviour
         NextCamera();
         attackButton.SetActive(true);
         healButton.SetActive(true);
+        Debug.Log("MOSTRAR BOTONES");
     }
     void NextCamera()
     {
-        BP.cameras[cameraIndex].Priority++;
+        // 1. Verificación de seguridad: ¿Hay cámaras en la lista?
+        if (BP.cameras == null || BP.cameras.Count == 0) return;
+
+        // 2. Si el índice llegó al final, reseteamos TODO antes de usarlo
         if (cameraIndex >= BP.cameras.Count)
         {
+            cameraIndex = 0; // Volvemos al inicio
             for (int i = 0; i < BP.cameras.Count; i++)
             {
                 BP.cameras[i].Priority = 0;
             }
         }
+
+        // 3. Ahora sí es seguro acceder porque ya validamos el índice
+        BP.cameras[cameraIndex].Priority++;
+
+        // 4. Incrementamos para el próximo turno
         cameraIndex++;
     }
 
@@ -406,6 +416,7 @@ public class BattleSystem : MonoBehaviour
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
+            BP.cameras.Remove(BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponent<CinemachineCamera>());
             attackedPlayer.healthBar.gameObject.SetActive(false);
             //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
         }
