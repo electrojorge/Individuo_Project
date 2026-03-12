@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class BattlePositioner : MonoBehaviour
@@ -16,6 +18,8 @@ public class BattlePositioner : MonoBehaviour
     public GameObject enemiesContainer;
     public GameObject playersContainer;
 
+    public List<CinemachineCamera> cameras;
+
     private void Start()
     {
         UM = Game_Manager.instance.GetComponent<UnitsManager>();
@@ -24,6 +28,11 @@ public class BattlePositioner : MonoBehaviour
         SetUnits(true, distanceBetweenTeams);
         // Aliados en Z=-distanceBetweenTeams
         SetUnits(false, -distanceBetweenTeams);
+
+        for (int i = 0; i < playersContainer.transform.childCount; i++)
+        {
+            cameras.Add(playersContainer.transform.GetChild(i).transform.GetChild(0).GetComponent<CinemachineCamera>());
+        }
     }
 
     void SetUnits(bool enemies, float zOffset = 0f)
