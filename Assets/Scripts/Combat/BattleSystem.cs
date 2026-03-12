@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Cinemachine;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Cinemachine;
 
 public enum BattleState
 {
@@ -325,17 +325,17 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Turno de: " + currentPlayer.unitName);
         else
             Debug.LogWarning("PlayerTurn: currentPlayer es null.");
+
         NextCamera();
         attackButton.SetActive(true);
         healButton.SetActive(true);
     }
-
     void NextCamera()
     {
         BP.cameras[cameraIndex].Priority++;
         if (cameraIndex >= BP.cameras.Count)
         {
-            for(int i = 0; i < BP.cameras.Count; i++)
+            for (int i = 0; i < BP.cameras.Count; i++)
             {
                 BP.cameras[i].Priority = 0;
             }
