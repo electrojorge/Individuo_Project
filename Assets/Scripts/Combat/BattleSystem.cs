@@ -91,6 +91,18 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < playerUnits.Count; i++)
+        {
+            Floating_HealthBar bar = CHM.allyBars[i];
+
+            playerUnits[i].healthBar = bar;
+
+            bar.Init(
+                playerUnits[i].currentHP,
+                playerUnits[i].maxHP
+            );
+        }
+
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
         yield return new WaitForSeconds(waitTime);
@@ -394,6 +406,7 @@ public class BattleSystem : MonoBehaviour
             playerUnits.Remove(attackedPlayer);
             Debug.Log(attackedPlayer.unitName + " ha muerto");
             BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
+            attackedPlayer.healthBar.gameObject.SetActive(false);
             //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
         }
         if (attackedPlayer.healthBar != null)

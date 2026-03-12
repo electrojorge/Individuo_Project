@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class CombatHudManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class CombatHudManager : MonoBehaviour
     private Unit lastSelectedEnemy;
     private Unit lastSelectedAlly;
 
+    public Floating_HealthBar[] allyBars;
     //public static event System.Action<Unit> OnUnitSelected;
 
     private void Start()

@@ -67,6 +67,14 @@ public class Floating_HealthBar : MonoBehaviour
         fillImage.color = color;
     }
 
+    public void SetEventText(TextMeshProUGUI txt)
+    {
+        eventDamage = txt;
+
+        if (eventDamage != null)
+            eventDamage.gameObject.SetActive(false);
+    }
+
     public void ShowNumberEvent(int amount, bool isHeal)
     {
         if (eventDamage == null) return;
