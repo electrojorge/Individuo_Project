@@ -19,8 +19,6 @@ public class BattleSystem : MonoBehaviour
 {
     public static BattleSystem instance;
 
-    public CinemachineCamera[] cameras;
-
     UnitsManager UM;
     CombatHudManager CHM;
     BattlePositioner BP;
@@ -42,6 +40,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject healButton;
 
     [SerializeField] float waitTime;
+
+    int cameraIndex = 0;
 
     private void Awake()
     {
@@ -313,8 +313,22 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Turno de: " + currentPlayer.unitName);
         else
             Debug.LogWarning("PlayerTurn: currentPlayer es null.");
+        NextCamera();
         attackButton.SetActive(true);
         healButton.SetActive(true);
+    }
+
+    void NextCamera()
+    {
+        BP.cameras[cameraIndex].Priority++;
+        if (cameraIndex >= BP.cameras.Count)
+        {
+            for(int i = 0; i < BP.cameras.Count; i++)
+            {
+                BP.cameras[i].Priority = 0;
+            }
+        }
+        cameraIndex++;
     }
 
     IEnumerator EndBattle() // Volver a la escena del hospital despues de ganar
