@@ -265,6 +265,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 359647232687695095, guid: 2f31f40558b4518479ea8197c62fdf7b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359647232687695095, guid: 2f31f40558b4518479ea8197c62fdf7b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.303511
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2f31f40558b4518479ea8197c62fdf7b, type: 3}
       propertyPath: m_Name
       value: Lillian
