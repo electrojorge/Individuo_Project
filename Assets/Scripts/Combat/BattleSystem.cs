@@ -398,35 +398,63 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void PlayerTakeDamage(int dmg) // funcion que hace que un jugador reciba daño, si muere se elimina de la lista y se desactiva su prefab
+    void PlayerTakeDamage(int dmg)
     {
         if (playerUnits == null || playerUnits.Count == 0)
             return;
 
+        // 1. Lógica de cálculo de daño
         int extraDmg = Random.Range(0, 10);
         int i = Random.Range(0, playerUnits.Count);
-
         dmg = (isBoss) ? dmg + extraDmg : dmg;
+
+        // 2. Aplicar daño a la variable numérica
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
-        Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 
-        if (attackedPlayer.currentHP <= 0)
-        {
-            playerUnits.Remove(attackedPlayer);
-            Debug.Log(attackedPlayer.unitName + " ha muerto");
-            BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
-            BP.cameras.Remove(BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponent<CinemachineCamera>());
-            attackedPlayer.healthBar.gameObject.SetActive(false);
-            //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
-        }
+        Debug.Log("Vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
+
+        // 3. ACTUALIZAR UI (Esto es lo que faltaba o estaba fuera de lugar)
+        // Lo hacemos antes de comprobar si muere para que el jugador vea la barra bajar a 0
         if (attackedPlayer.healthBar != null)
         {
             attackedPlayer.healthBar.ShowNumberEvent(dmg, false);
-        }
-        if (attackedPlayer.healthBar != null)
-        {
             attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
         }
+
+        // 4. Comprobar si la unidad ha muerto
+        if (attackedPlayer.currentHP <= 0)
+        {
+            StartCoroutine(HandlePlayerDeath(attackedPlayer));
+        }
+    }
+
+    // He separado la muerte en una pequeña función para que el código sea más limpio
+    IEnumerator HandlePlayerDeath(Unit unit)
+    {
+        // Esperamos un momento para que el jugador vea la barra en 0 y el texto de daño
+        yield return new WaitForSeconds(0.5f);
+
+        // Buscar y eliminar la cámara de la lista de BattlePositioner
+        Transform unitTransform = BP.playersContainer.transform.GetChild(unit.unitID - 1);
+        CinemachineCamera unitCamera = unitTransform.GetComponentInChildren<CinemachineCamera>();
+
+        if (unitCamera != null)
+        {
+            BP.cameras.Remove(unitCamera);
+            Debug.Log("Cámara de " + unit.unitName + " eliminada.");
+        }
+
+        // Desactivar visualmente y eliminar de la lista de combate
+        playerUnits.Remove(unit);
+        unitTransform.gameObject.SetActive(false);
+
+        if (unit.healthBar != null)
+            unit.healthBar.gameObject.SetActive(false);
+
+        // Resetear el índice de cámaras para evitar errores de "fuera de rango"
+        cameraIndex = 0;
+
+        Debug.Log(unit.unitName + " ha muerto.");
     }
 }
