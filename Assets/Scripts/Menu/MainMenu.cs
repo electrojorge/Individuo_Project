@@ -11,8 +11,10 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionsMenuPanel;
 
-    public Slider loadingSlider;
-    public TextMeshProUGUI loadingText;
+    public GameObject pointLights;
+    public GameObject mainMenuPlane;
+
+    public GameObject controllMenuPlane;
 
     bool started = false;
 
@@ -20,6 +22,9 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         optionsMenuPanel.SetActive(false);
+        controllMenuPlane.SetActive(false);
+        pointLights.SetActive(true);
+        mainMenuPlane.SetActive(true);
     }
 
     public void StartGameButton()
@@ -30,13 +35,19 @@ public class MainMenu : MonoBehaviour
     public void OptionsButton()
     {
         mainMenuPanel.SetActive(false);
+        pointLights.SetActive(false);
+        mainMenuPlane.SetActive(false);
         optionsMenuPanel.SetActive(true);
+        controllMenuPlane.SetActive(true);
     }
 
     public void BackToMainMenuButton()
     {
         optionsMenuPanel.SetActive(false);
+        controllMenuPlane.SetActive(false);
         mainMenuPanel.SetActive(true);
+        pointLights.SetActive(true);
+        mainMenuPlane.SetActive(true);
     }
 
     public void ExitGame()
