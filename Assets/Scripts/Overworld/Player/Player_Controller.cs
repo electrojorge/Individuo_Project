@@ -27,17 +27,18 @@ public class Player_Controller : MonoBehaviour
     private Vector3 inputDirection = Vector3.zero;
     public bool enemyInRange;
     private string enemyTag = "Enemy";
+    public Animator animator;
 
     public int enemyID;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        
+        animator = GetComponent<Animator>();
+
     }
     void Start()
     {
-
         // Obtener o añadir Rigidbody: el controlador siempre usa Rigidbody.
         if (rb == null)
         {

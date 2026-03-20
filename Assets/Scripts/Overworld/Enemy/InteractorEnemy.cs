@@ -26,11 +26,11 @@ public class InteractorEnemy : MonoBehaviour
     private GameObject indicatorInstance;
     private Vector3 indicatorPrefabLocalScale = Vector3.one;
 
-    Player_Controller PC;
+    PlayerController PC;
 
     private void Awake()
     {
-        PC = FindAnyObjectByType<Player_Controller>();
+        PC = FindAnyObjectByType<PlayerController>();
     }
 
     void Start()
