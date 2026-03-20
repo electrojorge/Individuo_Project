@@ -13390,6 +13390,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3cb681c087f8c4daa040178d605cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  AnimBlendSpeed: 8.9
+  CameraRoot: {fileID: 17234245}
+  Camera: {fileID: 17234245}
+  MouseSensitivity: 21.9
   _walkSpeed: 4
 --- !u!4 &7301221136818281263
 Transform:

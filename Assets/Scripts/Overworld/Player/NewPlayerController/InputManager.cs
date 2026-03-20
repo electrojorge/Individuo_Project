@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        HideCursor();
         _currentmap = PlayerInput.currentActionMap;
         _moveAction = _currentmap.FindAction("Move");
         _lookAction = _currentmap.FindAction("Look");
@@ -35,6 +36,11 @@ public class InputManager : MonoBehaviour
         _interactAction.canceled += onInteract;
     }
 
+    private void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     private void onMove(InputAction.CallbackContext context)
     {
         Move = context.ReadValue<Vector2>();
