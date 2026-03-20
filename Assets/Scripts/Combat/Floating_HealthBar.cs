@@ -15,6 +15,7 @@ public class Floating_HealthBar : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI eventDamage;
     [SerializeField] private GameObject selector;
+    [SerializeField] private TextMeshProUGUI hpText;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class Floating_HealthBar : MonoBehaviour
         tV = normalized;
         slider.value = normalized;
         UpdateColor();
+        UpdateHPText(currentValue, maxValue);
     }
     public void ShowSelector()
     {
@@ -50,6 +52,13 @@ public class Floating_HealthBar : MonoBehaviour
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
         tV = currentValue / maxValue;
+        UpdateHPText(currentValue, maxValue);
+    }
+
+    void UpdateHPText(float current, float max)
+    {
+        if (hpText != null)
+            hpText.text = Mathf.RoundToInt(current) + " / " + Mathf.RoundToInt(max);
     }
 
     void UpdateColor()
