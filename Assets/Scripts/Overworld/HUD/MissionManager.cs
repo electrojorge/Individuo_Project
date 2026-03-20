@@ -18,20 +18,20 @@ public class MissionManager : MonoBehaviour
 
     void StartInvestigationMission()
     {
-        hud.SetMainMission("Investiga el asesinato");
+        hud.SetMainMission("INVESTIGA LA MANSIÓN");
 
         hud.ClearSubMission();
 
-        hud.SetSubMission(0, "Busca pistas en la mansión");
+        hud.SetSubMission(0, "BUSCA PISTAS EN LA MANSIÓN SOBRE EL ASESINATO");
     }
 
     public void EnemyAppears()
     {
-        hud.SetMainMission("¡Un enemigo aparece!");
+        hud.SetMainMission("¡UN ENEMIGO APARECE!");
 
         hud.ClearSubMission();
 
-        hud.SetSubMission(0, "Acaba con el enemigo");
+        hud.SetSubMission(0, "ACABA CON EL ENEMIGO");
     }
 
     public void EnemyDefeated()

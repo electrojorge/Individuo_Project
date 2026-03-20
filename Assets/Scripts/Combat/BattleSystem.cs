@@ -105,7 +105,7 @@ public class BattleSystem : MonoBehaviour
 
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(0.0001f);
 
         //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
 
@@ -398,35 +398,53 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void PlayerTakeDamage(int dmg) // funcion que hace que un jugador reciba daño, si muere se elimina de la lista y se desactiva su prefab
+    void PlayerTakeDamage(int dmg)
     {
         if (playerUnits == null || playerUnits.Count == 0)
             return;
 
         int extraDmg = Random.Range(0, 10);
         int i = Random.Range(0, playerUnits.Count);
-
         dmg = (isBoss) ? dmg + extraDmg : dmg;
+
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
-        Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 
-        if (attackedPlayer.currentHP <= 0)
-        {
-            playerUnits.Remove(attackedPlayer);
-            Debug.Log(attackedPlayer.unitName + " ha muerto");
-            BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
-            BP.cameras.Remove(BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponent<CinemachineCamera>());
-            attackedPlayer.healthBar.gameObject.SetActive(false);
-            //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
-        }
+        Debug.Log("Vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
+
         if (attackedPlayer.healthBar != null)
         {
             attackedPlayer.healthBar.ShowNumberEvent(dmg, false);
-        }
-        if (attackedPlayer.healthBar != null)
-        {
             attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
         }
+
+        if (attackedPlayer.currentHP <= 0)
+        {
+            StartCoroutine(HandlePlayerDeath(attackedPlayer));
+        }
+    }
+
+    IEnumerator HandlePlayerDeath(Unit unit)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        Transform unitTransform = BP.playersContainer.transform.GetChild(unit.unitID - 1);
+        CinemachineCamera unitCamera = unitTransform.GetComponentInChildren<CinemachineCamera>();
+
+        if (unitCamera != null)
+        {
+            BP.cameras.Remove(unitCamera);
+            Debug.Log("Cámara de " + unit.unitName + " eliminada.");
+        }
+
+        playerUnits.Remove(unit);
+        unitTransform.gameObject.SetActive(false);
+
+        if (unit.healthBar != null)
+            unit.healthBar.gameObject.SetActive(false);
+
+        cameraIndex = 0;
+
+        Debug.Log(unit.unitName + " ha muerto.");
     }
 }
