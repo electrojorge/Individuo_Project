@@ -43,7 +43,7 @@ public class Game_Manager : MonoBehaviour
         if (scene.name == "Hospital_Inside" && returningFromCombat)
         {
             Debug.Log("volvemos al overworld");
-            PlayerController player = FindFirstObjectByType<PlayerController>();
+            Player_Controller player = FindFirstObjectByType<Player_Controller>();
             player.GetRigidbody().position = playerPos;
             player.transform.position = playerPos;
             returningFromCombat = false;
