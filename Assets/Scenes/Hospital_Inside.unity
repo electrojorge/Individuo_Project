@@ -6882,6 +6882,20 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 864737839}
   m_SourcePrefab: {fileID: 100100000, guid: a380b15624545f443afafdef2b486fe3, type: 3}
+--- !u!114 &398803307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Interact
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 16edc7a19c0827b4fac23145eae6ef31, type: 3}
+  m_ActionId: 04491fb1-60c4-4943-a267-7d4bb9d6acc6
 --- !u!1 &399883114
 GameObject:
   m_ObjectHideFlags: 0
@@ -18600,6 +18614,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 210282609}
     - target: {fileID: 7299510969647468025, guid: 2281a68a372e0d24bafecd09088156e9, type: 3}
+      propertyPath: CameraRoot
+      value: 
+      objectReference: {fileID: 989296955}
+    - target: {fileID: 7299510969647468025, guid: 2281a68a372e0d24bafecd09088156e9, type: 3}
       propertyPath: enemyUIText
       value: 
       objectReference: {fileID: 604853412}
@@ -18607,6 +18625,10 @@ PrefabInstance:
       propertyPath: enemyUIPanel
       value: 
       objectReference: {fileID: 604853410}
+    - target: {fileID: 7299510969647468025, guid: 2281a68a372e0d24bafecd09088156e9, type: 3}
+      propertyPath: MouseSensitivity
+      value: 7.41
+      objectReference: {fileID: 0}
     - target: {fileID: 9205990058433385163, guid: 2281a68a372e0d24bafecd09088156e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -20221,6 +20243,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 887838630}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &989296955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9205990058433385163, guid: 2281a68a372e0d24bafecd09088156e9, type: 3}
+  m_PrefabInstance: {fileID: 925662301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &989342362
 GameObject:
   m_ObjectHideFlags: 0
@@ -40129,6 +40156,10 @@ PrefabInstance:
       propertyPath: playerUIPanel
       value: 
       objectReference: {fileID: 2007378604}
+    - target: {fileID: 3427867294284324189, guid: b39b3724ea35a75428bbd4ae1f18f378, type: 3}
+      propertyPath: interactActionReference
+      value: 
+      objectReference: {fileID: 398803307}
     - target: {fileID: 5674985452086033818, guid: b39b3724ea35a75428bbd4ae1f18f378, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.83

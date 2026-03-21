@@ -27,6 +27,7 @@ public class Door_Blocked : MonoBehaviour
     public void OpenDoor()
     {
         playerAnimator.SetTrigger(openTriggerName);
+        doorAnimator.SetTrigger(openTriggerName);
         // Verifica si la puerta ya está abierta
         if (isOpen)
         {
