@@ -17,6 +17,7 @@ public class Door_Blocked : MonoBehaviour
     {
         doorObject = this.gameObject;
         doorCollider = GetComponent<BoxCollider>();
+        doorAnimator = GetComponent<Animator>();
         PlayerController PC = Object.FindFirstObjectByType<PlayerController>();
         PC.GetComponent<Animator>();
         playerAnimator = PC.animator;
