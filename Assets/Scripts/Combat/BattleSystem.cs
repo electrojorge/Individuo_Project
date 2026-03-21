@@ -283,7 +283,7 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.LOST;
             Debug.Log("Has perdido la batalla");
-            //GameOver();
+            GameOver();
             yield break;
         }
 
@@ -373,6 +373,11 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         Game_Manager.instance.returningFromCombat = true;
         SceneManager.LoadScene("Hospital_Inside");
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     void EnemyTakeDamage(int dmg) // funcion del enemigo recibe daño, si muere se elimina de la lista y se desactiva su prefab
