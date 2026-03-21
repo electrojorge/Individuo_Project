@@ -39,6 +39,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject attackButton;
     public GameObject healButton;
 
+    public Animator unitAnimator;
+
     [SerializeField] float waitTime;
 
     int cameraIndex = 0;
@@ -196,6 +198,13 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator PlayerAttack() // Jugador ataca al enemigo seleccionado
     {
+        // --- ANIMACIÓN DE ATAQUE ---
+        unitAnimator = BP.playersContainer.transform.GetChild(currentPlayer.unitID - 1).GetComponentInChildren<Animator>();
+
+        if (unitAnimator != null)
+        {
+            unitAnimator.SetTrigger("Attack"); // Dispara la animación de ataque
+        }
         yield return new WaitForSeconds(waitTime);
 
         EnemyTakeDamage(currentPlayer.physicalATK);
@@ -260,6 +269,10 @@ public class BattleSystem : MonoBehaviour
     {
         BP.panoramic.Priority = 10;
         Debug.Log("Turno de " + currentEnemy.unitName);
+
+        // --- ANIMACIÓN DE ATAQUE ---
+        unitAnimator = BP.enemiesContainer.transform.GetChild(currentEnemy.unitID - 1).GetComponentInChildren<Animator>();
+        if (unitAnimator != null) unitAnimator.SetTrigger("Attack");
         yield return new WaitForSeconds(waitTime);
 
         // Aplicar daño al jugador
@@ -365,6 +378,17 @@ public class BattleSystem : MonoBehaviour
     void EnemyTakeDamage(int dmg) // funcion del enemigo recibe daño, si muere se elimina de la lista y se desactiva su prefab
     {
         CHM.selectedEnemy.currentHP -= dmg;
+
+        // --- ANIMACIÓN DE DAÑO ---
+        unitAnimator = BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).GetComponentInChildren<Animator>();
+        if (unitAnimator != null)
+        {
+            if (CHM.selectedEnemy.currentHP <= 0)
+                unitAnimator.SetTrigger("Death");
+            else
+                unitAnimator.SetTrigger("Hit");
+        }
+
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
         {
@@ -411,6 +435,17 @@ public class BattleSystem : MonoBehaviour
 
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
+
+        // --- ANIMACIÓN DE DAÑO ---
+        unitAnimator = BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponentInChildren<Animator>();
+
+        if (unitAnimator != null)
+        {
+            if (attackedPlayer.currentHP <= 0)
+                unitAnimator.SetTrigger("Death"); // --- ANIMACIÓN DE MUERTE ---
+            else
+                unitAnimator.SetTrigger("Hit");   // --- ANIMACIÓN DE DAÑO ---
+        }
 
         Debug.Log("Vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 

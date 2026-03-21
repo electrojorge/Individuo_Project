@@ -885,6 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 4
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!43 &31167412
 Mesh:
@@ -7169,11 +7170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7500002
+      value: 3.7500002
       objectReference: {fileID: 0}
     - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.3999996
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18887,7 +18888,7 @@ Transform:
   m_GameObject: {fileID: 632458738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2534013, y: -0.000000011289291, z: 0.0000000048353126, w: 0.9673613}
-  m_LocalPosition: {x: 0, y: 6.05, z: -14.4}
+  m_LocalPosition: {x: 0, y: 7.05, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21994,6 +21995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 0
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1001 &698196147
 PrefabInstance:
@@ -30578,6 +30580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 2
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1 &1071336555
 GameObject:
@@ -31391,6 +31394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 3
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1 &1088418006
 GameObject:
@@ -34974,6 +34978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 1
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1 &1231910569
 GameObject:

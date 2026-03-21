@@ -5,17 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class KeyEntry
 {
-    // Reemplazamos el Key_SO y el bool manual por la referencia al script KeyDrop
     public KeyDrop keyDrop;
 }
 
 public class KeyInventory : MonoBehaviour
 {
-    // Legacy (oculto): entradas antiguas, ahora referenciando al script KeyDrop.
     [SerializeField, HideInInspector]
     private List<KeyEntry> keyEntries = new List<KeyEntry>();
 
-    // Nueva lista simple de IDs (serializada y usada a partir de ahora).
     [SerializeField]
     private List<int> obtainedKeyIDs = new List<int>();
 
@@ -33,7 +30,6 @@ public class KeyInventory : MonoBehaviour
         SyncFromList();
     }
 
-    // Migra datos legacy (si existen) desde keyEntries -> obtainedKeyIDs.
     private void MigrateIfNeeded()
     {
         if (keyEntries == null || keyEntries.Count == 0) return;
@@ -61,9 +57,6 @@ public class KeyInventory : MonoBehaviour
         {
             Debug.Log("KeyInventory: migradas entradas legacy a lista de IDs desde KeyDrop.");
         }
-
-        // Si quieres que se borre automáticamente la lista antigua tras migrar, descomenta la siguiente línea:
-        // keyEntries.Clear();
     }
 
     private void SyncFromList()
@@ -71,7 +64,6 @@ public class KeyInventory : MonoBehaviour
         obtainedSet = new HashSet<int>(obtainedKeyIDs ?? new List<int>());
     }
 
-    // API pública: ahora solo por int
     public bool HasKey(int id)
     {
         return obtainedSet.Contains(id);
