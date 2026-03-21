@@ -36,7 +36,8 @@ public class EnemyPatrol_Controller : MonoBehaviour
     [SerializeField] private float eyeHeight = 1.0f;
     [SerializeField] private LayerMask obstructionMask = ~0;
     private bool requireLineOfSight = true;
-    
+    public Animator animator;
+
     private string playerTag = "Player";
 
     // internals
@@ -51,6 +52,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         // Buscar jugador por tag
         var playerGO = GameObject.FindGameObjectWithTag(playerTag);
         if (playerGO != null) playerTransform = playerGO.transform;
@@ -104,6 +106,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     void Patrol()
     {
+        animator.SetTrigger("Walk");
         if (patrolPoints == null || patrolPoints.Length == 0) return;
 
         Transform target = patrolPoints[currentPatrolIndex];
@@ -136,6 +139,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     void Chase()
     {
+        animator.SetTrigger("Run");
         if (playerTransform == null) return;
         // Moverse hacia el jugador
         MoveTowards(playerTransform.position, chaseSpeed);
@@ -143,6 +147,7 @@ public class EnemyPatrol_Controller : MonoBehaviour
 
     public void Attack()
     {
+        animator.SetTrigger("Attack");
         SceneManager.LoadScene(2);
     }
 
@@ -215,8 +220,15 @@ public class EnemyPatrol_Controller : MonoBehaviour
             enemyActivity = EnemyBehavior.Attack;
             Game_Manager.instance.savedIDs.Add(enemyID);
             Game_Manager.instance.PlayerPos = collision.gameObject.GetComponent<Transform>().position;
+            ShowCursor();
             Attack();
         }
+    }
+
+    public void ShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Ajusta el índice al patrol point más cercano

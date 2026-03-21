@@ -39,6 +39,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject attackButton;
     public GameObject healButton;
 
+    public Animator unitAnimator;
+
     [SerializeField] float waitTime;
 
     int cameraIndex = 0;
@@ -105,7 +107,7 @@ public class BattleSystem : MonoBehaviour
 
         Debug.Log(playerUnits.Count + " aliados contra " + enemiesNum + " enemigos");
 
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(0.0001f);
 
         //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
 
@@ -196,6 +198,13 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator PlayerAttack() // Jugador ataca al enemigo seleccionado
     {
+        // --- ANIMACIÓN DE ATAQUE ---
+        unitAnimator = BP.playersContainer.transform.GetChild(currentPlayer.unitID - 1).GetComponentInChildren<Animator>();
+
+        if (unitAnimator != null)
+        {
+            unitAnimator.SetTrigger("Attack"); // Dispara la animación de ataque
+        }
         yield return new WaitForSeconds(waitTime);
 
         EnemyTakeDamage(currentPlayer.physicalATK);
@@ -258,7 +267,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn() // Turno de enemigo: ataca a un jugador aleatorio, luego pasa al siguiente enemigo o vuelve al jugador si no quedan más
     {
+        BP.panoramic.Priority = 10;
         Debug.Log("Turno de " + currentEnemy.unitName);
+
+        // --- ANIMACIÓN DE ATAQUE ---
+        unitAnimator = BP.enemiesContainer.transform.GetChild(currentEnemy.unitID - 1).GetComponentInChildren<Animator>();
+        if (unitAnimator != null) unitAnimator.SetTrigger("Attack");
         yield return new WaitForSeconds(waitTime);
 
         // Aplicar daño al jugador
@@ -317,6 +331,7 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        BP.panoramic.Priority = 0;
         // Seleccionar primer enemigo mediante NextCurrentEnemy para mantener consistencia
         if (enemyUnits != null && enemyUnits.Count > 0)
             NextCurrentEnemy(enemyUnits[0].unitID);
@@ -363,6 +378,17 @@ public class BattleSystem : MonoBehaviour
     void EnemyTakeDamage(int dmg) // funcion del enemigo recibe daño, si muere se elimina de la lista y se desactiva su prefab
     {
         CHM.selectedEnemy.currentHP -= dmg;
+
+        // --- ANIMACIÓN DE DAÑO ---
+        unitAnimator = BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).GetComponentInChildren<Animator>();
+        if (unitAnimator != null)
+        {
+            if (CHM.selectedEnemy.currentHP <= 0)
+                unitAnimator.SetTrigger("Death");
+            else
+                unitAnimator.SetTrigger("Hit");
+        }
+
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
         {
@@ -398,35 +424,64 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void PlayerTakeDamage(int dmg) // funcion que hace que un jugador reciba daño, si muere se elimina de la lista y se desactiva su prefab
+    void PlayerTakeDamage(int dmg)
     {
         if (playerUnits == null || playerUnits.Count == 0)
             return;
 
         int extraDmg = Random.Range(0, 10);
         int i = Random.Range(0, playerUnits.Count);
-
         dmg = (isBoss) ? dmg + extraDmg : dmg;
+
         playerUnits[i].currentHP -= dmg;
         attackedPlayer = playerUnits[i];
-        Debug.Log("vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
 
-        if (attackedPlayer.currentHP <= 0)
+        // --- ANIMACIÓN DE DAÑO ---
+        unitAnimator = BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponentInChildren<Animator>();
+
+        if (unitAnimator != null)
         {
-            playerUnits.Remove(attackedPlayer);
-            Debug.Log(attackedPlayer.unitName + " ha muerto");
-            BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).gameObject.SetActive(false);
-            BP.cameras.Remove(BP.playersContainer.transform.GetChild(attackedPlayer.unitID - 1).GetComponent<CinemachineCamera>());
-            attackedPlayer.healthBar.gameObject.SetActive(false);
-            //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
+            if (attackedPlayer.currentHP <= 0)
+                unitAnimator.SetTrigger("Death"); // --- ANIMACIÓN DE MUERTE ---
+            else
+                unitAnimator.SetTrigger("Hit");   // --- ANIMACIÓN DE DAÑO ---
         }
+
+        Debug.Log("Vida de: " + attackedPlayer.unitName + " ahora es: " + attackedPlayer.currentHP);
+
         if (attackedPlayer.healthBar != null)
         {
             attackedPlayer.healthBar.ShowNumberEvent(dmg, false);
-        }
-        if (attackedPlayer.healthBar != null)
-        {
             attackedPlayer.healthBar.UpdateHealthBar(attackedPlayer.currentHP, attackedPlayer.maxHP);
         }
+
+        if (attackedPlayer.currentHP <= 0)
+        {
+            StartCoroutine(HandlePlayerDeath(attackedPlayer));
+        }
+    }
+
+    IEnumerator HandlePlayerDeath(Unit unit)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        Transform unitTransform = BP.playersContainer.transform.GetChild(unit.unitID - 1);
+        CinemachineCamera unitCamera = unitTransform.GetComponentInChildren<CinemachineCamera>();
+
+        if (unitCamera != null)
+        {
+            BP.cameras.Remove(unitCamera);
+            Debug.Log("Cámara de " + unit.unitName + " eliminada.");
+        }
+
+        playerUnits.Remove(unit);
+        unitTransform.gameObject.SetActive(false);
+
+        if (unit.healthBar != null)
+            unit.healthBar.gameObject.SetActive(false);
+
+        cameraIndex = 0;
+
+        Debug.Log(unit.unitName + " ha muerto.");
     }
 }

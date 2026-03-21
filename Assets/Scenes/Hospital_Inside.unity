@@ -637,6 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 4
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1 &28964523
 GameObject:
@@ -6092,6 +6093,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mansion_gamemakers
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 93efc6d81bf83414798bad5f96e0a7b7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10271,9 +10276,49 @@ PrefabInstance:
       propertyPath: moveActionReference
       value: 
       objectReference: {fileID: 38819732}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.7500002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9673613
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.2534013
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000010761084
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984623529008047750, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000000028188776
+      objectReference: {fileID: 0}
     - target: {fileID: 7467056485934021548, guid: d426516186715014dab639de27eb4d8c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074799737931318054, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074799737931318054, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074799737931318054, guid: d426516186715014dab639de27eb4d8c, type: 3}
+      propertyPath: orthographic size
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22585,7 +22630,7 @@ Transform:
   m_GameObject: {fileID: 632458738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2534013, y: -0.000000011289291, z: 0.0000000048353126, w: 0.9673613}
-  m_LocalPosition: {x: 0, y: 6.05, z: -14.4}
+  m_LocalPosition: {x: 0, y: 7.05, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25221,6 +25266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 0
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1001 &667688746
 PrefabInstance:
@@ -39171,6 +39217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 2
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1001 &1074193084
 PrefabInstance:
@@ -39480,6 +39527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 3
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1001 &1087015209
 PrefabInstance:
@@ -43710,6 +43758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_Blocked
   doorNumber: 1
   doorAnimator: {fileID: 0}
+  playerAnimator: {fileID: 0}
   openTriggerName: Open
 --- !u!1 &1226810675
 GameObject:
@@ -56366,7 +56415,7 @@ Transform:
   m_GameObject: {fileID: 1705952464}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26, y: 3, z: 42}
+  m_LocalPosition: {x: -26, y: 3.6, z: 42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65749,7 +65798,7 @@ Transform:
   m_GameObject: {fileID: 2025077300}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -33, y: 3, z: 41}
+  m_LocalPosition: {x: -33, y: 3.6, z: 41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69191,7 +69240,7 @@ Transform:
   m_GameObject: {fileID: 2145403401}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34, y: 3, z: 29}
+  m_LocalPosition: {x: -34, y: 3.6, z: 29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

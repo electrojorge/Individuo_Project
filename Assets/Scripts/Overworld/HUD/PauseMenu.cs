@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.isPressed)
         {
+            ShowCursor();
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
@@ -25,6 +26,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        HideCursor();
     }
      public void ExitToMainMenu()
     {
@@ -46,5 +48,17 @@ public class PauseMenu : MonoBehaviour
     {
         controllPauseMenu.SetActive(false);
         pauseMenu.SetActive(true);
+    }
+
+    public void ShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

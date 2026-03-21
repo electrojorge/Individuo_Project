@@ -7,6 +7,7 @@ public class Door_Blocked : MonoBehaviour
     [Header("Door settings")]
     public int doorNumber = 0;
     public Animator doorAnimator;
+    public Animator playerAnimator;
     public string openTriggerName = "Open";
     private bool isOpen = false;
     private GameObject doorObject;
@@ -16,36 +17,39 @@ public class Door_Blocked : MonoBehaviour
     {
         doorObject = this.gameObject;
         doorCollider = GetComponent<BoxCollider>();
-        
-        if (doorCollider == null)
-        {
-            Debug.LogWarning($"No hay BoxCollider en'{gameObject.name}'");
-        }
+        PlayerController PC = Object.FindFirstObjectByType<PlayerController>();
+        PC.GetComponent<Animator>();
+        playerAnimator = PC.animator;
     }
 
+    // Intenta abrir la puerta, verificando si ya está abierta o si el jugador tiene la llave necesaria
     public void OpenDoor()
     {
+        playerAnimator.SetTrigger(openTriggerName);
+        // Verifica si la puerta ya está abierta
         if (isOpen)
         {
             Debug.Log("La puerta ya está abierta.");
             return;
         }
 
+        // Verifica si el jugador tiene la llave necesaria para abrir la puerta
         if (PlayerHasKey(doorNumber))
         {
             Debug.Log($"Se tiene la llave {doorNumber}, abriendo puerta.");
             DoOpen();
         }
+        // Si el jugador no tiene la llave, mostrar un mensaje indicando que la puerta está cerrada
         else
         {
             Debug.Log($"Puerta cerrada, necesitas la llave {doorNumber} para abrirla.");
         }
     }
 
+    // Abre la puerta, activando la animación o desactivando el objeto de la puerta, y deshabilitando el collider para permitir el paso
     private void DoOpen()
     {
         isOpen = true;
-
         if (doorAnimator != null && !string.IsNullOrEmpty(openTriggerName))
         {
             doorAnimator.SetTrigger(openTriggerName);
@@ -60,6 +64,7 @@ public class Door_Blocked : MonoBehaviour
             doorCollider.enabled = false;
     }
 
+    // Verifica si la puerta está abierta
     public bool IsOpen()
     {
         return isOpen;
@@ -67,6 +72,7 @@ public class Door_Blocked : MonoBehaviour
 
     private static KeyInventory cachedInventory;
 
+    //Obtiene el inventario de llaves del jugador
     private static KeyInventory GetInventory()
     {
         if (cachedInventory == null)
@@ -78,6 +84,7 @@ public class Door_Blocked : MonoBehaviour
         return cachedInventory;
     }
 
+    //Interactua con el inventario de llaves del jugador para dar llaves al jugador desde otros scripts
     public static void GivePlayerKey(int id)
     {
         var inv = GetInventory();
@@ -88,12 +95,14 @@ public class Door_Blocked : MonoBehaviour
         }
     }
 
+    // Verifica si el jugador tiene la llave con el ID especificado
     public static bool PlayerHasKey(int id)
     {
         var inv = GetInventory();
         return inv != null && inv.HasKey(id);
     }
 
+    // Devuelve un array con los IDs de las llaves que el jugador tiene actualmente (no se usa pero )
     public static int[] GetPlayerKeys()
     {
         var inv = GetInventory();
