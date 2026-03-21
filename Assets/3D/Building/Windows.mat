@@ -126,8 +126,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _StrokeBlendingNoiseScale: 500
-    - _StrokeBlendingNoiseStrength: 0.15
-    - _StrokeRandomness: 1
+    - _StrokeBlendingNoiseStrength: 0.16
+    - _StrokeRandomness: 0.331
     - _StrokeScale: 5
     - _Surface: 0
     - _Transparency: 1
@@ -138,7 +138,7 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.15036489, g: 0.16633579, b: 0.2924528, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

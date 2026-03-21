@@ -30,6 +30,7 @@ public class EnemySpawner : MonoBehaviour
                 Debug.Log("Spawning key for enemy ID: " + i);
                 GameObject keyDroped = Instantiate(keyDrop, enemies[i].enemySpawn.position, Quaternion.identity);
                 keyDroped.GetComponent<KeyDrop>().keyID = i;
+                MissionManager.instance.EnemyDefeated();
             }
         }
     }

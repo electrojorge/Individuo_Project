@@ -66,6 +66,7 @@ public class KeyInventory : MonoBehaviour
 
     public bool HasKey(int id)
     {
+        MissionManager.instance.KeyCollected();
         return obtainedSet.Contains(id);
     }
 
