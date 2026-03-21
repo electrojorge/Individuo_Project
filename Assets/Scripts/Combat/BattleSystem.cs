@@ -258,6 +258,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn() // Turno de enemigo: ataca a un jugador aleatorio, luego pasa al siguiente enemigo o vuelve al jugador si no quedan más
     {
+        BP.panoramic.Priority = 10;
         Debug.Log("Turno de " + currentEnemy.unitName);
         yield return new WaitForSeconds(waitTime);
 
@@ -317,6 +318,7 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        BP.panoramic.Priority = 0;
         // Seleccionar primer enemigo mediante NextCurrentEnemy para mantener consistencia
         if (enemyUnits != null && enemyUnits.Count > 0)
             NextCurrentEnemy(enemyUnits[0].unitID);

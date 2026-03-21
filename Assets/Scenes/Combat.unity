@@ -6352,6 +6352,7 @@ MonoBehaviour:
   enemiesContainer: {fileID: 1185041500}
   playersContainer: {fileID: 764503521}
   cameras: []
+  panoramic: {fileID: 1971919303}
 --- !u!114 &1649293000
 MonoBehaviour:
   m_ObjectHideFlags: 0

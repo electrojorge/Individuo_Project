@@ -20,6 +20,7 @@ public class BattlePositioner : MonoBehaviour
     public GameObject playersContainer;
 
     public List<CinemachineCamera> cameras;
+    public CinemachineCamera panoramic;
 
     private void Start()
     {
