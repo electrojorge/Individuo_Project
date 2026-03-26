@@ -14,15 +14,12 @@ public class MainMenu : MonoBehaviour
     public GameObject pointLights;
     public GameObject mainMenuPlane;
 
-    public GameObject controllMenuPlane;
-
     bool started = false;
 
     private void Start()
     {
         mainMenuPanel.SetActive(true);
         optionsMenuPanel.SetActive(false);
-        controllMenuPlane.SetActive(false);
         pointLights.SetActive(true);
         mainMenuPlane.SetActive(true);
     }
@@ -36,15 +33,13 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         pointLights.SetActive(false);
-        mainMenuPlane.SetActive(false);
+        mainMenuPlane.SetActive(true);
         optionsMenuPanel.SetActive(true);
-        controllMenuPlane.SetActive(true);
     }
 
     public void BackToMainMenuButton()
     {
         optionsMenuPanel.SetActive(false);
-        controllMenuPlane.SetActive(false);
         mainMenuPanel.SetActive(true);
         pointLights.SetActive(true);
         mainMenuPlane.SetActive(true);

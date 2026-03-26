@@ -7,7 +7,7 @@ public class TriggerMission1 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             MissionManager.instance.EnemyAppears();
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }
