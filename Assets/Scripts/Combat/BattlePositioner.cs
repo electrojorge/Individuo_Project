@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Unity.Cinemachine;
-using UnityEditor.Rendering;
 
 public class BattlePositioner : MonoBehaviour
 {

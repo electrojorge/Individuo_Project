@@ -14,8 +14,6 @@ public class MainMenu : MonoBehaviour
     public GameObject pointLights;
     public GameObject mainMenuPlane;
 
-    bool started = false;
-
     private void Start()
     {
         mainMenuPanel.SetActive(true);
