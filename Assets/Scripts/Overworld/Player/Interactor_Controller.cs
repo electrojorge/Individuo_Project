@@ -41,16 +41,6 @@ public class Interactor_Controller : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        // Preparar HUD
-        if (playerUIText != null)
-        {
-            playerUIText.text = message;
-            if (playerUIPanel != null)
-                playerUIPanel.SetActive(false);
-            else
-                playerUIText.gameObject.SetActive(false);
-        }
-
         // Guardar escala original del prefab
         if (indicatorPrefab != null)
             indicatorPrefabLocalScale = indicatorPrefab.transform.localScale;
