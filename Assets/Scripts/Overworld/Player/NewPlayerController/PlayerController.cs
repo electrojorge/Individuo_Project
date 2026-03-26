@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 
@@ -43,7 +44,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public void FixedUpdate()
-
     {
         Move();
     }
@@ -82,7 +82,11 @@ public class PlayerController : MonoBehaviour
         _xRotation = Mathf.Clamp(_xRotation, 0, 0);
 
         Camera.localRotation = Quaternion.Euler(_xRotation, 0, 0);
-        transform.Rotate(Vector3.up, Mouse_X * MouseSensitivity * Time.deltaTime);
+
+        if (Mouse.current != null && !Mouse.current.rightButton.isPressed)
+        {
+            transform.Rotate(Vector3.up, Mouse_X * MouseSensitivity * Time.deltaTime);
+        }
     }
     public void AttackEnemy()
     {

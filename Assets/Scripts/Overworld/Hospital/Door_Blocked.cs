@@ -13,13 +13,14 @@ public class Door_Blocked : MonoBehaviour
     private bool isOpen = false;
     private GameObject doorObject;
     private BoxCollider doorCollider;
+    private PlayerController PC;
 
     void Awake()
     {
         doorObject = this.gameObject;
         doorCollider = GetComponent<BoxCollider>();
         doorAnimator = GetComponent<Animator>();
-        PlayerController PC = Object.FindFirstObjectByType<PlayerController>();
+        PC = PlayerController.FindFirstObjectByType<PlayerController>();
         PC.GetComponent<Animator>();
         playerAnimator = PC.animator;
     }
@@ -37,6 +38,7 @@ public class Door_Blocked : MonoBehaviour
 
         if (PlayerHasKey(4))
         {
+            PC.ShowCursor();
             SceneManager.LoadScene(5);
         }
 
