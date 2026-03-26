@@ -38,6 +38,7 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject attackButton;
     public GameObject healButton;
+    public GameObject endPannel;
 
     public Animator unitAnimator;
 
@@ -59,9 +60,12 @@ public class BattleSystem : MonoBehaviour
     }
     void Start()
     {
+        endPannel.SetActive(false);
+
         UM = Game_Manager.instance.GetComponent<UnitsManager>();
         CHM = GetComponent<CombatHudManager>();
         BP = GetComponent<BattlePositioner>();
+
 
         state = BattleState.START;
         Debug.Log("Empieza la batalla");
@@ -371,8 +375,16 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EndBattle() // Volver a la escena del hospital despues de ganar
     {
         yield return new WaitForSeconds(waitTime);
-        Game_Manager.instance.returningFromCombat = true;
-        SceneManager.LoadScene("Hospital_Inside");
+
+        if (isBoss)
+        {
+            endPannel.SetActive(true);
+        }
+        else
+        {
+            Game_Manager.instance.returningFromCombat = true;
+            SceneManager.LoadScene("Hospital_Inside");
+        }
     }
 
     void GameOver()
@@ -400,7 +412,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnits.Remove(CHM.selectedEnemy);
             Debug.Log("muelto");
             BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).gameObject.SetActive(false);
-            //TurnOrderUI.instance.UpdateTurnOrder(playerUnits, enemyUnits);
+            
         }
         if (CHM.selectedEnemy.healthBar != null)
         {
@@ -488,5 +500,10 @@ public class BattleSystem : MonoBehaviour
         cameraIndex = 0;
 
         Debug.Log(unit.unitName + " ha muerto.");
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
