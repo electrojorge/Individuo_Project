@@ -388,15 +388,16 @@ public class BattleSystem : MonoBehaviour
         unitAnimator = BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).GetComponentInChildren<Animator>();
         if (unitAnimator != null)
         {
-            if (CHM.selectedEnemy.currentHP <= 0)
-                unitAnimator.SetTrigger("Death");
-            else
-                unitAnimator.SetTrigger("Hit");
+           unitAnimator.SetTrigger("Hit");
         }
 
         Debug.Log("vida de: " + CHM.selectedEnemy.unitName + " ahora es: " + CHM.selectedEnemy.currentHP);
         if (CHM.selectedEnemy.currentHP <= 0)
         {
+            if (unitAnimator != null)
+            {
+               unitAnimator.SetTrigger("Death"); // --- ANIMACIÓN DE MUERTE ---
+            }
             enemyUnits.Remove(CHM.selectedEnemy);
             Debug.Log("muelto");
             BP.enemiesContainer.transform.GetChild(CHM.selectedEnemy.unitID - 1).gameObject.SetActive(false);
