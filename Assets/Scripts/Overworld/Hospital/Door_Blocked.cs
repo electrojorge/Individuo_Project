@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door_Blocked : MonoBehaviour
 {
@@ -26,8 +27,7 @@ public class Door_Blocked : MonoBehaviour
     // Intenta abrir la puerta, verificando si ya está abierta o si el jugador tiene la llave necesaria
     public void OpenDoor()
     {
-        playerAnimator.SetTrigger(openTriggerName);
-        doorAnimator.SetTrigger(openTriggerName);
+        playerAnimator.SetTrigger("TryOpen");
         // Verifica si la puerta ya está abierta
         if (isOpen)
         {
@@ -35,11 +35,17 @@ public class Door_Blocked : MonoBehaviour
             return;
         }
 
+        if (PlayerHasKey(4))
+        {
+            SceneManager.LoadScene(5);
+        }
+
         // Verifica si el jugador tiene la llave necesaria para abrir la puerta
         if (PlayerHasKey(doorNumber))
         {
             Debug.Log($"Se tiene la llave {doorNumber}, abriendo puerta.");
             DoOpen();
+            doorAnimator.SetTrigger(openTriggerName);
         }
         // Si el jugador no tiene la llave, mostrar un mensaje indicando que la puerta está cerrada
         else
